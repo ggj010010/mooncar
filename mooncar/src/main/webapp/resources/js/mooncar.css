@@ -1,6 +1,20 @@
 @charset "EUC-KR";
 
-div#side_left{
+div#left{
+ 		margin:0 auto;
+        width: 49%;
+        float: left;
+
+    }
+    
+ #right{
+ 		margin:0 auto;
+        width: 49%;
+        float: right;
+
+    }
+    
+#side_left{
 width:25%;
 height:100%;
 background-color:white;
@@ -30,22 +44,9 @@ display: inline;
 background-color:white;
 margin:5px;
 }
-
 .board-container{
 	
 }
-
- #left{
-        width: 50%;
-        float: left;
-
-    }
-    
- #right{
-        width: 50%;
-        float: right;
-
-    }
     
 #side_rigth{
 	margin:0 auto;
@@ -64,6 +65,63 @@ width:30%;
 height:100%;
 float: right;
 margin-top: 5px;
+}
+
+#input1{
+	 color : white; 
+	 border-radius: 8px;
+	 background-color: gray; 
+	 width:50%;
+	 height:35px; 
+	 letter-spacing: 2px; 
+	 text-align:center; 
+	 font-size : 20px"
+}
+
+#input2{
+	 color : black; 
+	 border-radius: 8px;
+	 background-color: white; 
+	 width:50%;
+	 height:35px; 
+	 letter-spacing: 2px; 
+	 text-align:center; 
+	 font-size : 20px"
+}
+
+#browsers1{
+    background-color: white;
+    border-radius: 10px;
+    display: inline-block;
+    font: inherit;
+    color : black;
+    padding: 0.5em 3.5em 0.5em 1em;
+
+margin: 0;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+-webkit-appearance: none;
+-moz-appearance: none;
+
+
+background-image:
+linear-gradient(45deg, transparent 50%, gray 50%),
+linear-gradient(135deg, gray 50%, transparent 50%),
+radial-gradient(#ddd 70%, transparent 72%);
+background-position:
+calc(100% - 20px) calc(1em + 2px),
+calc(100% - 15px) calc(1em + 2px),
+calc(100% - .5em) .5em;
+background-size:
+5px 5px,
+5px 5px,
+1.5em 1.5em;
+background-repeat: no-repeat;
+}
+
+img {
+   height: 30px;
 }
 
 #browsers2{
@@ -146,8 +204,31 @@ tbody {
   cursor: pointer;
   outline: none;
   }
+ .button1 {
+   width: 20%;
+  height: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #fff;
+  background-color: gray;
+  border: 1px;
+  border-radius: 5px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+ }
 
 .button:hover {
+  background-color: #ffffff;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+  color: #333;
+  transform: translateY(-7px);
+}
+.button1:hover {
   background-color: #ffffff;
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
   color: #333;
