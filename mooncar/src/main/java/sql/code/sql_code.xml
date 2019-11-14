@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="code">
+    
+    <resultMap type="com.spring.mooncar.dto.CodeDTO" id="codeDTO">
+    	<result property="codeType" 	column="CODETYPE"/>
+    	<result property="codeDesc" 	column="CODEDESC"/>
+    	<result property="totalCnt" 	column="TOTALCNT"/>
+    </resultMap>
+    
+    <resultMap type="com.spring.mooncar.dto.ComcodeDTO" id="comcodeDTO">   
+    	<result property="codeId" column="CODEID" />
+    	<result property="codeType" 	column="CODETYPE"/>
+    	<result property="codeName" 	column="CODENAME"/>
+    	<result property="codeComment" 	column="CODECOMMENT"/>
+    </resultMap>
+    
+    <select id="comcodeView" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultMap="comcodeDTO">
+    /*code.comcodeView*/
+    	SELECT
+    		*
+    	FROM
+    		COMCODE
+    	WHERE
+    		CODEID = #{codeId}
+    </select>
+    
+    <select id="codeList1" parameterType="com.spring.mooncar.dto.CodeDTO" resultMap="codeDTO">
+    /*code.codeList1*/
+		SELECT 
+			*  
+		FROM 
+			CODE	
+		
+    </select>
+    
+    <select id="codeList" parameterType="com.spring.mooncar.dto.CodeDTO" resultMap="codeDTO">
+    /*code.codeList*/
+		SELECT 
+			CODETYPE
+			,CODEDESC
+			,TOTALCNT  
+		FROM 
+		(
+			SELECT
+				CODETYPE
+				,CODEDESC
+		      	,ROW_NUMBER() OVER(ORDER BY CODETYPE) AS NUMROW
+		      	,COUNT(*) OVER() AS TOTALCNT
+			FROM
+				CODE	
+		)
+    	WHERE NUMROW BETWEEN (#{pageNo, jdbcType=NUMERIC}-1)*10 + 1 AND #{pageNo, jdbcType=NUMERIC}*10
+    	
+    </select>
+    
+    <select id="comcodeList" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultMap="comcodeDTO">
+    /*code.comcodeList*/
+    	SELECT
+    		CODEID
+			,CODETYPE
+			,CODENAME
+			,CODECOMMENT
+			,TOTALCNT
+    	FROM
+		(
+			SELECT 
+    			CODEID
+    			,CODETYPE
+    			,CODENAME
+    			,nvl(CODECOMMENT,' ') as CODECOMMENT
+    			,ROW_NUMBER() OVER(ORDER BY CODEID) AS NUMROW
+			    ,COUNT(*) OVER() AS TOTALCNT
+			FROM
+				COMCODE	
+			WHERE
+				CODETYPE = #{codeType}
+			ORDER BY
+    			CODEID
+		)		
+    	WHERE
+    		 NUMROW BETWEEN (#{pageNo, jdbcType=NUMERIC}-1)*10 + 1 AND #{pageNo, jdbcType=NUMERIC}*10
+    	
+    </select>
+    
+    <select id="comcodeList1" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultMap="comcodeDTO">
+    /*code.comcodeList1*/
+    	SELECT
+    		*
+    	FROM
+    		COMCODE
+    	WHERE
+    		CODETYPE = #{codeType, jdbcType=VARCHAR}
+    </select>
+    
+     <select id="codeTotal" parameterType="Integer" resultType="Integer">
+    /*code.codeTotal*/
+    	 SELECT
+			COUNT(*) AS TOTAL_CNT
+		FROM
+			CODE	
+			
+    </select>
+    
+    <select id="comcodeTotal" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultType="Integer">
+    /*code.comcodeTotal*/
+		SELECT
+			COUNT(*) AS TOTAL_CNT
+		FROM
+			COMCODE	
+		WHERE
+    		CODETYPE = #{codeType}
+    		
+    </select>
+    
+    <insert id="codeInsert" parameterType="com.spring.mooncar.dto.CodeDTO">
+    /*code.codeInsert*/
+		INSERT INTO
+			CODE
+			(
+				CODETYPE
+    			,CODEDESC
+			)
+		VALUES
+ 		(
+			#{codeType}
+   		 	,#{codeDesc}
+		)
+    	
+    </insert>
+    
+    <update id="codeUpdate" parameterType="com.spring.mooncar.dto.CodeDTO">
+    /*code.codeUpdate*/
+    	UPDATE
+    		CODE
+    	SET
+    		CODEDESC = #{codeDesc}
+    	WHERE
+    		CODETYPE = #{codeType}
+    </update>
+    
+    <delete id="codeDelete" parameterType="com.spring.mooncar.dto.CodeDTO">
+    /*code.codeDelete*/
+		DELETE
+    	FROM
+			CODE
+		WHERE
+			CODETYPE = #{codeType}
+    
+    </delete>
+    
+    <delete id="codeDeleteAll" parameterType="com.spring.mooncar.dto.CodeDTO">
+    /*code.codeDeleteAll*/
+	    DELETE
+	    FROM
+	    	COMCODE
+	    WHERE
+	    	CODETYPE = #{codeType}
+    
+    </delete>
+    
+     <insert id="comcodeInsert" parameterType="com.spring.mooncar.dto.ComcodeDTO">
+    /*code.comcodeInsert*/
+		INSERT INTO
+			COMCODE
+			(
+    			CODEID
+    			,CODETYPE
+    			,CODENAME
+    			,CODECOMMENT
+			)
+    	VALUES
+		(
+    		(
+    			SELECT 
+    				nvl(TO_NUMBER(MAX(CODEID)+1),0)
+	 			FROM
+	 				COMCODE
+	  		)
+    		,#{codeType}
+    		,#{codeName}
+    		,#{codeComment}
+		)
+    	
+    </insert>
+    
+    <update id="comcodeUpdate" parameterType="com.spring.mooncar.dto.ComcodeDTO">
+    /*code.comcodeUpdate*/
+    	UPDATE
+    		COMCODE
+    	SET
+    		CODENAME = #{codeName}
+    		,CODECOMMENT = #{codeComment}
+    	WHERE
+    		CODEID = #{codeId}
+    
+    </update>
+    
+    <delete id="comcodeDelete" parameterType="com.spring.mooncar.dto.ComcodeDTO">
+    /*code.comcodeDelete*/
+	    DELETE
+	    FROM
+	    	COMCODE
+	    WHERE
+	    	CODEID = #{codeId}
+    
+    </delete>
+    
+</mapper>
+
