@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+
+	<resultMap type="com.spring.mooncar.dto.ProductInfoDTO" id="productInfoDTO">
+		<result property="prdIdx" column="PRDIDX"/>
+		<result property="prdCtgr" column="PRDCTGR"/>
+		<result property="prdName" column="PRDNAME"/>
+		<result property="prdPrc" column="PRDPRC"/>
+		<result property="prdView" column="PRDVIEW"/>
+		<result property="prdImg" column="PRDIMG"/>
+		<result property="codeType" column="PRDTYPE"/>
+	</resultMap>
+	
+	<select id="productInfoListAll1" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.productInfoListAll1*/
+		SELECT
+			*
+		FROM
+			PRODUCTINFO
+		WHERE
+			PRDTYPE = #{codeType, jdbcType=VARCHAR}
+		ORDER BY
+			PRDIDX
+	
+	</select>
+	
+	<select id="productInfoListAll" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.productInfoListAll*/
+		SELECT
+			PRDIDX
+			,PRDCTGR
+			,PRDNAME
+			,PRDPRC
+			,PRDVIEW
+			,PRDIMG
+			,PRDTYPE
+			,TOTALCNT
+			
+		FROM
+		(
+			SELECT
+				PRDIDX
+				,PRDCTGR
+				,PRDNAME
+				,PRDPRC
+				,PRDVIEW
+				,PRDIMG
+				,PRDTYPE
+		      	,ROW_NUMBER() OVER(ORDER BY PRDIDX) AS NUMROW
+		      	,COUNT(*) OVER() AS TOTALCNT
+			FROM
+				PRODUCTINFO
+			WHERE
+				PRDTYPE = #{codeType, jdbcType=VARCHAR}
+		)
+		WHERE
+			NUMROW BETWEEN (#{pageNo, jdbcType=NUMERIC}-1)*10 + 1 AND #{pageNo, jdbcType=NUMERIC}*10
+		ORDER BY
+			PRDIDX
+	
+	</select>
+	
+	<select id="productTotalAll" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultType="Integer">
+    /*product.productTotalAll*/
+		SELECT
+			COUNT(*) AS TOTAL_CNT
+		FROM
+			PRODUCTINFO	
+		WHERE
+    		PRDTYPE = #{codeType}
+    </select>
+    
+    <select id="productTotal" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultType="Integer">
+    /*product.productTotal*/
+		SELECT
+			COUNT(*) AS TOTAL_CNT
+		FROM
+			PRODUCTINFO	
+		WHERE
+    		PRDTYPE = #{codeType}
+		AND
+    		PRDCTGR = #{prdCtgr, jdbcType=VARCHAR}
+    </select>
+	
+	<select id="productInfoList1" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.productInfoList1*/
+		SELECT
+			*
+		FROM
+			PRODUCTINFO
+		WHERE
+			PRDCTGR = #{prdCtgr, jdbcType=VARCHAR}
+		AND
+			PRDTYPE = #{codeType, jdbcType=VARCHAR}
+		ORDER BY
+			PRDIDX
+	
+	</select>
+	<select id="productInfoList" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.productInfoList*/
+		SELECT
+			PRDIDX
+			,PRDCTGR
+			,PRDNAME
+			,PRDPRC
+			,PRDVIEW
+			,PRDIMG
+			,PRDTYPE
+		FROM
+			(
+			SELECT
+				PRDIDX
+				,PRDCTGR
+				,PRDNAME
+				,PRDPRC
+				,PRDVIEW
+				,PRDIMG
+				,PRDTYPE
+		      	,ROW_NUMBER() OVER(ORDER BY PRDIDX) AS NUMROW
+		      	,COUNT(*) OVER() AS TOTALCNT
+			FROM
+				PRODUCTINFO
+			WHERE
+				PRDCTGR = #{prdCtgr, jdbcType=VARCHAR}
+			AND
+				PRDTYPE = #{codeType, jdbcType=VARCHAR}
+			)
+		WHERE
+    		 NUMROW BETWEEN (#{pageNo, jdbcType=NUMERIC}-1)*10 + 1 AND #{pageNo, jdbcType=NUMERIC}*10
+		ORDER BY
+			PRDIDX
+	
+	</select>
+	
+	<select id="productInfoprdIdx" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.productInfoprdIdx*/
+		SELECT
+			PRDIDX
+		FROM
+			PRODUCTINFO
+		WHERE
+			PRDCTGR = #{prdCtgr, jdbcType=VARCHAR} 
+		AND
+		 	PRDTYPE = #{codeType, jdbcType=VARCHAR}
+		AND
+			nvl(TO_NUMBER(MAX(PRDIDX)+1),0)
+	
+	</select>
+	
+	<select id="productInfoView" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.productInfoView*/
+		SELECT
+			*
+		FROM
+			PRODUCTINFO
+		WHERE
+			PRDIDX = #{prdIdx, jdbcType=VARCHAR}
+	
+	</select>
+	
+	<insert id="productInfoInsert" parameterType="com.spring.mooncar.dto.ProductInfoDTO">
+	/*product.productInfoInsert*/
+	<selectKey keyProperty="prdIdx" resultType="Integer" order="BEFORE"> 
+			SELECT 
+    				nvl(TO_NUMBER(MAX(PRDIDX)+1),0)
+	 			FROM
+	 				PRODUCTINFO 
+	</selectKey>
+		INSERT INTO
+			PRODUCTINFO
+			(
+    			PRDIDX
+    			,PRDCTGR
+    			,PRDNAME
+    			,PRDPRC
+    			,PRDIMG
+    			,PRDVIEW
+    			,PRDTYPE
+			)
+    	VALUES
+		(
+    		#{prdIdx}
+	  		,#{prdCtgr}
+    		,#{prdName}
+    		,#{prdPrc}
+    		,#{prdImg, jdbcType=VARCHAR}
+    		,#{prdView}
+    		,#{codeType, jdbcType=VARCHAR}
+    	)
+    	
+	</insert>
+	
+	<update id="productInfoUpdate" parameterType="com.spring.mooncar.dto.ProductInfoDTO">
+    /*product.productInfoUpdate*/
+    	UPDATE
+    		PRODUCTINFO
+    	SET
+    		PRDNAME = #{prdName}
+    		,PRDPRC = #{prdPrc}
+    		,PRDVIEW = #{prdView}
+    	WHERE
+    		PRDIDX = #{prdIdx}
+    
+    </update>
+    
+    <delete id="productInfoDelete" parameterType="com.spring.mooncar.dto.ProductInfoDTO">
+    /*product.productInfoDelete*/
+    	DELETE
+    	FROM
+    		PRODUCTINFO
+    	WHERE
+    		PRDIDX = #{prdIdx}
+    
+    </delete>
+	
+	<update id="fileNameUpdate" parameterType="com.spring.mooncar.dto.ProductInfoDTO">
+	/*product.fileNameUpdate*/
+		UPDATE
+			PRODUCTINFO
+		SET
+			PRDIMG = #{prdImg}
+		WHERE
+			PRDIDX = #{prdIdx}
+	</update>
+	
+
+</mapper>

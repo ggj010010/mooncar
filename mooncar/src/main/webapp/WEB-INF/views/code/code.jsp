@@ -682,5 +682,6 @@
 	</td>
 	</tr>
 	</table>
+	<a href="/product/productInfo" style="position:absolute; left:10px; top:610px;">상품정보</a>
 </body>
 </html>
