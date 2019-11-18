@@ -53,8 +53,8 @@
 	</tr>
 	<tr>
 		<td>차종</td>
-		<td colspan="2"><input type="text" size="20" id="input2" style="width : 100%;"></td>
-		<td style="float : right;">
+		<td colspan="2"><input type="text" size="20" id="input2" style="width : 90%; float : right;"></td>
+		<td style="float : center; width : 50px;">
 			<select id="browsers1" name="caryear" >
 			     <option value="2019" selected>2019</option> 
      			 <option value="2019" selected>2019</option> 
@@ -75,6 +75,96 @@
       			 
       		</select>&nbsp:&nbsp년
 		</td>
+	 </tr>
+	 <tr>
+		<td>차형</td>
+		<td> 
+			<select id="browsers1" name="carsize" >
+			     <option value="대형" selected>대형</option> 
+     			 <option value="중형" selected>중형</option> 
+			     <option value="준중형" selected>준중형</option> 
+     			 <option value="소형" selected>소형</option> 
+			     <option value="크기선택" selected>크기선택</option>       			 
+      		</select>
+		</td>
+		<td> 
+			<select id="browsers1" name="cartype" >
+			     <option value="경차" selected>경차</option> 
+     			 <option value="세단" selected>세단</option> 
+			     <option value="SUV" selected>SUV</option> 
+     			 <option value="스포츠카" selected>스포츠카</option> 
+			     <option value="종류선택" selected>종류선택</option>       			 
+      		</select>
+		</td>
+		<td>
+			<select id="browsers1" name="caroil" >
+			     <option value="가솔린" selected>가솔린</option> 
+     			 <option value="디젤" selected>디젤</option> 
+			     <option value="LPG" selected>LPG</option> 
+     			 <option value="하이브리드" selected>하이브리드</option> 
+			     <option value="엔진선택" selected>엔진선택</option>       			 
+      		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>차량번호</td>
+		<td colspan="3"><input type="text" size="20" id="input2" style="width : 85%; float : center;"></td>
+	</tr>
+	<tr>
+		<td>키로수</td>
+		<td colspan="3"><input type="text" size="20" id="input2" style="width : 80%; float : center;">Km</td>
+	</tr>
+	<tr>
+		<td>방문일자</td>
+		<td colspan="2">
+			<input type="date" id="userdate" style="width : 75%; float : center; name="userdate" value="2019-11-14">
+		</td>
+		<td>  
+            <input type="radio" value="오전" name="timeTF">오전
+            <input type="radio" value="오후" name="timeTF">오후
+		   <select id="browsers1" name="time" style=" float : left;">
+			     <option value="01" selected>01</option> 
+     			 <option value="02" selected>02</option> 
+     			 <option value="03" selected>03</option> 
+     			 <option value="04" selected>04</option> 
+     			 <option value="05" selected>05</option> 
+     			 <option value="06" selected>06</option> 
+     			 <option value="07" selected>07</option> 
+     			 <option value="08" selected>08</option> 
+     			 <option value="09" selected>09</option> 
+     			 <option value="10" selected>10</option> 
+     			 <option value="11" selected>11</option> 
+     			 <option value="12" selected>12</option> 
+			     <option value="시간선택" selected>시간선택</option>       			 
+      		</select>시
+		</td>
+	</tr>
+	<tr>
+		<td>엔진오일</td>
+		<td colspan="3">
+		   <select id="browsers1" name="engineoil" style="width : 85%; float : center;">
+			     <option value="1개월" selected>1개월</option> 
+     			 <option value="2개월" selected>2개월</option> 
+     			 <option value="3개월" selected>3개월</option> 
+     			 <option value="4개월" selected>4개월</option> 
+     			 <option value="5개월" selected>5개월</option> 
+     			 <option value="6개월" selected>6개월</option> 
+			     <option value="기간선택" selected>기간선택</option>       			 
+      		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>기타</td>
+		<td colspan="3"><textarea name="desc" id="desc" rows="2" cols="90" style="width : 85%;"></textarea></td>
+	</tr>
+	<tr>
+		<td>특이사항</td>
+		<td colspan="3">
+			<textarea name="desc" id="desc" rows="4" cols="90" style="width : 85%;"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4"><button class ="button" type="button" style = "width : 40%;"> 등록하기 </button></td>
 	</tr>
 </table>
 </body>
