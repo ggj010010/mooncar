@@ -145,7 +145,7 @@
 		<td>¾Æ¿ìµð</td>
 	</tr>
 </table>
-     <button class ="button" type="button" style="width : 6%; float : right;"> E-Mail </button>
+     <button class ="button" type="button" style="width : 6%; float : right;"onclick="window.open('/popup/emailpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> E-Mail </button>
 </div>
 </body>
 </html>

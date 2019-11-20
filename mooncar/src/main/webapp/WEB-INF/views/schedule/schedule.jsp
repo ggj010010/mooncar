@@ -255,7 +255,7 @@ table.calendar td{
 		   <tr>
 		   		<td colspan="3";>
 		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%; margin-right=5px;"> 수정 </button>
-		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%"> 추가 </button>
+		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%" onclick="window.open('/popup/schedulepop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
 		   		</td>
 		   </tr>
         </table>

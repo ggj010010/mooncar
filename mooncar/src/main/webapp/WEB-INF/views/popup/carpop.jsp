@@ -8,48 +8,29 @@
 <title>Insert title here</title>
 
 </head>
-<body onresize="parent.resizeTo(800,1000)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(750,810)" onload="parent.resizeTo(500,400)">
 <table style="width : 100%;">
 	<tr>
-		<th colspan="4">회원등록</th>
+		<th colspan="4">차량등록</th>
+	</tr>
+	<tr>
+		<td>연락처</td>
+
+		<td colspan="3"style ="font-size : 20px;">010  &nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp
+		<input type="text" id="input2" size="5" style="width : 20%;">&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp
+		<input type="text" id="input2" size="5" style="width : 20%;">&nbsp&nbsp<button class ="button" type="button" style = "width : 20%;height:70%"> 검색 </button></td>
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td colspan="3">김명중</td>
+		<td colspan="3">문종학</td>
 	</tr>
 	<tr>
 		<td>성별</td>
 		<td colspan="3">남자</td>
 	</tr>
 	<tr>
-		<td>연락처</td>
-
-		<td colspan="3"style ="font-size : 20px;">010  &nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp
-		<input type="text" id="input2" size="5" style="width : 30%;">&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp
-		<input type="text" id="input2" size="5" style="width : 30%;"></td>
-	</tr>
-	<tr>
 		<td>E-Mail</td>
-		<td colspan="3">
-			<input type="text" size="20" id="input2" ">&nbsp&nbsp
-			@&nbsp&nbsp
-			<select id="browsers1" name="emailsite" >
-     			 <option value="1">직접입력</option> 
-     			 <option value="naver.com" selected>naver.com</option> 
-     			 <option value="hanmail.net">hanmail.net</option> 
-     			 <option value="hotmail.com">hotmail.com</option> 
-     			 <option value="nate.com">nate.com</option> 
-     			 <option value="yahoo.co.kr">yahoo.co.kr</option> 
-     			 <option value="empas.com">empas.com</option> 
-     			 <option value="dreamwiz.com">dreamwiz.com</option> 
-     			 <option value="freechal.com">freechal.com</option> 
-     			 <option value="lycos.co.kr">lycos.co.kr</option> 
-     			 <option value="korea.com">korea.com</option> 
-     			 <option value="gmail.com">gmail.com</option> 
-     			 <option value="hanmir.com">hanmir.com</option> 
-     			 <option value="paran.com">paran.com</option>
-      		</select>
-		</td>
+		<td colspan="3">answhdgkr@naver.com</td>
 	</tr>
 	<tr>
 		<td>차종</td>
@@ -113,31 +94,6 @@
 	<tr>
 		<td>키로수</td>
 		<td colspan="3"><input type="text" size="20" id="input2" style="width : 80%; float : center;">Km</td>
-	</tr>
-	<tr>
-		<td>방문일자</td>
-		<td colspan="2">
-			<input type="date" id="userdate" style="width : 75%; float : center; name="userdate" value="2019-11-14">
-		</td>
-		<td>  
-            <input type="radio" value="오전" name="timeTF">오전
-            <input type="radio" value="오후" name="timeTF">오후
-		   <select id="browsers1" name="time" style=" float : left;">
-			     <option value="01" selected>01</option> 
-     			 <option value="02" selected>02</option> 
-     			 <option value="03" selected>03</option> 
-     			 <option value="04" selected>04</option> 
-     			 <option value="05" selected>05</option> 
-     			 <option value="06" selected>06</option> 
-     			 <option value="07" selected>07</option> 
-     			 <option value="08" selected>08</option> 
-     			 <option value="09" selected>09</option> 
-     			 <option value="10" selected>10</option> 
-     			 <option value="11" selected>11</option> 
-     			 <option value="12" selected>12</option> 
-			     <option value="시간선택" selected>시간선택</option>       			 
-      		</select>시
-		</td>
 	</tr>
 	<tr>
 		<td>엔진오일</td>

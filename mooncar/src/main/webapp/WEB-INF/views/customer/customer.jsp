@@ -60,7 +60,7 @@
            </tr>
        	 <tr>
        		<td colspan="2">
-       		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"onclick="window.open('/popup/popup', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
+       		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
        		</td>
       	 </tr>
         </table>
@@ -140,7 +140,7 @@
            </tr>
         </table><br>
         <div class="wrap" style="float: right; width : 30%;">
-          <button class ="button" type="button"> 추가 </button>
+          <button class ="button" type="button" onclick="window.open('/popup/carpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
           <button class="button" type="button"> 수정 </button>
           <button class="button" type="button"> 삭제 </button>
        </div>
@@ -201,7 +201,7 @@
            </tr>
         </table>
         <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" > 추가 </button>
+          <button class ="button" type="button" onclick="window.open('/popup/fixpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
        </div>
        <table style = "width : 100%";>
            <tr>
@@ -236,7 +236,7 @@
            </tr>
         </table>
         <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" > 추가 </button>
+          <button class ="button" type="button" onclick="window.open('/popup/schedulepop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
        </div>
     </div>
 </div>
