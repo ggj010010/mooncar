@@ -33,7 +33,7 @@
    <br><br>
 <div class="wrap">
    <div id = "side"><button class="button" onClick="location.href='/'"> main</button></div>
-   <div id = "side"><button class="button"onClick="location.href='/customer/customer'"> customer</button></div>
+   <div id = "side"><button class="button"onClick="location.href='/customer/custview'"> customer</button></div>
    <div id = "side"><button class="button"onClick="location.href='/search/search'"> search</button></div>
     <div id = "side"><button class="button"onClick="location.href='/schedule/schedule'"> schedule </button></div>
 </div>
@@ -51,44 +51,44 @@
 			  <th>Del</th>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
            <tr>
-              <td>김메시</td>
-              <td>010-2345-4564</td>
+              <td><a href="/customer/customer">김메시</a></td>
+              <td><a href="/customer/customer">010-2345-4564</a></td>
               <td>남자</td>
               <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
            </tr>

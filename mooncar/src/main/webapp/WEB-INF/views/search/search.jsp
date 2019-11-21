@@ -27,7 +27,7 @@
    <br><br>
 <div class="wrap">
    <div id = "side"><button class="button" onClick="location.href='/'"> main</button></div>
-   <div id = "side"><button class="button"onClick="location.href='/customer/customer'"> customer</button></div>
+   <div id = "side"><button class="button"onClick="location.href='/customer/custview'"> customer</button></div>
    <div id = "side"><button class="button"onClick="location.href='/search/search'"> search</button></div>
     <div id = "side"><button class="button"onClick="location.href='/schedule/schedule'"> schedule </button></div>
 </div>

@@ -14,24 +14,14 @@
 		<th colspan="4">차량등록</th>
 	</tr>
 	<tr>
-		<td>연락처</td>
-
-		<td colspan="3"style ="font-size : 20px;">010  &nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp
-		<input type="text" id="input2" size="5" style="width : 20%;">&nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp
-		<input type="text" id="input2" size="5" style="width : 20%;">&nbsp&nbsp<button class ="button" type="button" style = "width : 20%;height:70%"> 검색 </button></td>
-	</tr>
-	<tr>
 		<td>이름</td>
 		<td colspan="3">문종학</td>
 	</tr>
-	<tr>
-		<td>성별</td>
-		<td colspan="3">남자</td>
-	</tr>
-	<tr>
-		<td>E-Mail</td>
-		<td colspan="3">answhdgkr@naver.com</td>
-	</tr>
+    <tr>
+        <td>연락처</td>
+        <td colspan="3">010-1234-1234</td>
+    </tr>
+
 	<tr>
 		<td>차종</td>
 		<td colspan="2"><input type="text" size="20" id="input2" style="width : 90%; float : right;"></td>
@@ -92,7 +82,7 @@
 		<td colspan="3"><input type="text" size="20" id="input2" style="width : 85%; float : center;"></td>
 	</tr>
 	<tr>
-		<td>키로수</td>
+		<td>주행거리</td>
 		<td colspan="3"><input type="text" size="20" id="input2" style="width : 80%; float : center;">Km</td>
 	</tr>
 	<tr>

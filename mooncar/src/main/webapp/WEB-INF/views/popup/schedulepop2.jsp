@@ -8,31 +8,29 @@
 <title>Insert title here</title>
 
 </head>
-<body onresize="parent.resizeTo(600,795)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(550,670)" onload="parent.resizeTo(500,400)">
 <table style="width : 100%;">
 	<tr>
-		<th colspan="4">정비등록</th>
+		<th colspan="4">예약등록</th>
+	</tr>
+	<tr>
+		<td>연락처</td>
+
+		<td colspan="3"style ="font-size : 20px;">010  -
+		<input type="text" id="input2" size="5" style="width : 20%;">-
+		<input type="text" id="input2" size="5" style="width : 20%;">&nbsp&nbsp<button class ="button" type="button" style = "width : 20%;height:70%"> 검색 </button></td>
 	</tr>
 	<tr>
 		<td>고객명</td>
 		<td colspan="3">문종학</td>
 	</tr>
 	<tr>
-		<td>연락처</td>
-
-		<td colspan="3"style ="font-size : 20px;">010	-	8991	-	3464</td>
-	</tr>
-	<tr>
 		<td>차량</td>
 		<td colspan="3">
-			<input type="radio" value="붕붕이" name="car">붕붕이
+			<input type="radio" value="붕붕이" name="chk_car">붕붕이
 			<input type="radio" value="쌍화차" name="chk_car">쌍화차
 			<input type="radio" value="공차" name="chk_car">공차
 		</td>
-	</tr>
-	<tr>
-		<td>차종</td>
-		<td colspan="4">소나타 MD 2019년형</td>
 	</tr>
 	
 	 <tr>
@@ -66,28 +64,13 @@
 		</td>
 	</tr>
 	<tr>
-	
-		<td>키로수</td>
-		<td colspan="3"><input type="text" size="20" id="input2" style="width : 80%; float : center;">Km</td>
+		<td>정비제목</td>
+		<td colspan="3"><textarea name="desc" id="desc" rows="2" cols="90" style="width : 85%;"></textarea></td>
 	</tr>
 	<tr>
-	
-		<td rowspan="2">정비내역</td>
+		<td>정비상세</td>
 		<td colspan="3">
-			  <input type='checkbox' name='FixedCar' value='EnginOil' />엔진오일
-			  <input type='checkbox' name='FixedCar' value='GearOrl' />기어오일
-			  <input type='checkbox' name='FixedCar' value='BreakOil' />브레이크액
-			  <input type='checkbox' name='FixedCar' value='AirconFilter' />에어컨필터
-			  <input type='checkbox' name='FixedCar' value='TireChange' />타이어교체
-		</td>
-	</tr>
-	<tr><td colspan="3">
-			  <input type='checkbox' name='FixedCar' value='Other' />기타
-			  <textarea name="desc" id="desc" rows="1" cols="90" style="width : 60%;"></textarea></td></tr>
-	<tr>
-		<td>다음정비</td>
-		<td colspan="3">
-			<textarea name="desc" id="desc" rows="3" cols="90" style="width : 85%;"></textarea>
+			<textarea name="desc" id="desc" rows="4" cols="90" style="width : 85%;"></textarea>
 		</td>
 	</tr>
 	<tr>

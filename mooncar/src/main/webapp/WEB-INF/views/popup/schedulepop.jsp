@@ -14,10 +14,6 @@
 		<th colspan="4">예약등록</th>
 	</tr>
 	<tr>
-		<td>차량번호</td>
-		<td colspan="3"><input type="text" id="input2" size="5" style="width : 60%;"><button class ="button" type="button" style = "width : 15%;"> 검색 </button></td>
-	</tr>
-	<tr>
 		<td>고객명</td>
 		<td colspan="3">문종학</td>
 	</tr>
@@ -27,8 +23,12 @@
 		<td colspan="3"style ="font-size : 20px;">010	-	8991	-	3464</td>
 	</tr>
 	<tr>
-		<td>차종</td>
-		<td colspan="4">소나타 MD 2019년형</td>
+		<td>차량</td>
+		<td colspan="3">
+			<input type="radio" value="붕붕이" name="chk_car">붕붕이
+			<input type="radio" value="쌍화차" name="chk_car">쌍화차
+			<input type="radio" value="공차" name="chk_car">공차
+		</td>
 	</tr>
 	
 	 <tr>
