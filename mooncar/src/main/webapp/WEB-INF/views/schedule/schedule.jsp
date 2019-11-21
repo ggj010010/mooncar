@@ -253,9 +253,9 @@ table.calendar td{
 			  </td>
            </tr>
 		   <tr>
-		   		<td colspan="3";>
+		   		<td colspan="3">
 		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%; margin-right=5px;"> 수정 </button>
-		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%" onclick="window.open('/popup/schedulepop2', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
+		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%" onclick="window.open('/schedule/scheduleinsert', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
 		   		</td>
 		   </tr>
         </table>

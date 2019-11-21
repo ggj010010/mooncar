@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ScheduleController {
@@ -18,4 +19,20 @@ public class ScheduleController {
 		
 		return "schedule/schedule";
 	}
+	
+	
+	@RequestMapping(value = "schedule/scheduleinsert", method = RequestMethod.GET)
+	public String scheduleinsert(Model model) {
+		return "schedule/scheduleinsert";
+		
+	}
+	@RequestMapping(value = "/scheduleInsert", method = RequestMethod.GET)
+	public String scheduleInsert(Model model) {
+		
+		
+		return "schedule/scheduleinsert";
+		
+	}
+	
+	
 }

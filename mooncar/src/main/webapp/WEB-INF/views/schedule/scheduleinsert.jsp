@@ -1,14 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
-<title>Insert title here</title>
+<title>Schedule Insert</title>
+<SCRIPT type="text/javascript">
+ $j(document).ready(function(){
+	}).on("click", ".btnInsert", function(){
+		var tel1 = $j("#tel1").val();
+		var tel2 = $j("#tel2").val();
+		
+	    	$j.ajax({
+				url : "/scheduleInsert",
+				type : "GET",
+				data : {
+						
+					}
+				,
+				//JSON.stringify()
+				dataType : "json",
+				//contentType:"application/json;charset=UTF-8",
+				timeout : 3000,
+				success : function(returndata) {
+						//console.log(returndata.count)
+						
+						
+						
+				},//end success
+				error : function(jqXHR, textStatus, errorThrown) {
+				 	if(textStatus=="timeout") {
 
+			        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+			        } 
+				 	else {
+
+			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+			        } 
+				
+				}//end error 
+			});//end ajax.productInfoWriteAction 
+		
+	
+</SCRIPT>
 </head>
-<body onresize="parent.resizeTo(550,670)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(700,650)" onload="parent.resizeTo(500,400)">
 <table style="width : 100%;">
 	<tr>
 		<th colspan="4">예약등록</th>
@@ -17,8 +57,8 @@
 		<td>연락처</td>
 
 		<td colspan="3"style ="font-size : 20px;">010  -
-		<input type="text" id="input2" size="5" style="width : 20%;">-
-		<input type="text" id="input2" size="5" style="width : 20%;">&nbsp&nbsp<button class ="button" type="button" style = "width : 20%;height:70%"> 검색 </button></td>
+		<input type="text" id="tel1" size="5" style="width : 20%;">-
+		<input type="text" id="tel2" size="5" style="width : 20%;">&nbsp&nbsp<button class ="btnSearch" type="button" style = "width : 20%;height:70%"> 검색 </button></td>
 	</tr>
 	<tr>
 		<td>고객명</td>
@@ -74,7 +114,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4"><button class ="button" type="button" style = "width : 40%;"> 등록하기 </button></td>
+		<td colspan="4"><button class ="btnInsert" type="button" style = "width : 40%;"> 등록하기 </button></td>
 	</tr>
 </table>
 </body>
