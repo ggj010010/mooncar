@@ -22,10 +22,7 @@ public class PopupController {
 		return "popup/schedulepop";
 	}
 	
-	@RequestMapping(value = "popup/schedulepop2", method = RequestMethod.GET)
-	public String schedulepop2(Model model) {
-		return "popup/schedulepop2";
-	}
+
 	
 	@RequestMapping(value = "popup/fixpop", method = RequestMethod.GET)
 	public String fixpop(Model model) {
