@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,49 +51,23 @@
               <th>전화번호</th>
 			  <th>성별</th>
 			  <th>Del</th>
+			  
            </tr>
+          <c:forEach var="cv" items="${custview}">
            <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
+              <td><a href="/customer/customer.do?c_tel=${cv.c_tel}">${cv.c_name}</a></td>
+              <td><a href="/customer/customer.do?c_tel=${cv.c_tel}">${cv.c_tel}</a></td>
+              <c:choose>
+              		<c:when test="${cv.c_gender == '1'}">
+              			<td>남자</td>
+              		</c:when>
+        			<c:otherwise> 
+              			<td>여자</td>
+              		</c:otherwise>
+               </c:choose>
+              <td><button class="button" type="button" style="width : 60%;float : center; height : 100%"> 삭제 </button></td>
            </tr>
-           <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
-           <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
-           <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
-           <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
-           <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
-           <tr>
-              <td><a href="/customer/customer">김메시</a></td>
-              <td><a href="/customer/customer">010-2345-4564</a></td>
-              <td>남자</td>
-              <td><button class="button" type="button" style="width : 50%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
+		  </c:forEach>
         </table>
    
 </div>

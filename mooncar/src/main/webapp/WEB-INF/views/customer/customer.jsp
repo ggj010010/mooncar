@@ -37,33 +37,35 @@
 <div class="board-container" >
   <div id="left" >
     <div id="left">
-
+  
         <table style = "float : center; width : 100%;">
+          <c:forEach var="cv" items="${custdetail}">
            <tr>
               <th colspan="2">회원정보</th>
            </tr>
            <tr>
               <td>이름</td>
-              <td>박찬호</td>
+              <td>${cv.c_name}</td>
            </tr>
            <tr>
               <td>핸드폰</td>
-              <td>010-1234-1234</td>
+              <td>${cv.c_name}</td>
            </tr>
              <tr>
               <td>성별</td>
-              <td>남자</td>
+              <td>${cv.c_female}</td>
            </tr>
            <tr>
               <td>이메일</td>
-              <td>X</td>
+              <td>${cv.c_email}</td>
            </tr>
        	 <tr>
        		<td colspan="2">
        		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
        		</td>
       	 </tr>
-        </table>
+      	</c:forEach>
+       </table>
 
     </div>
     <div id="right">
