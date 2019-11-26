@@ -29,23 +29,69 @@
     <div id = "side"><button class="button"onClick="location.href='/schedule/schedule'"> schedule </button></div>
 </div>
 </head>
+<script type="text/javascript">
+	$j(document).ready(function(e){
+	    /* genRowspan("codetype"); */
+	}).on("click","#productInfoInsert",function(){
+	 
+	/* function genRowspan(className){
+		$j("." + className).each(function() {
+	        var rows = $j("." + className + ":contains('" + $j(this).text() + "')");
+	        if (rows.length > 1) {
+	            rows.eq(0).attr("rowspan", rows.length);
+	            rows.not(":eq(0)").remove();
+	        }
+		});
+	} */
+</script>
 <body>
 <br>
    <h2 align = "center">통합검색</h2>
 <table style = "margin: auto; width : 95%;">
 	<c:forEach var="cl" items="${codeList}">
+			<%int i = 0; %>
 		<tr>
-			<td>${cl.codeType}</td>
+			<th class="codetype" rowspan="1">${cl.codeType}</th>
 			<c:forEach var="ccl1" items="${comcodeList1}">
-				<c:if test="${cl.codeType eq ccl1.codeType }">
-					<th>${ccl1.codeName}</th>
-				</c:if>
+					<c:set var="cnt" value="<%=i %>"/>
+				<c:choose>
+					<c:when test="${cl.codeType eq ccl1.codeType and cnt % 5 !=0 or cnt == 0}">
+						<%i++; %>
+						<%-- <%=i %> --%>
+						<td>
+						<label for="hint" style="cursor:pointer">
+						<input type="checkbox" name="${cl.codeType}" value="${ccl1.codeName}"/> ${ccl1.codeName}
+						</label>
+						</td>
+					</c:when>
+					<c:when test="${cl.codeType eq ccl1.codeType and cnt != 0 and cnt % 5 ==0}">
+						<%i++; %>
+						</tr>
+						<tr>
+						<th></th>
+						<td>
+						<input type="checkbox" name="${cl.codeType}" value="${ccl1.codeName}"/> ${ccl1.codeName}
+						</td>
+					</c:when>
+				</c:choose>
 			</c:forEach>
 		</tr>
 	</c:forEach>
-			
-           
-</table><br><br>
+	<tr >
+		<th>
+		검색
+		</th>
+		<td colspan="5">
+			<select id="browsers2" name="startdate" >
+				<option value="이름">이름</option>
+				<option value="차량번호">차량번호</option>
+			</select>
+			<input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
+			<button class ="button1" type="button"> 검색 </button>
+		</td>
+	</tr>
+</table>
+<br><br>
 <div style = "margin: auto; width : 95%;">
 <table style = "margin: auto; width : 100%;">
 	<tr>
