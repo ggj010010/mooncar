@@ -8,12 +8,54 @@
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>Schedule Insert</title>
 <SCRIPT type="text/javascript">
+$j(function(){ 
+	$j("#tel").autocomplete({
+	minLength: 2,
+	source : function( request, response ) { 
+		//많이 봤죠? jquery Ajax로 비동기 통신한 후 //json객체를 서버에서 내려받아서 리스트 뽑는 작업
+				$j.ajax({ //호출할 URL 
+					url: "/search_coustomer", //우선 jsontype json으로
+					dataType: "json", // parameter 값이다. 여러개를 줄수도 있다. 
+					data: { //request.term >> 이거 자체가 text박스내에 입력된 값이다.
+						"c_tel" : request.term 
+					}, 
+					success: function( result ) 
+					{ //return 된놈을 response() 함수내에 다음과 같이 정의해서 뽑아온다. 
+						$j.each(result.search_coustomer , function(idx, cust) {
+							return {
+								label: cust.c_tel,
+								value: cust.c_tel
+							}
+						}); 
+					} 
+				}); 
+		}, //최소 몇자 이상되면 통신을 시작하겠다라는 옵션 minLength: 2, //자동완성 목록에서 특정 값 선택시 처리하는 동작 구현 //구현없으면 단순 text태그내에 값이 들어간다. 
+			select: function( event, ui ) {
+				//var terms = split(this.value);
+
+			},
+			focus: function(event, ui) {return false;}
+
+		}); 
+});
+
+
+$j(document).ready(function(){
+	$j("#tel").keydown(function(key) {
+		if (key.keyCode == 13) {
+			alert("enter");
+		}
+	});
+});
+
+
+
+	
  $j(document).ready(function(){
 	}).on("click", ".btnInsert", function(){
-		var tel1 = $j("#tel1").val();
-		var tel2 = $j("#tel2").val();
-		
-	    	$j.ajax({
+		var tel = "010"+$j("#tel").val();
+		alert("asd")
+	    	 $j.ajax({
 				url : "/scheduleInsert",
 				type : "GET",
 				data : {
@@ -43,9 +85,9 @@
 			        } 
 				
 				}//end error 
-			});//end ajax.productInfoWriteAction 
+			});//end ajax.productInfoWriteAction  
 		
-	
+	});
 </SCRIPT>
 </head>
 <body onresize="parent.resizeTo(700,650)" onload="parent.resizeTo(500,400)">
@@ -57,8 +99,8 @@
 		<td>연락처</td>
 
 		<td colspan="3"style ="font-size : 20px;">010  -
-		<input type="text" id="tel1" size="5" style="width : 20%;">-
-		<input type="text" id="tel2" size="5" style="width : 20%;">&nbsp&nbsp<button class ="btnSearch" type="button" style = "width : 20%;height:70%"> 검색 </button></td>
+		<input type="text" id="tel" size="15" style="width : 30%;">
+		
 	</tr>
 	<tr>
 		<td>고객명</td>
@@ -114,7 +156,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4"><button class ="btnInsert" type="button" style = "width : 40%;"> 등록하기 </button></td>
+		<td colspan="4"><button id = "btnInsert" class ="btn" type="button" style = "width : 40%;"> 등록하기 </button></td>
 	</tr>
 </table>
 </body>

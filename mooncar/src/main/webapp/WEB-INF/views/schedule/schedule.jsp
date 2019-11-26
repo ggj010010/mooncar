@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>Schedule</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
 <!--상단 (공통) -->
@@ -40,13 +40,101 @@
     var $tdDay = null;
     var $tdSche = null;
     var jsonData = null;
-    $(document).ready(function() {
+    $j(document).ready(function(){
+    	$j('#request tbody tr').mouseover(function() {
+			$j(this).children().css({
+				'backgroundColor' : '#DCDCDC',
+				'cursor' : 'pointer'
+			});
+		}).mouseout(function() {
+			$j(this).children().css({
+				'backgroundColor' : '#FFFFFF',
+				'cursor' : 'default'
+			});
+		});
+    	
+   	 $j(document).on("click", ".calendar td", function(){
+   			var day = $j(this).children().text();
+   			if(day.length < 2){
+   				day = "0" + day
+   			}
+   			var date = year + "-" + month + "-" + day;
+   			alert(date);
+   			
+   			$j.ajax({
+   				url : "/manager/manager_response",
+   				type : "POST",
+   				data : {
+   					"s_date": date,
+   					}
+   				,
+   				//JSON.stringify()
+   				dataType : "json",
+   				//contentType:"application/json;charset=UTF-8",
+   				timeout : 3000,
+   				success : function(returndata) {
+   					if(returndata == 3){
+   						alert("정상적으로 보내졌습니다.");
+   						window.location.href = "/Manager/manager_order";
+   					}
+   				},//end success
+   				error : function(jqXHR, textStatus, errorThrown) {
+   					alert("실패");
+   					
+   				}//end error 
+   			});//end ajax.productInfoWriteAction  
+   			
+   		   /*  var tdArr = new Array();
+   			
+   			
+   			var td = 
+   			var mr_id = "0";
+   			var m_name = td.eq(2).text();
+   			var p_name = td.eq(3).text();
+   			//var p_count = ${sessionScope.request_count};
+   			//var request_id = ${sessionScope.request_id};
+   			var o_no = ${sessionScope.o_no};  
+   			console.log("P-count : " + p_count);
+   			td.each(function(i) {
+   				tdArr.push(td.eq(i).text());
+   			});
+   			console.log("btn 배열에 담긴 값 : " + tdArr);
+   			$j.ajax({
+   				url : "/manager/manager_response",
+   				type : "POST",
+   				data : {
+   					"m_id": mr_id,
+   					"p_name": p_name,
+   					"p_count": p_count,
+   					"request_id" : m_id,
+   					"o_no" : o_no
+   					}
+   				,
+   				//JSON.stringify()
+   				dataType : "json",
+   				//contentType:"application/json;charset=UTF-8",
+   				timeout : 3000,
+   				success : function(returndata) {
+   					if(returndata == 3){
+   						alert("정상적으로 보내졌습니다.");
+   						window.location.href = "/Manager/manager_order";
+   					}
+   				},//end success
+   				error : function(jqXHR, textStatus, errorThrown) {
+   					alert("실패");
+   					
+   				}//end error 
+   			});//end ajax.productInfoWriteAction  
+   			 */
+   		});
+    });
+    $j(document).ready(function() {
         drawCalendar();
         initDate();
         drawDays();
         drawSche();
-        $("#movePrevMonth").on("click", function(){movePrevMonth();});
-        $("#moveNextMonth").on("click", function(){moveNextMonth();});
+        $j("#movePrevMonth").on("click", function(){movePrevMonth();});
+        $j("#moveNextMonth").on("click", function(){moveNextMonth();});
     });
     
     //Calender Draw
@@ -57,7 +145,7 @@
         for(var i=0;i<6;i++){
             setTableHTML+='<tr height="100">';
             for(var j=0;j<7;j++){
-                setTableHTML+='<td style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
+                setTableHTML+='<td class="td" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
                 setTableHTML+='    <div class="cal-day"></div>';
                 setTableHTML+='    <div class="cal-schedule"></div>';
                 setTableHTML+='</td>';
@@ -65,13 +153,13 @@
             setTableHTML+='</tr>';
         }
         setTableHTML+='</table>';
-        $("#cal_tab").html(setTableHTML);
+        $j("#cal_tab").html(setTableHTML);
     }
     
     //DateReset
     function initDate(){
-        $tdDay = $("td div.cal-day")
-        $tdSche = $("td div.cal-schedule")
+        $tdDay = $j("td div.cal-day")
+        $tdSche = $j("td div.cal-schedule")
         dayCount = 0;
         today = new Date();
         year = today.getFullYear();
@@ -83,8 +171,8 @@
     
     //calendar DateView
     function drawDays(){
-        $("#cal_top_year").text(year);
-        $("#cal_top_month").text(month);
+        $j("#cal_top_year").text(year);
+        $j("#cal_top_month").text(month);
         for(var i=firstDay.getDay();i<firstDay.getDay()+lastDay.getDate();i++){
             $tdDay.eq(i).text(++dayCount);
         }
@@ -222,33 +310,11 @@ table.calendar td{
            </tr>
            <tr>
               <td colspan="3">
-              	 <div style="overflow:scroll; width:100%; height:205px;text-align : center;">
-              	 	<input type="radio" value="ex01" name="update">
+              	 <div class = "customer_view" style="overflow:scroll; width:100%; height:205px;text-align : center;">
+              	 	<!-- <input type="radio" value="ex01" name="update">
               	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
              	 	<br><input type="radio" value="ex01" name="update">
-             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-             	 	<br><input type="radio" value="ex01" name="update">
-             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-             	 	<br><input type="radio" value="ex01" name="update">
-             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-            	  	<br><input type="radio" value="ex01" name="update">
-            	  		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-             	 	<br><input type="radio" value="ex01" name="update">
-             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-             	 	<br><input type="radio" value="ex01" name="update">
-             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-           	   		<br><input type="radio" value="ex01" name="update">
-           	   			<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-              		<br><input type="radio" value="ex01" name="update">
-              			<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-              		<br><input type="radio" value="ex01" name="update">
-              			<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-              		<br><input type="radio" value="ex01" name="update">
-              			<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-              		<br><input type="radio" value="ex01" name="update">
-              			<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-              		<br><input type="radio" value="ex01" name="update">
-              			<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
+             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a> -->
 	 </div>
 			  </td>
            </tr>
