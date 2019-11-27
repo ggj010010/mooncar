@@ -1,7 +1,10 @@
 package com.spring.mooncar.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CustomerDTO;
-import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.ScheduleService;
 
 
@@ -37,36 +39,30 @@ public class ScheduleController {
 		return "schedule/scheduleinsert";
 		
 	}
-	@RequestMapping(value = "/scheduleInsert", method = RequestMethod.GET)
-	public String scheduleInsert(Model model) {
-		
-		return "schedule/scheduleinsert";
-		
-	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/schedule_customer_view", method = RequestMethod.GET)
-	public String schedule_customer_view(Model model, ScheduleDTO scheduleDTO) {
+	@RequestMapping(value = "/search_customer", method = RequestMethod.GET)
+	public String schedule_customer_view(Model model, CustomerDTO customerDTO) throws IOException {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		CommonUtil commonUtil = new CommonUtil();
-		
-		 //String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-	      
-	     // System.out.println("callbackMsg::"+callbackMsg);
-	      
-	    //  return callbackMsg;
-		return null;
-		
-	}
-	@ResponseBody
-	@RequestMapping(value = "/search_coustomer", method = RequestMethod.GET)
-	public String search_coustomer(Model model, CustomerDTO customerDTO) throws IOException {
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		CommonUtil commonUtil = new CommonUtil();
-		result.put("search_coustomer", scheduleService.Search_Customer(customerDTO));
+		result.put("search_customer", scheduleService.Search_Customer(customerDTO));
 		 String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 	      
 	      System.out.println("callbackMsg::"+callbackMsg);
+	      
+	      return callbackMsg;
+		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/auto_coustomer", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+	public String search_coustomer(Model model, CustomerDTO customerDTO, HttpServletResponse response) throws IOException {
+
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		CommonUtil commonUtil = new CommonUtil();
+		System.out.println(customerDTO.getC_tel());
+		result.put("auto_coustomer", scheduleService.Auto_Customer(customerDTO));
+		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	    System.out.println("callbackMsg::"+callbackMsg);
 	      
 	     return callbackMsg;
 		

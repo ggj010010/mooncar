@@ -12,7 +12,7 @@ public class CarDTO {
 	String car_oil_type;
 	int car_oil_date;
 	String car_comment;
-	
+	String c_name;
 	public String getCar_number() {
 		return car_number;
 	}
@@ -79,5 +79,11 @@ public class CarDTO {
 	public void setCar_comment(String car_comment) {
 		this.car_comment = car_comment;
 	}
-
+	public String getC_name() {
+		return c_name;
+	}
+	public void setC_name(String c_name) {
+		this.c_name = c_name;
+	}
+	
 }

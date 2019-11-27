@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mooncar.dao.ScheduleDAO;
+import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.ScheduleService;
@@ -39,7 +40,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 
 	@Override
-	public List<CustomerDTO> Search_Customer(CustomerDTO customerDTO) {
+	public List<CustomerDTO> Auto_Customer(CustomerDTO customerDTO) {
+		// TODO Auto-generated method stub
+		System.out.println("S"+customerDTO.getC_tel());
+		return scheduleDAO.Auto_Customer(customerDTO);
+	}
+
+	@Override
+	public List<CarDTO> Search_Customer(CustomerDTO customerDTO) {
 		// TODO Auto-generated method stub
 		return scheduleDAO.Search_Customer(customerDTO);
 	}

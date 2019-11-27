@@ -9,7 +9,7 @@ public class CarDetailDTO {
 	String car_next_repair;
 	int car_d_km;
 	Date car_date;
-	
+	String c_tel;
 	public int getCar_d_no() {
 		return car_d_no;
 	}
@@ -45,6 +45,12 @@ public class CarDetailDTO {
 	}
 	public void setCar_date(Date car_date) {
 		this.car_date = car_date;
+	}
+	public String getC_tel() {
+		return c_tel;
+	}
+	public void setC_tel(String c_tel) {
+		this.c_tel = c_tel;
 	}
 	
 }

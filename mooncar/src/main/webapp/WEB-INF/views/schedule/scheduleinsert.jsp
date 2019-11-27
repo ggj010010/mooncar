@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>Schedule Insert</title>
 <SCRIPT type="text/javascript">
@@ -14,19 +13,21 @@ $j(function(){
 	source : function( request, response ) { 
 		//많이 봤죠? jquery Ajax로 비동기 통신한 후 //json객체를 서버에서 내려받아서 리스트 뽑는 작업
 				$j.ajax({ //호출할 URL 
-					url: "/search_coustomer", //우선 jsontype json으로
+					url: "/auto_coustomer", //우선 jsontype json으로
 					dataType: "json", // parameter 값이다. 여러개를 줄수도 있다. 
 					data: { //request.term >> 이거 자체가 text박스내에 입력된 값이다.
 						"c_tel" : request.term 
 					}, 
 					success: function( result ) 
 					{ //return 된놈을 response() 함수내에 다음과 같이 정의해서 뽑아온다. 
-						$j.each(result.search_coustomer , function(idx, cust) {
-							return {
-								label: cust.c_tel,
-								value: cust.c_tel
-							}
-						}); 
+						response(
+	                            $j.map(result.auto_coustomer, function(item) {
+	                                return {
+	                                    label: item.c_tel,
+	                                    value: item.c_tel
+	                                }
+	                            })
+	                        );
 					} 
 				}); 
 		}, //최소 몇자 이상되면 통신을 시작하겠다라는 옵션 minLength: 2, //자동완성 목록에서 특정 값 선택시 처리하는 동작 구현 //구현없으면 단순 text태그내에 값이 들어간다. 
@@ -43,7 +44,44 @@ $j(function(){
 $j(document).ready(function(){
 	$j("#tel").keydown(function(key) {
 		if (key.keyCode == 13) {
-			alert("enter");
+			var tel = $j("#tel").val();
+		    	 $j.ajax({
+					url : "/search_customer",
+					type : "GET",
+					data : 
+					{
+						"c_tel" : tel
+					}
+					,
+					//JSON.stringify()
+					dataType : "json",
+					contentType:"application/json;charset=UTF-8",
+					timeout : 3000,
+					success : function(returndata) {
+							//console.log(returndata.count)
+							//console.log(returndata.search_customer.c_name);
+							
+							$j.each(returndata.search_customer , function(idx, val) {
+								$j(".c_name").text(val.c_name);
+								alert(val.car_number);
+							});
+							
+							
+					},//end success
+					error : function(jqXHR, textStatus, errorThrown) {
+					 	if(textStatus=="timeout") {
+
+				        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+				        } 
+					 	else {
+
+				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+				        } 
+					
+					}//end error 
+				});//end ajax.productInfoWriteAction   
 		}
 	});
 });
@@ -53,7 +91,7 @@ $j(document).ready(function(){
 	
  $j(document).ready(function(){
 	}).on("click", ".btnInsert", function(){
-		var tel = "010"+$j("#tel").val();
+		var tel = $j("#tel").val();
 		alert("asd")
 	    	 $j.ajax({
 				url : "/scheduleInsert",
@@ -98,17 +136,17 @@ $j(document).ready(function(){
 	<tr>
 		<td>연락처</td>
 
-		<td colspan="3"style ="font-size : 20px;">010  -
+		<td colspan="3"style ="font-size : 20px;">
 		<input type="text" id="tel" size="15" style="width : 30%;">
 		
 	</tr>
 	<tr>
 		<td>고객명</td>
-		<td colspan="3">문종학</td>
+		<td colspan="3" class="c_name"></td>
 	</tr>
 	<tr>
 		<td>차량</td>
-		<td colspan="3">
+		<td colspan="3" class="car">
 			<input type="radio" value="붕붕이" name="chk_car">붕붕이
 			<input type="radio" value="쌍화차" name="chk_car">쌍화차
 			<input type="radio" value="공차" name="chk_car">공차
@@ -117,9 +155,9 @@ $j(document).ready(function(){
 	
 	 <tr>
 		<td>차형          </td>
-		<td>크기 : 중형</td>
-		<td> 종류 : 세단</td>
-		<td>연료 : 가솔린</td>
+		<td class="car_size">크기 : 중형</td>
+		<td class="car_type"> 종류 : 세단</td>
+		<td class="car_fuel">연료 : 가솔린</td>
 	<tr>
 		<td>방문일자</td>
 		<td colspan="2">
@@ -152,7 +190,7 @@ $j(document).ready(function(){
 	<tr>
 		<td>정비상세</td>
 		<td colspan="3">
-			<textarea name="desc" id="desc" rows="4" cols="90" style="width : 85%;"></textarea>
+			<textarea name="desc_detail" id="desc_detail" rows="4" cols="90" style="width : 85%;"></textarea>
 		</td>
 	</tr>
 	<tr>

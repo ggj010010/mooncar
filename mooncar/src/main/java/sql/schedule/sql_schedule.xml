@@ -12,16 +12,46 @@
 		<result property="c_email" column="c_email" />
 		<result property="c_comment" column="c_comment" />
 	</resultMap>
-	
-	<select id="search_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
+	<resultMap type="com.spring.mooncar.dto.CarDTO" id="CarDTO">
+		<result property="car_number" column="car_number" />
+		<result property="car_km" column="car_km" />
+		<result property="car_maker" column="car_maker" />
+		<result property="car_size" column="car_size" />
+		<result property="car_category" column="car_category" />
+		<result property="car_fuel_type" column="car_fuel_type" />
+		<result property="car_oil_type" column="car_oil_type" />
+		<result property="car_oil_date" column="car_oil_date" />
+		<result property="car_comment" column="car_comment" />
+		
+		<result property="c_tel" column="c_tel" />
+		<result property="c_name" column="c_name" />
+	</resultMap>
+	<select id="auto_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
 
-	/*schedule.search_customer*/
+	/*schedule.auto_customer*/
 		SELECT  
 				*
 		FROM 
 			customer 
 		where
-			c_tel LIKE '%${c_tel}%'
+			c_tel LIKE '%' || #{c_tel, jdbcType=VARCHAR} || '%' 
+
+	</select>
+	<select id="search_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CarDTO">
+
+	/*schedule.search_customer*/
+		SELECT  
+				customer.c_name as c_name,
+				car_number,
+				car_name,
+				car_size,
+				car_category,
+				car_fuel_type
+		FROM 
+			customer , car
+		where
+            customer.c_tel = car.c_tel and car.c_tel = #{c_tel}
+			
 
 	</select>
 </mapper>
