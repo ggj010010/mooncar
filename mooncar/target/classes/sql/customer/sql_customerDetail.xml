@@ -2,5 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="customerDetail">
+<resultMap type="com.spring.mooncar.dto.CustomerDetailDTO"
 
+		id="CustomerDetailDTO">
+
+		<result property="cus_d_no" column="cus_d_no" />
+		<result property="c_tel" column="c_tel" />
+		<result property="cus_d_contents" column="cus_d_contents" />
+		<result property="cus_d_date" column="cus_d_date" />
+
+	</resultMap> 
+    <select id="selectCustomerDetail" resultType="com.spring.mooncar.dto.CustomerDetailDTO">
+        SELECT * FROM customer_detail
+        WHERE c_tel = #{c_tel}
+    </select>
 </mapper>

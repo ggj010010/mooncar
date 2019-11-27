@@ -13,7 +13,7 @@
 		<result property="c_comment" column="c_comment" />
 
 	</resultMap> 
-    <select id="viewAll" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
+    <select id="selectCustomerAll" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
         SELECT 
            *
         FROM 
@@ -22,8 +22,10 @@
             c_name
     </select>
     
-    <select id="viewdetail" resultType="com.spring.mooncar.dto.CustomerDTO">
+    <select id="selectCustomerOne" resultType="com.spring.mooncar.dto.CustomerDTO">
         SELECT * FROM customer 
         WHERE c_tel = #{c_tel}
     </select>
+    
+
 </mapper>

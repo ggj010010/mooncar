@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
+
 <title>Insert title here</title>
 
 
@@ -37,36 +39,39 @@
 <div class="board-container" >
   <div id="left" >
     <div id="left">
-  
         <table style = "float : center; width : 100%;">
-          <c:forEach var="cv" items="${custdetail}">
            <tr>
               <th colspan="2">회원정보</th>
            </tr>
            <tr>
               <td>이름</td>
-              <td>${cv.c_name}</td>
+              <td>${selectCustomerOne.c_name}</td>
            </tr>
            <tr>
               <td>핸드폰</td>
-              <td>${cv.c_name}</td>
+              <td>${selectCustomerOne.c_tel}</td>
            </tr>
              <tr>
               <td>성별</td>
-              <td>${cv.c_female}</td>
+             <c:choose>
+              		<c:when test="${selectCustomerOne.c_gender == '1'}">
+              			<td>남자</td>
+              		</c:when>
+        			<c:otherwise> 
+              			<td>여자</td>
+              		</c:otherwise>
+               </c:choose>
            </tr>
            <tr>
               <td>이메일</td>
-              <td>${cv.c_email}</td>
+              <td>${selectCustomerOne.c_email}</td>
            </tr>
        	 <tr>
        		<td colspan="2">
        		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
        		</td>
       	 </tr>
-      	</c:forEach>
        </table>
-
     </div>
     <div id="right">
         <table style = "width : 100%;">
@@ -76,23 +81,15 @@
 			  </th>
            </tr>
            <tr>
-              <td colspan="2">
-              	<div style="overflow:scroll; width:100%; height:159px;">친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br></div>
-			  </td>
-           </tr>
+           <tr>
+             <td style = "text-align : right"><div style="overflow:scroll; width:100%; height:159px;">
+          		<c:forEach var="selectCustomerDetail" items="${selectCustomerDetail}">
+                	${selectCustomerDetail.cus_d_contents} &nbsp&nbsp
+              	     ${selectCustomerDetail.cus_d_date}<br>&nbsp&nbsp
+				</c:forEach>
+	
+		   	 </td>
+		  </tr>
        	<tr>
        	<td>
        		<input type="text" name="my_name" size="50" style="color : black; border-radius: 8px; background-color: white; width:60%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
@@ -100,47 +97,105 @@
         </tr>
         </table><br><br>
      </div>
-       
+
+
+
+
+<table width="300" border="1" cellspacing="0" cellpadding="0" valign="center" >
+   <tr height="30" >
+      <td align="center">라디오버튼</td>
+           <c:forEach var="selectCarOne" items="${selectCarOne}">
+<script type="text/javascript">
+
+
+
+	function Rradio_OnOff(id)
+	{
+//  <tr> id로 값을 비교한다!
+	   if(id == "${selectCarOne.car_number}")
+	   {
+      	document.all["Radio_On"].style.display = '';         // 보이게
+      	document.all["Radio_Off"].style.display = 'none';  // 안보이게
+   	    }
+   		else
+   		{
+      	document.all["Radio_On"].style.display = 'none';  // 안보이게
+      	document.all["Radio_Off"].style.display = '';         // 보이게
+   		}
+	}
+</script>
+				<th><input type="radio" title="${selectCarOne.car_number}" value="${selectCarOne.car_name}"onclick="Rradio_OnOff('${selectCarOne.car_number}');" name="chk_car">${selectCarOne.car_name}</th>
+		   </c:forEach>  
+
+    </tr>
+    <tr id="Radio_On" height="30" style="display:'';">   
+        <td align="center">???</td>
+        <td align="left" class="input_text">On</td>
+    </tr>
+    <tr id="Radio_Off" height="30" style="display:none;">  <!-- style에 display:none를 줌으로 숨긴다.^^ -->
+        <td align="center">???</td>
+        <td align="left" class="input_text">Off</td>
+    </tr>
+</table>
+
+
+
+
 
     <table style = "width : 100%;">
         <tr>
-           <th>차량</th>   
-            <th><input type="radio" value="스타렉스" name="chk_car">스타렉스</th>
-            <th><input type="radio" value="아우디" name="chk_car">아우디</th>            
-            <th><input type="radio" value="리어카" name="chk_car">리어카</th>                     
+           <th>차량</th>
+           <c:forEach var="selectCarOne" items="${selectCarOne}">
+				<th><input type="radio" title="${selectCarOne.car_number}" value="${selectCarOne.car_name}" name="chk_car">${selectCarOne.car_name}</th>
+		   </c:forEach>  
+                    
         </tr>
     </table>
     <br><br><br>
     
     <table style = "float : center; width : 100%;">
+       <c:forEach var="selectCarOne" items="${selectCarOne}">
            <tr>
               <th colspan="2">차량정보</th>
            </tr>
            <tr>
               <td>차량번호</td>
-              <td>1234</td>
+              <td>${selectCarOne.car_number}</td>
            </tr>
            <tr>
-              <td>차량종류</td>
-              <td>리어카</td>
-           </tr>
-           <tr>
-              <td>엔진오일</td>
-              <td>2 개월</td>
-           </tr>
-             <tr>
-              <td>제조사</td>
-              <td>벤츠</td>
+              <td>차종</td>
+              <td>${selectCarOne.car_name}</td>
            </tr>
            <tr>
               <td>키로수</td>
-              <td>82키로</td>
+              <td>${selectCarOne.car_km}</td>
+           </tr>
+           <tr>
+              <td>차량크기</td>
+              <td>${selectCarOne.car_size}</td>
+           </tr>
+           <tr>
+              <td>종류</td>
+              <td>${selectCarOne.car_category}</td>
            </tr>
            <tr>
               <td>연료</td>
-              <td>경유</td>
+              <td>${selectCarOne.car_fuel_type}</td>
            </tr>
-        </table><br>
+           <tr>
+              <td>엔진오일</td>
+              <td>${selectCarOne.car_oil_type}</td>
+           </tr>
+           <tr>
+           	  <td>엔진오일</td>
+              <td>${selectCarOne.car_oil_date}</td>
+           </tr>
+           <tr>
+              <td>차량상세</td>
+              <td>${selectCarOne.car_comment}</td>
+           </tr>
+        </c:forEach>
+     </table><br>
         <div class="wrap" style="float: right; width : 30%;">
           <button class ="button" type="button" onclick="window.open('/popup/carpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
           <button class="button" type="button"> 수정 </button>

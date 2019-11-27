@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mooncar.dao.CustomerDAO;
+import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.CustomerDetailDTO;
 import com.spring.mooncar.service.CustomerService;
@@ -36,8 +37,8 @@ public class CustomerServiceImpl implements CustomerService{
 
 	@Override
 	public List<CustomerDetailDTO> selectCustomerDetail(CustomerDetailDTO customerDetailDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		String tel = customerDetailDTO.getC_tel();
+	      return customerDAO.selectCustomerDetail(tel);
 	}
 
 	@Override
@@ -56,6 +57,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public int insertCustomerDetail(CustomerDetailDTO customerDetailDTO) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<CarDTO> selectCarOne(CarDTO carDTO) {
+		String tel = carDTO.getC_tel();
+	      return customerDAO.selectCarOne(tel);
 	}
 
 }

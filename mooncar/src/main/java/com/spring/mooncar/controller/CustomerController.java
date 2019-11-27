@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.CustomerDetailDTO;
+import com.spring.mooncar.service.CarService;
 import com.spring.mooncar.service.CustomerService;
 
 
@@ -27,15 +30,18 @@ public class CustomerController {
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
 	@RequestMapping(value = "customer/customer.do", method = RequestMethod.GET)
-	 public ModelAndView customer(CustomerDTO customerdto) throws Exception{
-        // 조회수 증가 처리
-   //     quService.increaseViewcnt(q_no, session);
+	 public ModelAndView customer(CustomerDTO customerDTO,CustomerDetailDTO customerdetailDTO, CarDTO carDTO) throws Exception{
+        System.out.println(customerdetailDTO.getC_tel());
+        List<CustomerDetailDTO> selectCustomerDetail = customerservice.selectCustomerDetail(customerdetailDTO);
+        List<CarDTO> selectCarOne = customerservice.selectCarOne(carDTO);
         // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
         ModelAndView mav = new ModelAndView();
         // 뷰의 이름
         mav.setViewName("customer/customer");
         // 뷰에 전달할 데이터
-        mav.addObject("custdetail", customerservice.selectCustomerOne(customerdto));
+        mav.addObject("selectCustomerOne", customerservice.selectCustomerOne(customerDTO));
+        mav.addObject("selectCustomerDetail", selectCustomerDetail);
+        mav.addObject("selectCarOne", selectCarOne);
         return mav;
     }
 		
@@ -43,8 +49,6 @@ public class CustomerController {
 		public ModelAndView custview ()throws Exception {
         List<CustomerDTO> custview = customerservice.selectCustomerAll();
         // ModelAndView - 모델과 뷰
-        System.out.println(custview.size());
-        System.out.println(custview.get(0).getC_name());
         ModelAndView mav = new ModelAndView();
         mav.setViewName("customer/custview"); // 뷰를 custview.jsp로 설정
         mav.addObject("custview", custview); // 데이터를 저장
