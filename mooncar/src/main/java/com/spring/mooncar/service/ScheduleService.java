@@ -13,4 +13,6 @@ public interface ScheduleService {
 	int updateSchedule(ScheduleDTO scheduleDTO);//예약 수정
 	List<CustomerDTO> Auto_Customer(CustomerDTO customerDTO);
 	List<CarDTO> Search_Customer(CustomerDTO customerDTO);
+	public List<CarDTO> search_car(CarDTO carDTO);
+	
 }

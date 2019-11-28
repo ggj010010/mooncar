@@ -12,5 +12,4 @@ public interface CarService {
 	int updateCar(CarDTO carDTO);//기존회원 차량 수정
 	int deleteCar(CarDTO carDTO);//기존회원 차량 삭제
 	int insertCarDetail(CarDetailDTO carDetailDTO);//정비 등록
-	
 }

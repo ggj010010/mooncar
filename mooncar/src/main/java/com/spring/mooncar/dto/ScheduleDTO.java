@@ -8,7 +8,8 @@ public class ScheduleDTO {
 	String s_contents;
 	String s_check;
 	String s_comment;
-	Date s_date;
+	String s_date;
+	String car_number;
 	
 	public int getS_no() {
 		return s_no;
@@ -40,11 +41,19 @@ public class ScheduleDTO {
 	public void setS_comment(String s_comment) {
 		this.s_comment = s_comment;
 	}
-	public Date getS_date() {
+	
+	public String getS_date() {
 		return s_date;
 	}
-	public void setS_date(Date s_date) {
+	public void setS_date(String s_date) {
 		this.s_date = s_date;
 	}
+	public String getCar_number() {
+		return car_number;
+	}
+	public void setCar_number(String car_number) {
+		this.car_number = car_number;
+	}
+	
 	
 }

@@ -1,7 +1,6 @@
 package com.spring.mooncar.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.common.CommonUtil;
+import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.ScheduleService;
 
 
@@ -41,8 +42,8 @@ public class ScheduleController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/search_customer", method = RequestMethod.GET)
-	public String schedule_customer_view(Model model, CustomerDTO customerDTO) throws IOException {
+	@RequestMapping(value = "/search_customer", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String search_customer(Model model, CustomerDTO customerDTO) throws IOException {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		CommonUtil commonUtil = new CommonUtil();
 		result.put("search_customer", scheduleService.Search_Customer(customerDTO));
@@ -54,8 +55,22 @@ public class ScheduleController {
 		
 	}
 	@ResponseBody
+	@RequestMapping(value = "/search_car", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String search_car(Model model, CarDTO carDTO) throws IOException {
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		CommonUtil commonUtil = new CommonUtil();
+		System.out.println(carDTO.getCar_number());
+		result.put("search_car", scheduleService.search_car(carDTO));
+		 String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	      
+	      System.out.println("callbackMsg::"+callbackMsg);
+	      
+	      return callbackMsg;
+		
+	}
+	@ResponseBody
 	@RequestMapping(value = "/auto_coustomer", produces ="application/json; charset=utf8", method = RequestMethod.GET)
-	public String search_coustomer(Model model, CustomerDTO customerDTO, HttpServletResponse response) throws IOException {
+	public String auto_coustomer(Model model, CustomerDTO customerDTO, HttpServletResponse response) throws IOException {
 
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		CommonUtil commonUtil = new CommonUtil();
@@ -65,6 +80,20 @@ public class ScheduleController {
 	    System.out.println("callbackMsg::"+callbackMsg);
 	      
 	     return callbackMsg;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/scheduleInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+	public int scheduleInsert(Model model, ScheduleDTO scheduleDTO) throws IOException {
+
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		CommonUtil commonUtil = new CommonUtil();
+		int check = scheduleService.insertSchedule(scheduleDTO);
+		result.put("insertSchedule", scheduleService.insertSchedule(scheduleDTO));
+		
+	      
+	    return check;
 		
 	}
 //	@RequestMapping(value = "/order/responseDate",  method = RequestMethod.GET, produces = "application/text; charset=utf8")

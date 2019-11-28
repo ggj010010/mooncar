@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.mooncar.dao.ScheduleDAO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.ScheduleDTO;
 
 @Repository
 public class ScheduleDAOImpl implements ScheduleDAO{
@@ -25,6 +26,18 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	public List<CarDTO> Search_Customer(CustomerDTO customerDTO) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("schedule.search_customer", customerDTO);
+	}
+
+	@Override
+	public List<CarDTO> search_car(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("schedule.search_car", carDTO);
+	}
+
+	@Override
+	public int insertSchedule(ScheduleDTO scheduleDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("schedule.insertSchedule", scheduleDTO);
 	}
 	
 	

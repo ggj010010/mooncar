@@ -30,7 +30,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public int insertSchedule(ScheduleDTO scheduleDTO) {
 		// TODO Auto-generated method stub
-		return 0;
+		return scheduleDAO.insertSchedule(scheduleDTO);
 	}
 
 	@Override
@@ -42,7 +42,6 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public List<CustomerDTO> Auto_Customer(CustomerDTO customerDTO) {
 		// TODO Auto-generated method stub
-		System.out.println("S"+customerDTO.getC_tel());
 		return scheduleDAO.Auto_Customer(customerDTO);
 	}
 
@@ -50,6 +49,12 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public List<CarDTO> Search_Customer(CustomerDTO customerDTO) {
 		// TODO Auto-generated method stub
 		return scheduleDAO.Search_Customer(customerDTO);
+	}
+
+	@Override
+	public List<CarDTO> search_car(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return scheduleDAO.search_car(carDTO);
 	}
 
 }

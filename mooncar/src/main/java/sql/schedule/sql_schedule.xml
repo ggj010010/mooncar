@@ -26,6 +26,14 @@
 		<result property="c_tel" column="c_tel" />
 		<result property="c_name" column="c_name" />
 	</resultMap>
+	<resultMap type="com.spring.mooncar.dto.ScheduleDTO" id="ScheduleDTO">
+		<result property="c_tel" column="c_tel" />
+		<result property="s_contents" column="s_contents" />
+		<result property="s_check" column="s_check" />
+		<result property="s_comment" column="s_comment" />
+		<result property="s_date" column="s_date" />
+		<result property="car_number" column="car_number" />
+	</resultMap>
 	<select id="auto_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
 
 	/*schedule.auto_customer*/
@@ -38,7 +46,6 @@
 
 	</select>
 	<select id="search_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CarDTO">
-
 	/*schedule.search_customer*/
 		SELECT  
 				customer.c_name as c_name,
@@ -51,7 +58,33 @@
 			customer , car
 		where
             customer.c_tel = car.c_tel and car.c_tel = #{c_tel}
-			
-
 	</select>
+	<select id="search_car" parameterType="com.spring.mooncar.dto.CarDTO" resultMap="CarDTO">
+	/*schedule.search_car*/
+		SELECT  
+				car_number
+				car_size,
+				car_category,
+				car_fuel_type
+		FROM 
+			 car
+		where
+            car_number = #{car_number}
+	</select>
+	<insert id="insertSchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO">
+	/*schedule.insertSchedule*/
+		insert into
+			schedule 			
+		VALUES
+		 (
+    		(SELECT NVL(MAX(s_no)+1, 1)FROM schedule)
+    		,#{c_tel}
+    		,#{car_number}
+    		,#{s_contents}
+    		,0
+    		,#{s_comment}
+    		,to_char(${s_date}, 'YYYY-MM-DD HH24')
+    	 )
+	</insert>
+	
 </mapper>

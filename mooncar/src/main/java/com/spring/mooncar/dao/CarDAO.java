@@ -1,5 +1,8 @@
 package com.spring.mooncar.dao;
 
-public interface CarDAO {
+import java.util.List;
 
+import com.spring.mooncar.dto.CarDTO;
+
+public interface CarDAO {
 }
