@@ -86,15 +86,10 @@ public class ScheduleController {
 	@ResponseBody
 	@RequestMapping(value = "/scheduleInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
 	public int scheduleInsert(Model model, ScheduleDTO scheduleDTO) throws IOException {
-
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		CommonUtil commonUtil = new CommonUtil();
+		
 		int check = scheduleService.insertSchedule(scheduleDTO);
-		result.put("insertSchedule", scheduleService.insertSchedule(scheduleDTO));
-		
-	      
-	    return check;
-		
+	    
+		return check;
 	}
 //	@RequestMapping(value = "/order/responseDate",  method = RequestMethod.GET, produces = "application/text; charset=utf8")
 //

@@ -30,6 +30,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public int insertSchedule(ScheduleDTO scheduleDTO) {
 		// TODO Auto-generated method stub
+		System.out.println(scheduleDTO.getC_tel());
+		System.out.println(scheduleDTO.getCar_number());
+		System.out.println(scheduleDTO.getS_comment());
+		System.out.println(scheduleDTO.getS_contents());
+		System.out.println(scheduleDTO.getS_date());
 		return scheduleDAO.insertSchedule(scheduleDTO);
 	}
 

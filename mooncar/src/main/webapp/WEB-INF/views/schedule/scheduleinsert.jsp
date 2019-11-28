@@ -64,6 +64,13 @@ $j(document).ready(function() {
 							$j(".car_size").empty();
 							$j(".car_type").empty();
 							$j(".car_fuel").empty();
+							$j("#desc").val('');
+							$j("#desc_detail").val('');
+							$j('input[name="timeTF"]').removeAttr('checked');
+							$j('#browsers1 option:eq(0)').prop('selected', true);
+							var now = new Date();
+						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+							$j('#userdate').val(today);
 							$j.each(returndata.search_car , function(idx, val) {
 					 			$j(".car_size").text("크기: "+val.car_size);
 								$j(".car_type").text("종류: "+val.car_category);
@@ -108,9 +115,17 @@ $j(document).ready(function(){
 					success : function(returndata) {
 							$j(".c_name").empty();
 							$j(".car").empty();
-							$j(".car_size").empty();
-							$j(".car_type").empty();
-							$j(".car_fuel").empty();
+							$j(".car_size").text("크기:");
+							$j(".car_type").text("종류:");
+							$j(".car_fuel").text("연료:");
+							$j("#desc").val('');
+							$j("#desc_detail").val('');
+							$j('input[name="timeTF"]').removeAttr('checked');
+						    $j('#browsers1 option:eq(0)').prop('selected', true);
+
+						    var now = new Date();
+						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+							$j('#userdate').val(today);
 							var html = "";
 							//console.log(returndata.count)
 							//console.log(returndata.search_customer.c_name);
@@ -119,9 +134,6 @@ $j(document).ready(function(){
 								html = "<input type='radio' value='"+val.car_number+"'"+" name='chk_car'>"+val.car_name
 								$j(".car").append(html);
 								
-					/* 			$j(".car_size").text("크기: "+val.car_size);
-								$j(".car_type").text("종류: "+val.car_size);
-								$j(".car_fuel").text("연료: "+val.car_size); */
 							});
 							
 							
@@ -163,9 +175,7 @@ $j(document).ready(function(){
 				var time = parseInt(time, 10)+12;
 				
 			}
-			var date = $j("#userdate").val()+" "+time;
-			alert(date);
-			
+			var date = $j("#userdate").val()+"-"+time;
 		}
 		else{
 			alert("예약 시간을 입력해주세요!");
@@ -193,7 +203,22 @@ $j(document).ready(function(){
 				timeout : 3000,
 				success : function(returndata) {
 						//console.log(returndata.count)
-						
+						if(returndata == 1){
+							alert("예약이 완료되었습니다!");
+							$j(".c_name").empty();
+							$j(".car").empty();
+							$j(".car_size").text("크기:");
+							$j(".car_type").text("종류:");
+							$j(".car_fuel").text("연료:");
+							$j("#desc").val('');
+							$j("#desc_detail").val('');
+							$j('input[name="timeTF"]').removeAttr('checked');
+						    $j('#browsers1 option:eq(0)').prop('selected', true);
+						    $j("#tel").val('');
+						    var now = new Date();
+						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+							$j('#userdate').val(today);
+						}
 						
 						
 				},//end success
@@ -234,9 +259,6 @@ $j(document).ready(function(){
 	<tr>
 		<td>차량</td>
 		<td colspan="3" class="car">
-			<!-- <input type="radio" value="붕붕이" name="chk_car">붕붕이
-			<input type="radio" value="쌍화차" name="chk_car">쌍화차
-			<input type="radio" value="공차" name="chk_car">공차 -->
 		</td>
 	</tr>
 	
@@ -254,19 +276,19 @@ $j(document).ready(function(){
             <input type="radio" value="오전" name="timeTF">오전
             <input type="radio" value="오후" name="timeTF">오후
 		   <select id="browsers1" name="time" style=" float : right;">
-			     <option value="01" selected>01</option> 
-     			 <option value="02" selected>02</option> 
-     			 <option value="03" selected>03</option> 
-     			 <option value="04" selected>04</option> 
-     			 <option value="05" selected>05</option> 
-     			 <option value="06" selected>06</option> 
-     			 <option value="07" selected>07</option> 
-     			 <option value="08" selected>08</option> 
-     			 <option value="09" selected>09</option> 
-     			 <option value="10" selected>10</option> 
-     			 <option value="11" selected>11</option> 
-     			 <option value="12" selected>12</option> 
 			     <option value="시간선택" selected>시간선택</option>       			 
+			     <option value="01">01</option> 
+     			 <option value="02">02</option> 
+     			 <option value="03">03</option> 
+     			 <option value="04">04</option> 
+     			 <option value="05">05</option> 
+     			 <option value="06">06</option> 
+     			 <option value="07">07</option> 
+     			 <option value="08">08</option> 
+     			 <option value="09">09</option> 
+     			 <option value="10">10</option> 
+     			 <option value="11">11</option> 
+     			 <option value="12">12</option> 
       		</select>
 		</td>
 	</tr>

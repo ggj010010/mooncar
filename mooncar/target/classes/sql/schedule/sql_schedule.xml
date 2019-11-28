@@ -73,7 +73,7 @@
 	</select>
 	<insert id="insertSchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO">
 	/*schedule.insertSchedule*/
-		insert into
+    	insert into
 			schedule 			
 		VALUES
 		 (
@@ -83,7 +83,7 @@
     		,#{s_contents}
     		,0
     		,#{s_comment}
-    		,to_char(${s_date}, 'YYYY-MM-DD HH24')
+    		,to_date(#{s_date}, 'YYYY-MM-DD HH24')
     	 )
 	</insert>
 	
