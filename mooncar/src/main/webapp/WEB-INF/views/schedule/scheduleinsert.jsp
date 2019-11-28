@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>Schedule Insert</title>
 <SCRIPT type="text/javascript">
