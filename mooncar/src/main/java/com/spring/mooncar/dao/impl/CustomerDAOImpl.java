@@ -40,6 +40,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("car.selectCarOne",tel);
 	}
+
+	@Override
+	public CustomerDTO deleteCustomerOne(String tel) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("customer.deleteCustomerOne",tel);
+	}
 	
 	
 }

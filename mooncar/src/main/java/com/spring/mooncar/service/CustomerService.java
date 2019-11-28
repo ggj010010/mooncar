@@ -11,6 +11,7 @@ public interface CustomerService {
 	CustomerDTO selectCustomerOne(CustomerDTO customerDTO);//회원 상세정보에서 사용 o
 	List<CustomerDTO> selectCustomerList(CustomerDTO customerDTO);//상단 회원검색에서 사용
 	List<CustomerDTO> selectCustomerAll();//회원리스트에서 사용 o
+	CustomerDTO deleteCustomerOne(CustomerDTO customerDTO);//회원삭제에서 사용 o
 	
 	List<CustomerDetailDTO> selectCustomerDetail(CustomerDetailDTO customerdetailDTO);//회원 상세정보에서 회원과 있었던일볼때 사용o
 	List<CarDTO> selectCarOne(CarDTO carDTO);//회원 상세정보에서 회원차 볼때 사용

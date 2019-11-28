@@ -27,5 +27,9 @@
         WHERE c_tel = #{c_tel}
     </select>
     
+    <delete id="deleteCustomerOne">
+        DELETE FROM customer
+        WHERE c_tel = #{c_tel}
+    </delete>
 
 </mapper>

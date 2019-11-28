@@ -7,15 +7,9 @@
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-
-<style type="text/css">
- 
-
-
-
-
-</style>
 
 <title>Insert title here</title>
 
@@ -26,7 +20,8 @@
   <div class="wrap" style="float : right;">
       <select id="browsers2" name="startdate" >
             <option value="이름">이름</option>
-          <option value="차량번호">차량번호</option>
+          <option value="핸드폰">핸드폰</option>
+          <option value="성별">성별</option>
       </select>
 	  		 <input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
              <button class ="button1" type="button"> 검색 </button>
@@ -53,6 +48,20 @@
 			  <th>Del</th>
 			  
            </tr>
+
+<script>
+//삭제버튼
+	$(document).ready(function() {
+		$("#btnDelete").click(function() {
+			var val = $(this).val();
+			alert(val);
+			if (confirm("삭제하시겠습니까?")) {
+				location.href="/customer/delete.do?c_tel="+$(this).val();
+			}
+		});
+	});
+</script>
+
           <c:forEach var="cv" items="${custview}">
            <tr>
               <td><a href="/customer/customer.do?c_tel=${cv.c_tel}">${cv.c_name}</a></td>
@@ -65,8 +74,7 @@
               			<td>여자</td>
               		</c:otherwise>
                </c:choose>
-              <td><button class="button" type="button" style="width : 60%;float : center; height : 100%"> 삭제 </button></td>
-           </tr>
+              <td><button class="button" type="button" style="width : 60%;float : center; height : 100%" id="btnDelete" value="${cv.c_tel}"> 삭제 </button></td>
 		  </c:forEach>
         </table>
    

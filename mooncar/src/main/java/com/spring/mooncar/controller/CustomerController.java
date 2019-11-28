@@ -54,4 +54,26 @@ public class CustomerController {
         mav.addObject("custview", custview); // 데이터를 저장
         return mav; // custview.jsp로 custview가 전달된다.
 	}
+	
+	@RequestMapping(value = "customer/ajax", method = RequestMethod.GET)
+	public String main(Model model) {
+		logger.info("main");
+		
+		return "customer/ajax";
+	}
+
+    @RequestMapping(value="customer/delete.do", method=RequestMethod.GET)
+    public ModelAndView detail(CustomerDTO customerDTO) throws Exception{
+        System.out.println(customerDTO.getC_tel());
+
+        // 모델(데이터)+뷰(화면)를 함께 전달하는 객체
+        ModelAndView mav = new ModelAndView();
+        // 뷰의 이름
+        mav.setViewName("customer/custview");
+        // 뷰에 전달할 데이터
+        mav.addObject("deleteCustomerOne", customerservice.deleteCustomerOne(customerDTO));
+
+        return mav;
+    }
+
 }

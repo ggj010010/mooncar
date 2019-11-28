@@ -16,4 +16,6 @@ public interface CustomerDAO {
 
 	public List<CarDTO> selectCarOne(String tel);
 
+	public CustomerDTO deleteCustomerOne(String tel);
+
 }

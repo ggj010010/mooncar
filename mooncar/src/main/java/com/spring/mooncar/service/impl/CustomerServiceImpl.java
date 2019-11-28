@@ -65,4 +65,10 @@ public class CustomerServiceImpl implements CustomerService{
 	      return customerDAO.selectCarOne(tel);
 	}
 
+	@Override
+	public CustomerDTO deleteCustomerOne(CustomerDTO customerDTO) {
+		String tel = customerDTO.getC_tel();
+	      return customerDAO.deleteCustomerOne(tel);
+	}
+
 }

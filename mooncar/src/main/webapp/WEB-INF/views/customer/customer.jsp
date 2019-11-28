@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 
 
-
 <!--상단 (공통) -->
    <h1 align = "center">MoonCar</h1>
 <div class="board-container" >
@@ -18,7 +17,8 @@
   <div class="wrap" style="float : right;">
       <select id="browsers2" name="startdate" >
             <option value="이름">이름</option>
-          <option value="차량번호">차량번호</option>
+          <option value="핸드폰">핸드폰</option>
+          <option value="성별">성별</option>
       </select>
 	  		 <input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
              <button class ="button1" type="button"> 검색 </button>
@@ -81,13 +81,13 @@
 			  </th>
            </tr>
            <tr>
-           <tr>
-             <td style = "text-align : right"><div style="overflow:scroll; width:100%; height:159px;">
-          		<c:forEach var="selectCustomerDetail" items="${selectCustomerDetail}">
-                	${selectCustomerDetail.cus_d_contents} &nbsp&nbsp
-              	     ${selectCustomerDetail.cus_d_date}<br>&nbsp&nbsp
-				</c:forEach>
-	
+             <td style = "text-align : right">
+             	<div style="overflow:scroll; width:100%; height:159px;">
+          			<c:forEach var="selectCustomerDetail" items="${selectCustomerDetail}">
+                		${selectCustomerDetail.cus_d_contents} &nbsp&nbsp
+              	     	${selectCustomerDetail.cus_d_date}<br>&nbsp&nbsp
+					</c:forEach>
+				</div>
 		   	 </td>
 		  </tr>
        	<tr>
@@ -97,64 +97,84 @@
         </tr>
         </table><br><br>
      </div>
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script type="text/javascript">
+
+            
+            $j(document).ready(function() {
+            }).on("click", "input:radio[name=chk_car]", function(){
+               var car_number = $j(this).val();
+               alert(car_number);
+               
 
 
-
-
-<table width="300" border="1" cellspacing="0" cellpadding="0" valign="center" >
-   <tr height="30" >
-      <td align="center">라디오버튼</td>
-           <c:forEach var="selectCarOne" items="${selectCarOne}">
-<script type="text/javascript">
-
-
-
-	function Rradio_OnOff(id)
-	{
-//  <tr> id로 값을 비교한다!
-	   if(id == "${selectCarOne.car_number}")
-	   {
-      	document.all["Radio_On"].style.display = '';         // 보이게
-      	document.all["Radio_Off"].style.display = 'none';  // 안보이게
-   	    }
-   		else
-   		{
-      	document.all["Radio_On"].style.display = 'none';  // 안보이게
-      	document.all["Radio_Off"].style.display = '';         // 보이게
-   		}
-	}
+  		    	
+            });
+        </script>
+<script>
+    var rowIndex = 1;
+    function addFile(form,k){
+        if(rowIndex > (5-k)) return false;
+        var oCurrentRow,oCurrentCell;
+        var sAddingHtml;
+        oCurrentRow = insertTable.insertRow();
+        rowIndex = oCurrentRow.rowIndex;
+        oCurrentCell = oCurrentRow.insertCell();
+        rowIndex++;
+ 
+        var strHTML =  "<tr align='center'>";
+        strHTML += "<td width='50'>"+ rowIndex +"</td>";
+        strHTML += "<td colspan=3 width='60'></td>";
+        strHTML += "</tr>";      
+         
+        oCurrentCell.innerHTML = strHTML;
+        form.rowCount.value = rowIndex;
+    }
+    
+    //첨부파일 삭제
+    function deleteFile(form){
+        if(rowIndex<2){
+            return false;
+        }else{
+            form.rowCount.value = form.rowCount.value - 1;
+            rowIndex--;
+            insertTable.deleteRow(rowIndex);
+        }
+    }
+    
 </script>
-				<th><input type="radio" title="${selectCarOne.car_number}" value="${selectCarOne.car_name}"onclick="Rradio_OnOff('${selectCarOne.car_number}');" name="chk_car">${selectCarOne.car_name}</th>
-		   </c:forEach>  
-
-    </tr>
-    <tr id="Radio_On" height="30" style="display:'';">   
-        <td align="center">???</td>
-        <td align="left" class="input_text">On</td>
-    </tr>
-    <tr id="Radio_Off" height="30" style="display:none;">  <!-- style에 display:none를 줌으로 숨긴다.^^ -->
-        <td align="center">???</td>
-        <td align="left" class="input_text">Off</td>
-    </tr>
-</table>
+<body>
+<form name="write">
+    <table name='insertTable' id='insertTable' border=0 cellpadding=0 cellspacing=0>
+         
+    </table>
+    <input type="button" value="추가" onClick="addFile(write,1)" border=0 style='cursor:hand'>
+    <input type="button" value="삭제" onClick='deleteFile(write)' border=0 style='cursor:hand'>
+    <input type="hidden" name="rowCount" value="1">
+</form>                      
+</body>
 
 
 
 
+        <br>
+        <br>
 
-    <table style = "width : 100%;">
+        
+ 	<table style = "width : 100%;">
         <tr>
            <th>차량</th>
            <c:forEach var="selectCarOne" items="${selectCarOne}">
-				<th><input type="radio" title="${selectCarOne.car_number}" value="${selectCarOne.car_name}" name="chk_car">${selectCarOne.car_name}</th>
+           		
+				<th><input type="radio" value="${selectCarOne.car_number}" name="chk_car">${selectCarOne.car_name}</th>
+				
 		   </c:forEach>  
                     
         </tr>
     </table>
     <br><br><br>
-    
-    <table style = "float : center; width : 100%;">
        <c:forEach var="selectCarOne" items="${selectCarOne}">
+         <table style = "float : center; width : 100%;">
            <tr>
               <th colspan="2">차량정보</th>
            </tr>
@@ -183,19 +203,19 @@
               <td>${selectCarOne.car_fuel_type}</td>
            </tr>
            <tr>
-              <td>엔진오일</td>
+              <td>엔진오일명</td>
               <td>${selectCarOne.car_oil_type}</td>
            </tr>
            <tr>
-           	  <td>엔진오일</td>
-              <td>${selectCarOne.car_oil_date}</td>
+           	  <td>엔진오일교체</td>
+              <td>${selectCarOne.car_oil_date} 개월</td>
            </tr>
            <tr>
               <td>차량상세</td>
               <td>${selectCarOne.car_comment}</td>
            </tr>
-        </c:forEach>
      </table><br>
+     </c:forEach>
         <div class="wrap" style="float: right; width : 30%;">
           <button class ="button" type="button" onclick="window.open('/popup/carpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
           <button class="button" type="button"> 수정 </button>
