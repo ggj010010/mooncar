@@ -11,6 +11,10 @@ public class ScheduleDTO {
 	String s_date;
 	String car_number;
 	
+	String year;
+	String month;
+	String day;
+	String name;
 	public int getS_no() {
 		return s_no;
 	}
@@ -53,6 +57,30 @@ public class ScheduleDTO {
 	}
 	public void setCar_number(String car_number) {
 		this.car_number = car_number;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

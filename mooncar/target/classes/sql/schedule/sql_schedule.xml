@@ -33,6 +33,11 @@
 		<result property="s_comment" column="s_comment" />
 		<result property="s_date" column="s_date" />
 		<result property="car_number" column="car_number" />
+		
+		<result property="year" column="year" />
+		<result property="month" column="month" />
+		<result property="day" column="day" />
+		<result property="name" column="name" />
 	</resultMap>
 	<select id="auto_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
 
@@ -86,5 +91,14 @@
     		,to_date(#{s_date}, 'YYYY-MM-DD HH24')
     	 )
 	</insert>
-	
+	<select id="Calendar" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	/*schedule.Calendar*/
+	select 
+		to_char(s_date, 'YYYY') as year
+		,to_char(s_date, 'MM') as month
+		,to_char(s_date, 'DD') as day
+		,(select c_name from customer where c_tel = schedule.c_tel) as name
+	from schedule
+	where to_char(s_date, 'YY') =  to_char(sysdate, 'YY')
+	</select>
 </mapper>

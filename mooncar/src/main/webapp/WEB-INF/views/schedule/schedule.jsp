@@ -225,8 +225,15 @@
     
     //Data Insert
     function setData(){
-        jsonData = 
-        {
+    	/* $j.each(Calendar , function(idx, val) {
+    		alert(${ol.year});
+    	});
+    	
+    	for(var i = 0; i < ${fn:length(Calendar)}; i++){
+    		
+    	} */
+         jsonData = 
+          {
             "2019":{
                 "07":{
                     "17":"jehunjul"
@@ -241,7 +248,7 @@
                     ,"23":"ChuBun"
                 }
             }
-        }
+        }  
     }
     
     //?Draw Schedule
@@ -286,8 +293,9 @@ table.calendar td{
 </head>
 
 <body>
+
 <br>
-   <h2 align = "center">예약관리</h2>
+   <h2 align = "center">예약관리${Calender.year}</h2>
    <div class="board-container" >
  	 <div id="left" >
    	 <div class="cal_top">

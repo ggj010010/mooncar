@@ -11,4 +11,5 @@ public interface ScheduleDAO {
 	public List<CarDTO> Search_Customer(CustomerDTO customerDTO);
 	public List<CarDTO> search_car(CarDTO carDTO);
 	public int insertSchedule(ScheduleDTO scheduleDTO);
+	public List<ScheduleDTO> Calendar();
 }
