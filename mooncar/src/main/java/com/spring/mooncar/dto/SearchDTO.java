@@ -5,9 +5,9 @@ import java.sql.Date;
 public class SearchDTO {
 	String c_tel;
 	String c_name;
-	String car_number;
+	String car_oil_type;
 	String car_name;
-	String car_maker;
+	String car_repair;
 	String car_fuel_type;
 	int car_d_no;
 	Date car_date;
@@ -24,23 +24,11 @@ public class SearchDTO {
 	public void setC_name(String c_name) {
 		this.c_name = c_name;
 	}
-	public String getCar_number() {
-		return car_number;
-	}
-	public void setCar_number(String car_number) {
-		this.car_number = car_number;
-	}
 	public String getCar_name() {
 		return car_name;
 	}
 	public void setCar_name(String car_name) {
 		this.car_name = car_name;
-	}
-	public String getCar_maker() {
-		return car_maker;
-	}
-	public void setCar_maker(String car_maker) {
-		this.car_maker = car_maker;
 	}
 	public String getCar_fuel_type() {
 		return car_fuel_type;
@@ -60,5 +48,18 @@ public class SearchDTO {
 	public void setCar_date(Date car_date) {
 		this.car_date = car_date;
 	}
+	public String getCar_oil_type() {
+		return car_oil_type;
+	}
+	public void setCar_oil_type(String car_oil_type) {
+		this.car_oil_type = car_oil_type;
+	}
+	public String getCar_repair() {
+		return car_repair;
+	}
+	public void setCar_repair(String car_repair) {
+		this.car_repair = car_repair;
+	}
+	
 	
 }

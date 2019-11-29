@@ -1,7 +1,9 @@
 package com.spring.mooncar.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,17 +12,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.common.CommonUtil;
+import com.spring.mooncar.dto.Check_searchDTO;
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
 import com.spring.mooncar.dto.ProductInfoDTO;
 import com.spring.mooncar.service.CodeService;
+import com.spring.mooncar.service.SearchService;
 
 @Controller
 public class SearchController {
 	
 	@Autowired 
 	CodeService codeService;
+	@Autowired
+	SearchService searchService;
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
@@ -52,5 +60,27 @@ public class SearchController {
 		model.addAttribute("comcodeList1",comcodeList1);
 		
 		return "search/search";
+	}
+	
+	@RequestMapping(value = "/search/check_search", method = RequestMethod.GET, produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String check_search(Locale locale, Model model,Check_searchDTO check_searchDTO) throws Exception {
+
+		
+		System.out.println(check_searchDTO.getFuel());
+		System.out.println(check_searchDTO.getOil());
+		System.out.println(check_searchDTO.getSize());
+		System.out.println(check_searchDTO.getType());
+
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		CommonUtil commonUtil = new CommonUtil();
+		
+		result.put("success", searchService.selectSearch(check_searchDTO));
+
+		String callbackMsg = commonUtil.getJsonCallBackString(" ", result);
+
+		System.out.println("callbackMsg::" + callbackMsg);
+
+		return callbackMsg;
 	}
 }
