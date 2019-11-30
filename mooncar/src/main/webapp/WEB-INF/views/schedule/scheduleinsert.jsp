@@ -10,7 +10,10 @@
 <SCRIPT type="text/javascript">
 $j(document).ready(function(){
 	var now = new Date();
-    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+
+    var today = now.getFullYear() + '-' + mon + '-' + day;
 	$j('#userdate').val(today);
 });
 $j(function(){ 
@@ -68,9 +71,13 @@ $j(document).ready(function() {
 							$j("#desc_detail").val('');
 							$j('input[name="timeTF"]').removeAttr('checked');
 							$j('#browsers1 option:eq(0)').prop('selected', true);
+							
 							var now = new Date();
-						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+							var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+	    					var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+	    					var today = now.getFullYear() + '-' + mon + '-' + day;
 							$j('#userdate').val(today);
+							
 							$j.each(returndata.search_car , function(idx, val) {
 					 			$j(".car_size").text("크기: "+val.car_size);
 								$j(".car_type").text("종류: "+val.car_category);
@@ -124,11 +131,13 @@ $j(document).ready(function(){
 						    $j('#browsers1 option:eq(0)').prop('selected', true);
 
 						    var now = new Date();
-						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+							var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+    						var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+    						var today = now.getFullYear() + '-' + mon + '-' + day;
 							$j('#userdate').val(today);
+							
 							var html = "";
-							//console.log(returndata.count)
-							//console.log(returndata.search_customer.c_name);
+							
 							$j(".c_name").text(returndata.search_customer[0].c_name);
 							$j.each(returndata.search_customer , function(idx, val) {
 								html = "<input type='radio' value='"+val.car_number+"'"+" name='chk_car'>"+val.car_name

@@ -40,6 +40,71 @@
     var $tdDay = null;
     var $tdSche = null;
     var jsonData = null;
+    
+    $j(document).ready(function() {
+	}).on("click", "input:radio[name=chk_schedule]", function(){
+		var c_tel = $j(this).val().split(",")[0];
+		var car_number = $j(this).val().split(",")[1];
+		  $j.ajax({
+				url : "/selectScheduleOne",
+				type : "GET",
+				data : 
+				{
+					"c_tel" : c_tel,
+					"car_number" : car_number
+				}
+				,
+				//JSON.stringify()
+				dataType : "json",
+				contentType:"application/json;charset=UTF-8",
+				timeout : 3000,
+				success : function(returndata) {
+					alert("성공");
+					$j(".car_number").empty();
+					$j(".car_name").empty();
+					$j(".car_oil_date").empty();
+					$j(".car_km").empty();
+					$j(".car_fuel_type").empty();
+					$j(".c_name").empty();
+					$j(".c_tel").empty();
+					$j(".c_gender").empty();
+					$j(".c_email").empty();
+					$j(".c_comment").empty();
+					$j.each(returndata.selectScheduleOne , function(idx, val) {
+						
+						$j(".car_number").text(val.carDTO.car_number);
+						$j(".car_name").text(val.carDTO.car_name);
+						$j(".car_oil_date").text(val.carDTO.car_oil_date);
+						$j(".car_km").text(val.carDTO.car_km);
+						$j(".car_fuel_type").text(val.carDTO.car_fuel_type);
+						
+						$j(".c_name").text(val.customerDTO.c_name);
+						$j(".c_tel").text(val.customerDTO.c_tel);
+						if(val.customerDTO.c_gender == '1'){
+							$j(".c_gender").text("남자");
+						}
+						else if(val.customerDTO.c_gender == '0'){
+							$j(".c_gender").text("여자");
+						}
+						$j(".c_email").text(val.customerDTO.c_email);
+						$j(".c_comment").text(val.customerDTO.c_comment);
+					});
+				},//end success
+				error : function(jqXHR, textStatus, errorThrown) {
+				 	if(textStatus=="timeout") {
+
+			        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+			        } 
+				 	else {
+
+			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+			        } 
+				
+				}//end error 
+			});//end ajax.productInfoWriteAction */
+	});
     $j(document).ready(function(){
     	$j('#request tbody tr').mouseover(function() {
 			$j(this).children().css({
@@ -59,10 +124,9 @@
    				day = "0" + day
    			}
    			var date = year + "-" + month + "-" + day;
-   			alert(date);
    			
    			$j.ajax({
-   				url : "/manager/manager_response",
+   				url : "/select_schedule",
    				type : "POST",
    				data : {
    					"s_date": date,
@@ -73,10 +137,22 @@
    				//contentType:"application/json;charset=UTF-8",
    				timeout : 3000,
    				success : function(returndata) {
-   					if(returndata == 3){
-   						alert("정상적으로 보내졌습니다.");
-   						window.location.href = "/Manager/manager_order";
-   					}
+   					var html = "";
+					$j(".schedule_List").empty();
+   					$j.each(returndata.select_schedule , function(idx, val) {
+							html += "<input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
+							html += "<a href='#markup'>"+val.name+"</a>"+"&nbsp"+val.s_contents
+							if(parseInt(val.s_date.split(" ")[1]) > 12){
+								html += "오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시<br>";
+							}
+							else{
+								html+= "오전" + val.s_date.split(" ")[1].substr(1,1) + "시<br>"
+							}
+ 
+							
+							
+					});
+   					$j(".schedule_List").append(html);
    				},//end success
    				error : function(jqXHR, textStatus, errorThrown) {
    					alert("실패");
@@ -84,48 +160,6 @@
    				}//end error 
    			});//end ajax.productInfoWriteAction  
    			
-   		   /*  var tdArr = new Array();
-   			
-   			
-   			var td = 
-   			var mr_id = "0";
-   			var m_name = td.eq(2).text();
-   			var p_name = td.eq(3).text();
-   			//var p_count = ${sessionScope.request_count};
-   			//var request_id = ${sessionScope.request_id};
-   			var o_no = ${sessionScope.o_no};  
-   			console.log("P-count : " + p_count);
-   			td.each(function(i) {
-   				tdArr.push(td.eq(i).text());
-   			});
-   			console.log("btn 배열에 담긴 값 : " + tdArr);
-   			$j.ajax({
-   				url : "/manager/manager_response",
-   				type : "POST",
-   				data : {
-   					"m_id": mr_id,
-   					"p_name": p_name,
-   					"p_count": p_count,
-   					"request_id" : m_id,
-   					"o_no" : o_no
-   					}
-   				,
-   				//JSON.stringify()
-   				dataType : "json",
-   				//contentType:"application/json;charset=UTF-8",
-   				timeout : 3000,
-   				success : function(returndata) {
-   					if(returndata == 3){
-   						alert("정상적으로 보내졌습니다.");
-   						window.location.href = "/Manager/manager_order";
-   					}
-   				},//end success
-   				error : function(jqXHR, textStatus, errorThrown) {
-   					alert("실패");
-   					
-   				}//end error 
-   			});//end ajax.productInfoWriteAction  
-   			 */
    		});
     });
     $j(document).ready(function() {
@@ -295,7 +329,7 @@ table.calendar td{
 <body>
 
 <br>
-   <h2 align = "center">예약관리${Calender.year}</h2>
+   <h2 align = "center">예약관리</h2>
    <div class="board-container" >
  	 <div id="left" >
    	 <div class="cal_top">
@@ -318,12 +352,8 @@ table.calendar td{
            </tr>
            <tr>
               <td colspan="3">
-              	 <div class = "customer_view" style="overflow:scroll; width:100%; height:205px;text-align : center;">
-              	 	<!-- <input type="radio" value="ex01" name="update">
-              	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a>
-             	 	<br><input type="radio" value="ex01" name="update">
-             	 		<a href="#markup">문종학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp타이어교체&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp오후&nbsp2&nbsp:&nbsp00</a> -->
-	 </div>
+              	 <div class = "schedule_List" style="overflow:scroll; width:100%; height:205px;text-align : center;">
+	 			</div>
 			  </td>
            </tr>
 		   <tr>
@@ -341,27 +371,23 @@ table.calendar td{
            </tr>
            <tr>
               <td>차량번호</td>
-              <td>1234</td>
+              <td class = "car_number">&nbsp</td>
            </tr>
            <tr>
               <td>차량종류</td>
-              <td>리어카</td>
+              <td class = "car_name"></td>
            </tr>
            <tr>
               <td>엔진오일</td>
-              <td>2 개월</td>
-           </tr>
-             <tr>
-              <td>제조사</td>
-              <td>벤츠</td>
+              <td class = "car_oil_date"></td>
            </tr>
            <tr>
               <td>키로수</td>
-              <td>82키로</td>
+              <td class = "car_km"></td>
            </tr>
            <tr>
               <td>연료</td>
-              <td>경유</td>
+              <td class = "car_fuel_type"></td>
            </tr>
         </table>
         </div>
@@ -372,19 +398,19 @@ table.calendar td{
            </tr>
            <tr>
               <td>이름</td>
-              <td>박찬호</td>
+              <td class = "c_name"></td>
            </tr>
            <tr>
               <td>핸드폰</td>
-              <td>010-1234-1234</td>
+              <td class = "c_tel"></td>
            </tr>
              <tr>
               <td>성별</td>
-              <td>남자</td>
+              <td class = "c_gender"></td>
            </tr>
            <tr>
               <td>이메일</td>
-              <td>X</td>
+              <td class = "c_email"></td>
            </tr>
 
         </table>
@@ -399,20 +425,9 @@ table.calendar td{
            </tr>
            <tr>
               <td colspan="2">
-              	<div style="overflow:scroll; width:100%; height:159px;">친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br>친구없음 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              	2019.11.11<br></div>
+              	<div class="c_comment" style="overflow:scroll; width:100%; height:159px;">
+              	
+              	</div>
 			  </td>
            </tr>
        	<tr>

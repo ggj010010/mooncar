@@ -12,4 +12,6 @@ public interface ScheduleDAO {
 	public List<CarDTO> search_car(CarDTO carDTO);
 	public int insertSchedule(ScheduleDTO scheduleDTO);
 	public List<ScheduleDTO> Calendar();
+	List<ScheduleDTO> Select_schedule(ScheduleDTO scheduleDTO);
+	List<ScheduleDTO> selectScheduleOne(ScheduleDTO scheduleDTO);
 }

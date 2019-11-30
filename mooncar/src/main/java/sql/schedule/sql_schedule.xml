@@ -3,15 +3,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schedule">
 
-	<resultMap type="com.spring.mooncar.dto.CustomerDTO"
-
-		id="CustomerDTO">
+	<resultMap type="com.spring.mooncar.dto.CustomerDTO" id="CustomerDTO">
 		<result property="c_tel" column="c_tel" />
 		<result property="c_name" column="c_name" />
 		<result property="c_gender" column="c_gender" />
 		<result property="c_email" column="c_email" />
 		<result property="c_comment" column="c_comment" />
 	</resultMap>
+	
 	<resultMap type="com.spring.mooncar.dto.CarDTO" id="CarDTO">
 		<result property="car_number" column="car_number" />
 		<result property="car_km" column="car_km" />
@@ -22,10 +21,12 @@
 		<result property="car_oil_type" column="car_oil_type" />
 		<result property="car_oil_date" column="car_oil_date" />
 		<result property="car_comment" column="car_comment" />
+		<result property="car_name" column="car_name" />
 		
 		<result property="c_tel" column="c_tel" />
 		<result property="c_name" column="c_name" />
 	</resultMap>
+	
 	<resultMap type="com.spring.mooncar.dto.ScheduleDTO" id="ScheduleDTO">
 		<result property="c_tel" column="c_tel" />
 		<result property="s_contents" column="s_contents" />
@@ -33,12 +34,15 @@
 		<result property="s_comment" column="s_comment" />
 		<result property="s_date" column="s_date" />
 		<result property="car_number" column="car_number" />
-		
 		<result property="year" column="year" />
 		<result property="month" column="month" />
 		<result property="day" column="day" />
 		<result property="name" column="name" />
+		
+		<collection property="carDTO" resultMap="CarDTO" />
+		<collection property="customerDTO" resultMap="CustomerDTO" />
 	</resultMap>
+	
 	<select id="auto_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
 
 	/*schedule.auto_customer*/
@@ -100,5 +104,34 @@
 		,(select c_name from customer where c_tel = schedule.c_tel) as name
 	from schedule
 	where to_char(s_date, 'YY') =  to_char(sysdate, 'YY')
+	</select>
+	<select id="Select_schedule" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	/*schedule.Select_schedule*/
+		SELECT
+    	c_tel
+    	,car_number
+    	,(select c_name from customer where customer.c_tel = s.C_TEL) as name
+    	,s_contents
+    	,to_char(s_date, 'YY/MM/DD HH24') as s_date
+	FROM
+    	schedule s
+	WHERE
+		substrb(s_date, 0, 8) = to_date(#{s_date}, 'YY/MM/DD')
+	</select>
+	<select id="selectScheduleOne" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	/*schedule.Select_schedule*/
+	Select 
+    	car_number
+    	,car_name
+    	,car_oil_date
+    	,car_km
+    	,car_fuel_type
+    	,cs.c_tel
+    	,cs.c_name
+    	,cs.c_gender
+   		,cs.c_email
+    	,cs.c_comment
+	from car , CUSTOMER cs
+	where CAR_NUMBER = #{car_number} and cs.c_tel = #{c_tel}
 	</select>
 </mapper>
