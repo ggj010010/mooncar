@@ -5,6 +5,7 @@
 	<resultMap type="com.spring.mooncar.dto.SearchDTO" id="searchDTO">
 		<result property="c_tel" column="c_tel" />
 		<result property="c_name" column="c_name" />
+		<result property="c_email" column="c_email" />
 		<result property="car_name" column="car_name" />
 		<result property="car_fuel_type" column="car_fuel_type" />
 		<result property="car_date" column="car_date" />
@@ -15,13 +16,15 @@
 	<select id="selectSearch" parameterType="com.spring.mooncar.dto.Check_searchDTO" resultMap="searchDTO">
 	/*search.check_search*/
 		select
-		    c.c_tel,c.c_name,car.car_name,car.car_fuel_type,cd.car_Date,cd.car_repair,(select codename from comcode where codeid = car.car_oil_type) car_oil_type
+		    c.c_tel,c.c_name,c.c_email,car.car_name,car.car_fuel_type,cd.car_Date,cd.car_repair,(select codename from comcode where codeid = car.car_oil_type) car_oil_type
 		from
 		    customer c,car,car_detail cd
 		where
 		    c.c_tel = car.c_tel
 		and
 		    car.car_number = cd.car_number
+		and 
+			cd.CAR_DATE in (select max(cd.CAR_DATE) from car_detail cd group by car_number)
 		<if test="fuel != null">
 		and
 			car.car_fuel_type in

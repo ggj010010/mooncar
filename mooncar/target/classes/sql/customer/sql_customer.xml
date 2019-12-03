@@ -27,6 +27,22 @@
         WHERE c_tel = #{c_tel}
     </select>
     
+    <select id="selectCustomerEmail" parameterType="com.spring.mooncar.dto.EmailDTO" resultMap="CustomerDTO">
+	/*customer.selectCustomerEmail*/
+		select
+			c_email,c_name
+		from
+		    customer
+		<if test="c_tel != null">
+			where
+			    c_tel in
+					<foreach collection="c_tel" item="c_tel"  open="(" close=")" separator=",">
+		           		#{c_tel}
+		        	</foreach>
+	    </if>
+
+	</select>
+    
     <delete id="deleteCustomerOne">
         DELETE FROM customer
         WHERE c_tel = #{c_tel}

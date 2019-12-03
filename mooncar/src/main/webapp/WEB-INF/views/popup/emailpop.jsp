@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +16,21 @@
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td colspan="3">문종학</td>
+		<td colspan="3"><c:forEach var="el" items="${emailList}">
+				${el.c_name }
+			</c:forEach></td>
 	</tr>
 	<tr>
 		<td>주소</td>
-		<td colspan="3">answhdgkr95@naver.com</td>
+		<td colspan="3">
+			<c:forEach var="el" items="${emailList}">
+				${el.c_email }
+			</c:forEach>
+		</td>
 	</tr>
 	<tr>
 		<td>제목</td>
-		<td colspan="3"><input type="text" id="input2" size="5" style="width : 85%;"></td>
+		<td colspan="3"><input type="text" id="title" size="5" style="width : 85%;"></td>
 	</tr>
 	<tr>
 		<td>내용</td>

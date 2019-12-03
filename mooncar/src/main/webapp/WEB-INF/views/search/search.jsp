@@ -47,13 +47,14 @@
 	    	{
 	    		
     			$j("#search > tbody:last").html(
-	    				"<tr><th>고객명</th><th>전화번호</th><th>차연료</th><th>차종</th><th>차오일</th><th>마지막정비내용</th><th>마지막방문날짜</th></tr>'>"
+	    				"<tr><th><input type='checkbox' id='tel_all'/></th><th>고객명</th><th>전화번호</th><th>차연료</th><th>차종</th><th>차오일</th><th>마지막정비내용</th><th>마지막방문날짜</th></tr>'>"
 	    		);
 
 	    		for(var i = 0 ; i<Object.keys(returndata.success).length;i++){
 	    		    		
 		    		$j("#search > tbody:last").append(
-		    				"<tr><td><a href='#'>"+returndata.success[i].c_name+"</a>"
+		    				"<tr><td><input type='checkbox' name='c_tel' value='"+returndata.success[i].c_tel+"'/>"
+	    					+"</td><td><a href='/customer/customer.do?c_tel="+returndata.success[i].c_tel+"'>"+returndata.success[i].c_name+"</a>"
 	    					+"</td><td>"+returndata.success[i].c_tel
 	    					+"</td><td>"+returndata.success[i].car_fuel_type
 	    					+"</td><td>"+returndata.success[i].car_name
@@ -71,6 +72,30 @@
 	    	}
 	    });
 		
+	}).on("click","#tel_all",function(){
+		if($j("#tel_all").prop("checked")){
+			$j(":checkbox[name='c_tel']").prop("checked",true);
+		}else{
+			$j(":checkbox[name='c_tel']").prop("checked",false);
+		}
+	}).on("click","#email_ready",function(){
+		var $frm = $j(":checkbox[name='c_tel']:checked");
+		var param = $frm.serialize();
+		alert(param);
+		$j.ajax({
+			url : "/popup/emailpopgo",
+	    	type : "GET",
+	    	data : param,
+	    	success: function(returndata, textStatus, jqXHR)
+	    	{
+	    		
+	    	},
+	    	error : function(jqXHR, textStatus, errorThrown)
+	    	{
+	    		alert("실패");
+		    	alert("code:"+jqXHR.status+"\n"+"message:"+jqXHR.responseText+"\n"+"error:"+errorThrown);
+	    	}
+		});
 	});
 </script>
 <body>
@@ -124,6 +149,7 @@
 <div style = "margin: auto; width : 95%;">
 <table id="search" style = "margin: auto; width : 100%;">
 	<tr>
+		<th><input type="checkbox" id="tel_all"/></th>
 		<th>고객명</th>
 		<th>전화번호</th>
 		<th>차종</th>
@@ -133,7 +159,8 @@
 		<th>제조사</th>
 	</tr>
 </table>
-     <button class ="button" type="button" style="width : 6%; float : right;"onclick="window.open('/popup/emailpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> E-Mail </button>
+     <button id="email_ready" class ="button" type="button" style="width : 6%; float : right;"> E-Mail </button>
+     
 </div>
 </body>
 </html>

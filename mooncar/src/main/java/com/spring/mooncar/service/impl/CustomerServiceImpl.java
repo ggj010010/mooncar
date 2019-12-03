@@ -9,6 +9,7 @@ import com.spring.mooncar.dao.CustomerDAO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.CustomerDetailDTO;
+import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.service.CustomerService;
 
 @Service
@@ -28,6 +29,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public List<CustomerDTO> selectCustomerList(CustomerDTO customerDTO) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CustomerDTO> selectCustomerEmail(EmailDTO emailDTO) {
+		// TODO Auto-generated method stub
+		return customerDAO.selectCustomerEmail(emailDTO);
 	}
 
 	@Override

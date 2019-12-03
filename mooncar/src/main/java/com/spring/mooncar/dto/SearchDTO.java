@@ -5,6 +5,7 @@ import java.sql.Date;
 public class SearchDTO {
 	String c_tel;
 	String c_name;
+	String c_email;
 	String car_oil_type;
 	String car_name;
 	String car_repair;
@@ -23,6 +24,12 @@ public class SearchDTO {
 	}
 	public void setC_name(String c_name) {
 		this.c_name = c_name;
+	}
+	public String getC_email() {
+		return c_email;
+	}
+	public void setC_email(String c_email) {
+		this.c_email = c_email;
 	}
 	public String getCar_name() {
 		return car_name;

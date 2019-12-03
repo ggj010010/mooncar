@@ -10,6 +10,7 @@ import com.spring.mooncar.dao.CustomerDAO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.CustomerDetailDTO;
+import com.spring.mooncar.dto.EmailDTO;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO{
@@ -27,6 +28,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 	public CustomerDTO selectCustomerOne(String c_tel) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("customer.selectCustomerOne",c_tel);
+	}
+	@Override
+	public List<CustomerDTO> selectCustomerEmail(EmailDTO emailDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("customer.selectCustomerEmail",emailDTO);
 	}
 
 	@Override
