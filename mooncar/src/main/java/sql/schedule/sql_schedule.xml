@@ -44,7 +44,10 @@
 		<collection property="carDTO" resultMap="CarDTO" />
 		<collection property="customerDTO" resultMap="CustomerDTO" />
 	</resultMap>
-	
+	<resultMap type="com.spring.mooncar.dto.CalendarDTO" id="CalendarDTO">
+		<result property="title" column="title" />
+		<result property="start" column="start" />
+	</resultMap>
 	<select id="auto_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
 
 	/*schedule.auto_customer*/
@@ -97,7 +100,7 @@
     		,to_date(#{s_date}, 'YYYY-MM-DD HH24')
     	 )
 	</insert>
-	<select id="Calendar" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	<select id="Calendar" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="CalendarDTO">
 	/*schedule.Calendar*/
 	select 
 		to_char(s_date, 'YYYY-MM-DD') as "start"

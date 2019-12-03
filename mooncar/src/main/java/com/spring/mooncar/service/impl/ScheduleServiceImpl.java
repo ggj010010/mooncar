@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.mooncar.dao.ScheduleDAO;
+import com.spring.mooncar.dto.CalendarDTO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
@@ -63,7 +64,7 @@ public class ScheduleServiceImpl implements ScheduleService{
 	}
 
 	@Override
-	public List<ScheduleDTO> Calendar() {
+	public List<CalendarDTO> Calendar() {
 		// TODO Auto-generated method stub
 		return scheduleDAO.Calendar();
 	}

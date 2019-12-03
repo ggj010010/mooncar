@@ -6,6 +6,15 @@
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
+<link href='/resources/js/fullcalendar-4.3.1/packages/core/main.css'
+	rel='stylesheet' />
+<link href='/resources/js/fullcalendar-4.3.1/packages/daygrid/main.css'
+	rel='stylesheet' />
+<script src='/resources/js/fullcalendar-4.3.1/packages/core/main.js'></script>
+<script src='/resources/js/fullcalendar-4.3.1/packages/daygrid/main.js'></script>
+<script src='/resources/js/fullcalendar-4.3.1/packages/interaction/main.js'></script>
+<script src='/resources/js/fullcalendar-4.3.1/packages/moment/main.min.js'></script>
+
 <title>Schedule</title>
 
 
@@ -32,14 +41,6 @@
  
 <script type="text/javascript">
     
-    var today = null;
-    var year = null;
-    var month = null;
-    var firstDay = null;
-    var lastDay = null;
-    var $tdDay = null;
-    var $tdSche = null;
-    var jsonData = null;
     
     $j(document).ready(function() {
 	}).on("click", "input:radio[name=chk_schedule]", function(){
@@ -162,147 +163,79 @@
    			
    		});
     });
-    $j(document).ready(function() {
-        drawCalendar();
-        initDate();
-        drawDays();
-        drawSche();
-        $j("#movePrevMonth").on("click", function(){movePrevMonth();});
-        $j("#moveNextMonth").on("click", function(){moveNextMonth();});
-    });
-    
-    //Calender Draw
-    function drawCalendar(){
-        var setTableHTML = "";
-        setTableHTML+='<table class="calendar">';
-        setTableHTML+='<tr><th>SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th>SAT</th></tr>';
-        for(var i=0;i<6;i++){
-            setTableHTML+='<tr height="100">';
-            for(var j=0;j<7;j++){
-                setTableHTML+='<td class="td" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap">';
-                setTableHTML+='    <div class="cal-day"></div>';
-                setTableHTML+='    <div class="cal-schedule"></div>';
-                setTableHTML+='</td>';
-            }
-            setTableHTML+='</tr>';
-        }
-        setTableHTML+='</table>';
-        $j("#cal_tab").html(setTableHTML);
-    }
-    
-    //DateReset
-    function initDate(){
-        $tdDay = $j("td div.cal-day")
-        $tdSche = $j("td div.cal-schedule")
-        dayCount = 0;
-        today = new Date();
-        year = today.getFullYear();
-        month = today.getMonth()+1;
-        if(month < 10){month = "0"+month;}
-        firstDay = new Date(year,month-1,1);
-        lastDay = new Date(year,month,0);
-    }
-    
-    //calendar DateView
-    function drawDays(){
-        $j("#cal_top_year").text(year);
-        $j("#cal_top_month").text(month);
-        for(var i=firstDay.getDay();i<firstDay.getDay()+lastDay.getDate();i++){
-            $tdDay.eq(i).text(++dayCount);
-        }
-        for(var i=0;i<42;i+=7){
-            $tdDay.eq(i).css("color","red");
-        }
-        for(var i=6;i<42;i+=7){
-            $tdDay.eq(i).css("color","blue");
-        }
-    }
 
-    function movePrevMonth(){
-        month--;
-        if(month<=0){
-            month=12;
-            year--;
-        }
-        if(month<10){
-            month=String("0"+month);
-        }
-        getNewInfo();
-        }
-    
-    function moveNextMonth(){
-        month++;
-        if(month>12){
-            month=1;
-            year++;
-        }
-        if(month<10){
-            month=String("0"+month);
-        }
-        getNewInfo();
-    }
-    
-    //UpdateInformation
-    function getNewInfo(){
-        for(var i=0;i<42;i++){
-            $tdDay.eq(i).text("");
-            $tdSche.eq(i).text("");
-        }
-        dayCount=0;
-        firstDay = new Date(year,month-1,1);
-        lastDay = new Date(year,month,0);
-        drawDays();
-        drawSche();
-    }
-    
-    //2019-08-27 Add
-    
-    //Data Insert
-    function setData(){
-    	/* $j.each(Calendar , function(idx, val) {
-    		alert(${ol.year});
-    	});
-    	
-    	for(var i = 0; i < ${fn:length(Calendar)}; i++){
-    		
-    	} */
-         jsonData = 
-          {
-            "2019":{
-                "07":{
-                    "17":"jehunjul"
-                }
-                ,"08":{
-                    "7":"sevensuck"
-                    ,"15":"indifendentsday"
-                    ,"23":"Hit"
-                }
-                ,"09":{
-                    "13":"Chusuck"
-                    ,"23":"ChuBun"
-                }
-            }
-        }  
-    }
-    
-    //?Draw Schedule
-    function drawSche(){
-        setData();
-        var dateMatch = null;
-        for(var i=firstDay.getDay();i<firstDay.getDay()+lastDay.getDate();i++){
-            var txt = "";
-            txt =jsonData[year];
-            if(txt){
-                txt = jsonData[year][month];
-                if(txt){
-                    txt = jsonData[year][month][i];
-                    dateMatch = firstDay.getDay() + i -1; 
-                    $tdSche.eq(dateMatch).text(txt);
-                }
-            }
-        }
-    }
- 
+	$j(document).ready(function() {
+		fn_get_events();
+	});
+
+	function fn_set_calendar(data){
+		var calendarEl = document.getElementById('calendar');
+		alert(data);
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
+			defaultView : 'dayGridMonth',
+			defaultDate : new Date(),
+			header : {
+				left : 'prev,next today',
+				center : 'title',
+				right : ''
+			},
+			dateClick : function(info) {
+				alert('Date: ' + info.dateStr);
+				var date = info.dateStr
+	   			
+	   			$j.ajax({
+	   				url : "/select_schedule",
+	   				type : "POST",
+	   				data : {
+	   					"s_date": date,
+	   					}
+	   				,
+	   				//JSON.stringify()
+	   				dataType : "json",
+	   				//contentType:"application/json;charset=UTF-8",
+	   				timeout : 3000,
+	   				success : function(returndata) {
+	   					var html = "";
+						$j(".schedule_List").empty();
+	   					$j.each(returndata.select_schedule , function(idx, val) {
+								html += "<input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
+								html += "<a href='#markup'>"+val.name+"</a>"+"&nbsp"+val.s_contents
+								if(parseInt(val.s_date.split(" ")[1]) > 12){
+									html += "오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시<br>";
+								}
+								else{
+									html+= "오전" + val.s_date.split(" ")[1].substr(1,1) + "시<br>"
+								}
+	 
+								
+								
+						});
+	   					$j(".schedule_List").append(html);
+	   				},//end success
+	   				error : function(jqXHR, textStatus, errorThrown) {
+	   					alert("실패");
+	   					
+	   				}//end error 
+	   			});//end ajax.productInfoWriteAction  
+			},
+			events : data
+		
+		});
+
+		calendar.render();
+	}
+		
+	function fn_get_events()
+	{
+		$j.ajax({
+			url: '/Calendar', 
+			dataType: 'json', 
+			success: function(plan) {
+				fn_set_calendar(plan.Calendar);
+			}
+		}); 
+	}
 </script>
 
 <style type="text/css">
@@ -332,12 +265,7 @@ table.calendar td{
    <h2 align = "center">예약관리</h2>
    <div class="board-container" >
  	 <div id="left" >
-   	 <div class="cal_top">
-        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit">&lt;</span></a>
-        <span id="cal_top_year"></span>
-        <span id="cal_top_month"></span>
-        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit">&gt;</span></a>
-    </div>
+   	 <div id='calendar'></div>
     <div id="cal_tab" class="cal">
     </div>
   </div>

@@ -28,25 +28,25 @@ public class ScheduleController {
 	ScheduleService scheduleService;
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
 	
-	@ResponseBody
 	@RequestMapping(value = "/schedule/schedule", method = RequestMethod.GET,  produces ="application/json; charset=utf8")
-	public ModelAndView schedule(Model model) throws IOException {
+	public String schedule(Model model) throws IOException {
 			logger.info("schedule");
-			ModelAndView mav = new ModelAndView();
-	    	HashMap<String, Object> result = new HashMap<String, Object>();
-			CommonUtil commonUtil = new CommonUtil();
-			result.put("search_customer", scheduleService.Calendar());
-			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-		      
-		     //System.out.println("callbackMsg::"+callbackMsg);
-		     mav.addObject("Calendar", callbackMsg);
-		     mav.setViewName("schedule/schedule");
-	    return mav;
+	    return "/schedule/schedule";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/Calendar", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String Calendar(Model model, CustomerDTO customerDTO) throws IOException {
+    	HashMap<String, Object> result = new HashMap<String, Object>();
+		CommonUtil commonUtil = new CommonUtil();
+		result.put("Calendar", scheduleService.Calendar());
+		String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	    System.out.println("callbackMsg::"+callbackMsg);
+	      
+	    return callbackMsg;
+		
 	}
 	@RequestMapping(value = "/schedule/scheduleinsert", method = RequestMethod.GET,  produces ="application/json; charset=utf8")
 	public String scheduleinsert(Model model) throws IOException {
-	    
-			logger.info("scheduleinsert");
 		return "/schedule/scheduleinsert";
 	}
 	

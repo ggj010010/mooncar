@@ -2,6 +2,7 @@ package com.spring.mooncar.service;
 
 import java.util.List;
 
+import com.spring.mooncar.dto.CalendarDTO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
@@ -14,6 +15,6 @@ public interface ScheduleService {
 	List<CustomerDTO> Auto_Customer(CustomerDTO customerDTO);
 	List<CarDTO> Search_Customer(CustomerDTO customerDTO);
 	public List<CarDTO> search_car(CarDTO carDTO);
-	List<ScheduleDTO> Calendar();
+	List<CalendarDTO> Calendar();
 	List<ScheduleDTO> Select_schedule(ScheduleDTO scheduleDTO);
 }
