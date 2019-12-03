@@ -1,5 +1,7 @@
 package com.spring.mooncar.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,13 +14,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CarDTO;
+import com.spring.mooncar.dto.CarDetailDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.CustomerDetailDTO;
+import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.CarService;
 import com.spring.mooncar.service.CustomerService;
+import com.spring.mooncar.service.ScheduleService;
 
 
 @Controller
@@ -26,6 +33,10 @@ public class CustomerController {
 
 	@Autowired
 	CustomerService customerservice;
+	@Autowired
+	CarService carservice;
+	@Autowired
+	ScheduleService scheduleservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
@@ -75,5 +86,24 @@ public class CustomerController {
 
         return mav;
     }
+    
+    @ResponseBody
+	@RequestMapping(value = "/search", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String search_car(Model model, CarDTO carDTO, CarDetailDTO cardetailDTO,ScheduleDTO scheduleDTO) throws IOException {
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			CommonUtil commonUtil = new CommonUtil();
+			System.out.println("차량번호 : "+cardetailDTO.getCar_number());
+			System.out.println("차량 디테일번호 : "+carDTO.getCar_number());
+			result.put("search_car", carservice.search_car(carDTO));
+			result.put("car_detail", carservice.car_detail(cardetailDTO));
+			result.put("car_detail", scheduleservice.selectScheduleOne(scheduleDTO));
+			System.out.println(result);
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	      
+		 	System.out.println("callbackMsg::"+callbackMsg);
+	      
+	      return callbackMsg;
+		
+	}
 
 }

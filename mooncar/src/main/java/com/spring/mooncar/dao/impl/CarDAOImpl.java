@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.mooncar.dao.CarDAO;
 import com.spring.mooncar.dto.CarDTO;
+import com.spring.mooncar.dto.CarDetailDTO;
 
 @Repository
 public class CarDAOImpl implements CarDAO{
@@ -15,6 +16,18 @@ public class CarDAOImpl implements CarDAO{
 	private SqlSession sqlSession;
 
 
+	@Override
+	public List<CarDTO> search_car(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("car.search_car", carDTO);
+	}
+
+
+	@Override
+	public List<CarDetailDTO> car_detail(CarDetailDTO cardetailDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("car.car_detail", cardetailDTO);
+	}
 	
 	
 }

@@ -18,5 +18,5 @@ public interface CustomerService {
 	int insertCustomer(CustomerDTO customerDTO);//신규회원 등록
 	int updateCustomer(CustomerDTO customerDTO);//기존회원 수정
 	int insertCustomerDetail(CustomerDetailDTO customerDetailDTO);//회원 특이사항 추가
-	
+
 }
