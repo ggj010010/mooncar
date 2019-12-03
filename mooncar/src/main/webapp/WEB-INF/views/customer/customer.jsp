@@ -6,7 +6,120 @@
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script type="text/javascript">
 
+            
+        $j(document).ready(function(){
+        	var now = new Date();
+        	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+            var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+            var today = now.getFullYear() + '-' + mon + '-' + day;
+        	$j('#userdate').val(today);
+        });
+
+        $j(document).ready(function() {
+        		}).on("click", "input:radio[name=chk_car]", function(){
+        			var car_number = $j(this).val();
+        			 $j.ajax({
+        					url : "/search",
+        					type : "GET",
+        					data : 
+        					{
+        						"car_number" : car_number
+        					}
+        					,
+        					//JSON.stringify()
+        					dataType : "json",
+        					contentType:"application/json;charset=UTF-8",
+        					timeout : 3000,
+        					success : function(returndata) {
+        							$j(".car_number").empty();
+        							$j(".car_name").empty();
+        							$j(".car_km").empty();
+        							$j(".car_size").empty();
+        							$j(".car_category").empty();
+        							$j(".car_fuel_type").empty();
+        							$j(".car_oil_type").empty();
+        							$j(".car_oil_date").empty();
+        							$j(".car_comment").empty();
+        				              
+        							$j.each(returndata.search_car , function(idx, val) {
+        					 			$j(".car_number").text(val.car_number);
+        								$j(".car_name").text(val.car_name);
+        								$j(".car_km").text(val.car_km); 
+        								$j(".car_size").text(val.car_size);
+        								$j(".car_category").text(val.car_category);
+        								$j(".car_fuel_type").text(val.car_fuel_type); 
+        								$j(".car_oil_type").text(val.car_oil_type);
+        								$j(".car_oil_date").text(val.car_oil_date + " 개월");
+        								$j(".car_comment").text(val.car_comment); 
+        								{//정비정보 찍어주는 거
+        									var html = "";
+        									$j("#car_detail").empty();
+        									html += "<table id='response_date_table'; style='width : 100%';>";
+        									html += "<tr><th>정비내역</th><th>다음정비</th><th>키로수</th><th>날짜</th></tr>";
+        									
+        									var car_detail = returndata.car_detail;
+        									$j.each(car_detail , function(idx, val) {
+        										
+        										html += "<tr><td style='display: none;'>"+val.car_d_no+"</td>"
+        										html += "<td>"+val.car_repair+"</td>"
+        										html += "<td>"+val.car_next_repair+"</td>"
+        										html += "<td>"+val.car_d_km+" km</td>"
+        										html += "<td>"+val.car_date+"</td></tr>"
+        										
+        										
+        										
+        										
+        									});
+        									html += "</table>";
+        									$j("#car_detail").append(html);
+        								}
+        								{//예약정보 찍어주는거
+        						              <th>날짜</th> 
+        									var html = "";
+        									$j("#schedule_view").empty();
+        									html += "<table id='response_date_table'; style='width : 100%';>";
+        									html += "<tr><th>예약명</th><th>예약상세</th><th>종류</th><th>날짜</th></tr>";
+        									
+        									var car_detail = returndata.car_detail;
+        									$j.each(car_detail , function(idx, val) {
+        										
+        										html += "<tr><td style='display: none;'>"+val.car_d_no+"</td>"
+        										html += "<td>"+val.car_repair+"</td>"
+        										html += "<td>"+val.car_next_repair+"</td>"
+        										html += "<td>"+val.car_d_km+" km</td>"
+        										html += "<td>"+val.car_date+"</td></tr>"
+        										
+        										
+        										
+        										
+        									});
+        									html += "</table>";
+        									$j("#schedule_view").append(html);
+        								}
+        								
+        							});
+        					},//end success
+        					error : function(jqXHR, textStatus, errorThrown) {
+        					 	if(textStatus=="timeout") {
+
+        				        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+        				        } 
+        					 	else {
+
+        				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+        				        } 
+        					
+        					}//end error 
+        				});//end ajax.productInfoWriteAction
+        		});
+
+        </script>
+        
 <title>Insert title here</title>
 
 
@@ -97,62 +210,6 @@
         </tr>
         </table><br><br>
      </div>
-        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-        <script type="text/javascript">
-
-            
-            $j(document).ready(function() {
-            }).on("click", "input:radio[name=chk_car]", function(){
-               var car_number = $j(this).val();
-               alert(car_number);
-               
-
-
-  		    	
-            });
-        </script>
-<script>
-    var rowIndex = 1;
-    function addFile(form,k){
-        if(rowIndex > (5-k)) return false;
-        var oCurrentRow,oCurrentCell;
-        var sAddingHtml;
-        oCurrentRow = insertTable.insertRow();
-        rowIndex = oCurrentRow.rowIndex;
-        oCurrentCell = oCurrentRow.insertCell();
-        rowIndex++;
- 
-        var strHTML =  "<tr align='center'>";
-        strHTML += "<td width='50'>"+ rowIndex +"</td>";
-        strHTML += "<td colspan=3 width='60'></td>";
-        strHTML += "</tr>";      
-         
-        oCurrentCell.innerHTML = strHTML;
-        form.rowCount.value = rowIndex;
-    }
-    
-    //첨부파일 삭제
-    function deleteFile(form){
-        if(rowIndex<2){
-            return false;
-        }else{
-            form.rowCount.value = form.rowCount.value - 1;
-            rowIndex--;
-            insertTable.deleteRow(rowIndex);
-        }
-    }
-    
-</script>
-<body>
-<form name="write">
-    <table name='insertTable' id='insertTable' border=0 cellpadding=0 cellspacing=0>
-         
-    </table>
-    <input type="button" value="추가" onClick="addFile(write,1)" border=0 style='cursor:hand'>
-    <input type="button" value="삭제" onClick='deleteFile(write)' border=0 style='cursor:hand'>
-    <input type="hidden" name="rowCount" value="1">
-</form>                      
-</body>
 
 
 
@@ -165,7 +222,6 @@
         <tr>
            <th>차량</th>
            <c:forEach var="selectCarOne" items="${selectCarOne}">
-           		
 				<th><input type="radio" value="${selectCarOne.car_number}" name="chk_car">${selectCarOne.car_name}</th>
 				
 		   </c:forEach>  
@@ -173,49 +229,48 @@
         </tr>
     </table>
     <br><br><br>
-       <c:forEach var="selectCarOne" items="${selectCarOne}">
          <table style = "float : center; width : 100%;">
            <tr>
               <th colspan="2">차량정보</th>
            </tr>
            <tr>
               <td>차량번호</td>
-              <td>${selectCarOne.car_number}</td>
+              <td class=car_number>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp</td>
            </tr>
            <tr>
               <td>차종</td>
-              <td>${selectCarOne.car_name}</td>
+              <td class=car_name> - </td>
            </tr>
            <tr>
               <td>키로수</td>
-              <td>${selectCarOne.car_km}</td>
+              <td class=car_km> - </td>
            </tr>
            <tr>
               <td>차량크기</td>
-              <td>${selectCarOne.car_size}</td>
+              <td class=car_size> - </td>
            </tr>
            <tr>
               <td>종류</td>
-              <td>${selectCarOne.car_category}</td>
+              <td class=car_category> - </td>
            </tr>
            <tr>
               <td>연료</td>
-              <td>${selectCarOne.car_fuel_type}</td>
+              <td class=car_fuel_type> - </td>
            </tr>
            <tr>
               <td>엔진오일명</td>
-              <td>${selectCarOne.car_oil_type}</td>
+              <td class=car_oil_type> - </td>
            </tr>
            <tr>
            	  <td>엔진오일교체</td>
-              <td>${selectCarOne.car_oil_date} 개월</td>
+              <td class=car_oil_date> - </td>
            </tr>
            <tr>
               <td>차량상세</td>
-              <td>${selectCarOne.car_comment}</td>
+              <td class=car_comment> - </td>
            </tr>
-     </table><br>
-     </c:forEach>
+     </table>
+     <br>
         <div class="wrap" style="float: right; width : 30%;">
           <button class ="button" type="button" onclick="window.open('/popup/carpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
           <button class="button" type="button"> 수정 </button>
@@ -223,66 +278,11 @@
        </div>
   </div>
     <div id="right" >
-        <table style = "width : 100%";>
+    	
+           <table style = "width : 100%";>
            <tr>
-              <th colspan="4">정비내역</th>
-           </tr>
-           <tr>
-              <td colspan="2">
-               <form id="frm" >
-                    <div>Start &nbsp<input type="date" id="userdate" name="userdate" value="2019-11-14"></div>
-                </form>
-             </td>
-              <td colspan="2">
-               <form id="frm" >
-                    <div>End &nbsp<input type="date" id="userdate" name="userdate" value="2019-11-14"></div>
-                </form>
-             </td>
-           </tr>
-           <tr>
-              <td colspan="3">KeyWord &nbsp : &nbsp <input type="text" name="my_name" size="40"></td>
-              <td><button class="button" type="button" style = "width : 60%; height : 60%;"> 검색 </button></td>
-           </tr>
-        </table>
-        <br>
-        <table style = "width : 100%";>
-           <tr>
-              <th>정비내역</th>
-              <th>다음정비</th>
-              <th>방문날짜</th>              
-           </tr>
-           <tr>
-              <td>타이어교체</td>
-              <td>엔진오일교체</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>타이어교체</td>
-              <td>엔진오일교체</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>타이어교체</td>
-              <td>엔진오일교체</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>타이어교체</td>
-              <td>엔진오일교체</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>타이어교체</td>
-              <td>엔진오일교체</td>
-              <td>2017-11-13</td>
-           </tr>
-        </table>
-        <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" onclick="window.open('/popup/fixpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
-       </div>
-       <table style = "width : 100%";>
-           <tr>
-              <th>예약내용</th>
+              <th>예약명</th>
+              <th>예약상세</th>
               <th>종류</th>
               <th>날짜</th>              
            </tr>
@@ -311,7 +311,60 @@
               <td>정비완료</td>
               <td>2017-11-13</td>
            </tr>
+           <tr>
+              <td>엔진오일교체</td>
+              <td>정비완료</td>
+              <td>2017-11-13</td>
+           </tr>
+           <tr>
+              <td>엔진오일교체</td>
+              <td>정비완료</td>
+              <td>2017-11-13</td>
+           </tr>
+           <tr>
+              <td>엔진오일교체</td>
+              <td>정비완료</td>
+              <td>2017-11-13</td>
+           </tr>
         </table>
+        <div class="wrap" style="float: right; width : 10%;">
+          <button class ="button" type="button" onclick="window.open('/popup/fixpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
+       </div>
+        <table style = "width : 100%";>
+           <tr>
+              <th colspan="4">정비내역</th>
+           </tr>
+           <tr>
+              <td colspan="2">
+               <form id="frm" >
+                    <div>Start &nbsp<input type="date" id="userdate" name="userdate" value="2019-11-14"></div>
+                </form>
+             </td>
+              <td colspan="2">
+               <form id="frm" >
+                    <div>End &nbsp<input type="date" id="userdate" name="userdate" value="2019-11-14"></div>
+                </form>
+             </td>
+           </tr>
+           <tr>
+              <td colspan="3">KeyWord &nbsp : &nbsp <input type="text" name="my_name" size="40"></td>
+              <td><button class="button" type="button" style = "width : 60%; height : 60%;"> 검색 </button></td>
+           </tr>
+        </table>
+        <br>
+        <div id="car_detail">
+        <table style = "width : 100%";>
+           <tr>
+              <th>정비내역</th>
+              <th>다음정비</th>
+              <th>키로수</th>     
+              <th>방문날짜</th>              
+           </tr>
+           
+        </table>
+        </div>
+        
+
         <div class="wrap" style="float: right; width : 10%;">
           <button class ="button" type="button" onclick="window.open('/popup/schedulepop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
        </div>

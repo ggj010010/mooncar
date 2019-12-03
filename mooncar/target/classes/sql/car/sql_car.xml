@@ -17,9 +17,42 @@
 		<result property="car_comment" column="car_comment" />
 
 	</resultMap> 
+	<resultMap type="com.spring.mooncar.dto.CarDetailDTO"
+
+		id="CarDetailDTO">
+
+		<result property="car_d_no" column="car_d_no" />
+		<result property="car_number" column="car_number" />
+		<result property="car_repair" column="car_repair" />
+		<result property="car_next_repair" column="car_next_repair" />
+		<result property="car_d_km" column="car_d_km" />
+		<result property="car_date" column="car_date" />
+
+	</resultMap> 
     
     <select id="selectCarOne" resultType="com.spring.mooncar.dto.CarDTO">
         SELECT * FROM car 
         WHERE c_tel = #{c_tel}
     </select>
+    
+    <select id="search_car" parameterType="com.spring.mooncar.dto.CarDTO" resultMap="CarDTO">
+	/*schedule.search_car*/
+		SELECT  
+				*
+		FROM 
+			 car
+		where
+            car_number = #{car_number}
+	</select>
+	
+	<select id="car_detail" parameterType="com.spring.mooncar.dto.CarDetailDTO" resultMap="CarDetailDTO">
+	/*schedule.search_car*/
+		SELECT  
+				*
+		FROM 
+			 car_detail
+		where
+            car_number = #{car_number}
+	</select>
+	
 </mapper>
