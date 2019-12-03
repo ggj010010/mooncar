@@ -15,6 +15,8 @@ public class ScheduleDTO {
 	String month;
 	String day;
 	String name;
+	String start;
+	String title;
 	
 	CustomerDTO customerDTO;
 	CarDTO carDTO;
@@ -97,7 +99,17 @@ public class ScheduleDTO {
 	public void setCustomerDTO(CustomerDTO customerDTO) {
 		this.customerDTO = customerDTO;
 	}
+	public String getStart() {
+		return start;
+	}
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-	
-	
 }

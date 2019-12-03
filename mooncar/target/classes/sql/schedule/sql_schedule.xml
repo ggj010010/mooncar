@@ -37,7 +37,9 @@
 		<result property="year" column="year" />
 		<result property="month" column="month" />
 		<result property="day" column="day" />
+		<result property="start" column="start" />
 		<result property="name" column="name" />
+		<result property="title" column="title" />
 		
 		<collection property="carDTO" resultMap="CarDTO" />
 		<collection property="customerDTO" resultMap="CustomerDTO" />
@@ -98,10 +100,8 @@
 	<select id="Calendar" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
 	/*schedule.Calendar*/
 	select 
-		to_char(s_date, 'YYYY') as year
-		,to_char(s_date, 'MM') as month
-		,to_char(s_date, 'DD') as day
-		,(select c_name from customer where c_tel = schedule.c_tel) as name
+		to_char(s_date, 'YYYY-MM-DD') as "start"
+		,(select c_name from customer where c_tel = schedule.c_tel) as title
 	from schedule
 	where to_char(s_date, 'YY') =  to_char(sysdate, 'YY')
 	</select>
