@@ -15,4 +15,5 @@ public interface ScheduleDAO {
 	public List<CalendarDTO> Calendar();
 	List<ScheduleDTO> Select_schedule(ScheduleDTO scheduleDTO);
 	List<ScheduleDTO> selectScheduleOne(ScheduleDTO scheduleDTO);
+	int Schedule_check(ScheduleDTO scheduleDTO);
 }

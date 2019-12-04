@@ -17,4 +17,5 @@ public interface ScheduleService {
 	public List<CarDTO> search_car(CarDTO carDTO);
 	List<CalendarDTO> Calendar();
 	List<ScheduleDTO> Select_schedule(ScheduleDTO scheduleDTO);
+	int Schedule_check(ScheduleDTO scheduleDTO);
 }

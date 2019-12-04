@@ -95,8 +95,11 @@ public class ScheduleController {
 	@ResponseBody
 	@RequestMapping(value = "/scheduleInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
 	public int scheduleInsert(Model model, ScheduleDTO scheduleDTO) throws IOException {
-		
-			int check = scheduleService.insertSchedule(scheduleDTO);
+		int check = scheduleService.Schedule_check(scheduleDTO);
+		System.out.println(check);
+		if(check == 0) {
+			int insert = scheduleService.insertSchedule(scheduleDTO);
+		}
 	    
 		return check;
 	}

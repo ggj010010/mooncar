@@ -20,6 +20,7 @@ public class ScheduleDTO {
 	
 	CustomerDTO customerDTO;
 	CarDTO carDTO;
+	
 	public int getS_no() {
 		return s_no;
 	}
@@ -111,5 +112,5 @@ public class ScheduleDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	
 }

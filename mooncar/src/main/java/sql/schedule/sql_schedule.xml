@@ -41,6 +41,7 @@
 		<result property="name" column="name" />
 		<result property="title" column="title" />
 		
+		
 		<collection property="carDTO" resultMap="CarDTO" />
 		<collection property="customerDTO" resultMap="CustomerDTO" />
 	</resultMap>
@@ -77,9 +78,9 @@
 	/*schedule.search_car*/
 		SELECT  
 				car_number
-				car_size,
-				car_category,
-				car_fuel_type
+				,car_size
+				,car_category
+				,car_fuel_type
 		FROM 
 			 car
 		where
@@ -137,4 +138,14 @@
 	from car , CUSTOMER cs
 	where CAR_NUMBER = #{car_number} and cs.c_tel = #{c_tel}
 	</select>
+	<select id="Schedule_check" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultType="Integer">
+	/*schedule.Schedule_check*/
+	Select 
+    	count(*)
+	from 
+		Schedule
+	where 
+		CAR_NUMBER = #{car_number} and s_check = 0
+	</select>
+	
 </mapper>

@@ -170,7 +170,6 @@
 
 	function fn_set_calendar(data){
 		var calendarEl = document.getElementById('calendar');
-		alert(data);
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
 			defaultView : 'dayGridMonth',
@@ -181,7 +180,6 @@
 				right : ''
 			},
 			dateClick : function(info) {
-				alert('Date: ' + info.dateStr);
 				var date = info.dateStr
 	   			
 	   			$j.ajax({

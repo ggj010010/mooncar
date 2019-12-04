@@ -194,7 +194,6 @@ $j(document).ready(function(){
 			alert("예약 제목을 입력해주세요!");
 		}
 		var scheduleDedail =  $j("#desc_detail").val();
-		alert("제목"+scheduleTitle+"상세"+scheduleDedail)
 	    	  $j.ajax({
 				url : "/scheduleInsert",
 				type : "GET",
@@ -212,8 +211,9 @@ $j(document).ready(function(){
 				timeout : 3000,
 				success : function(returndata) {
 						//console.log(returndata.count)
-						if(returndata == 1){
-							alert("예약이 완료되었습니다!");
+						if(returndata == 0){
+							
+
 							$j(".c_name").empty();
 							$j(".car").empty();
 							$j(".car_size").text("크기:");
@@ -226,7 +226,13 @@ $j(document).ready(function(){
 						    $j("#tel").val('');
 						    var now = new Date();
 						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-							$j('#userdate').val(today);
+							$j('#userdate').val(today); 
+							//window.location.href = "/schedule/schedule";
+							opener.parent.location.reload();
+							//window.close();
+							
+						}else{
+							alert("예약이 존재합니다");
 						}
 						
 						
