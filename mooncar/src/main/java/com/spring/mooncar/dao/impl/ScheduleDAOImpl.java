@@ -65,5 +65,10 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		return sqlSession.selectOne("schedule.Schedule_check", scheduleDTO);
 	}
 	
+	@Override
+	public List<ScheduleDTO> selectCarSchedule(ScheduleDTO scheduleDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("schedule.selectCarSchedule", scheduleDTO);
+	}
 	
 }

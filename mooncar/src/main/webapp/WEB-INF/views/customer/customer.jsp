@@ -54,7 +54,8 @@
         								$j(".car_oil_type").text(val.car_oil_type);
         								$j(".car_oil_date").text(val.car_oil_date + " 개월");
         								$j(".car_comment").text(val.car_comment); 
-        								{//정비정보 찍어주는 거
+        								//정비정보 찍어주는 거
+        								{
         									var html = "";
         									$j("#car_detail").empty();
         									html += "<table id='response_date_table'; style='width : 100%';>";
@@ -76,29 +77,38 @@
         									html += "</table>";
         									$j("#car_detail").append(html);
         								}
-        								{//예약정보 찍어주는거
-        						              <th>날짜</th> 
+        								//예약정보 찍어주는 거
+        								{
         									var html = "";
-        									$j("#schedule_view").empty();
+        									$j("#selectCarSchedule").empty();
         									html += "<table id='response_date_table'; style='width : 100%';>";
         									html += "<tr><th>예약명</th><th>예약상세</th><th>종류</th><th>날짜</th></tr>";
         									
-        									var car_detail = returndata.car_detail;
-        									$j.each(car_detail , function(idx, val) {
+        									var selectCarSchedule = returndata.selectCarSchedule;
+        									$j.each(selectCarSchedule , function(idx, val) {
         										
         										html += "<tr><td style='display: none;'>"+val.car_d_no+"</td>"
-        										html += "<td>"+val.car_repair+"</td>"
-        										html += "<td>"+val.car_next_repair+"</td>"
-        										html += "<td>"+val.car_d_km+" km</td>"
-        										html += "<td>"+val.car_date+"</td></tr>"
+        										html += "<td>"+val.s_contents+"</td>"
+        										html += "<td>"+val.s_comment+"</td>"
+        										if(val.s_check==1){
+        											html += "<td>첫연락</td>"
+        										}
+        										else if(val.s_check==2){
+        											html += "<td>재연락</td>"
+        										}
+        										else if(val.s_check==3){
+        											html += "<td>정비완료</td>"
+        										}
+        										html += "<td>"+val.s_date+"</td></tr>"
         										
         										
         										
         										
         									});
         									html += "</table>";
-        									$j("#schedule_view").append(html);
+        									$j("#selectCarSchedule").append(html);
         								}
+        								
         								
         							});
         					},//end success
@@ -278,7 +288,7 @@
        </div>
   </div>
     <div id="right" >
-    	
+    	<div id="selectCarSchedule">
            <table style = "width : 100%";>
            <tr>
               <th>예약명</th>
@@ -286,47 +296,10 @@
               <th>종류</th>
               <th>날짜</th>              
            </tr>
-           <tr>
-              <td>타이어교체</td>
-              <td>재연락</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>엔진오일교체</td>
-              <td>재연락</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>엔진오일교체</td>
-              <td>정비완료</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-                 <td>엔진오일교체</td>
-              <td>정비완료</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>엔진오일교체</td>
-              <td>정비완료</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>엔진오일교체</td>
-              <td>정비완료</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>엔진오일교체</td>
-              <td>정비완료</td>
-              <td>2017-11-13</td>
-           </tr>
-           <tr>
-              <td>엔진오일교체</td>
-              <td>정비완료</td>
-              <td>2017-11-13</td>
-           </tr>
+           <tr><td></td>-<td>-</td><td>-</td><td>-</td></tr>
+          
         </table>
+        </div>
         <div class="wrap" style="float: right; width : 10%;">
           <button class ="button" type="button" onclick="window.open('/popup/fixpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
        </div>
@@ -360,7 +333,7 @@
               <th>키로수</th>     
               <th>방문날짜</th>              
            </tr>
-           
+           <tr><td></td>-<td>-</td><td>-</td><td>-</td></tr>
         </table>
         </div>
         

@@ -147,5 +147,15 @@
 	where 
 		CAR_NUMBER = #{car_number} and s_check = 0
 	</select>
+	<select id="selectCarSchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	/*schedule.Select_schedule*/
+	Select 
+    	*
+	from  schedule 
+	where CAR_NUMBER = #{car_number}
+	</select>
+	
+
+	
 	
 </mapper>
