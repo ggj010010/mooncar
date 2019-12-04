@@ -60,7 +60,7 @@
 				contentType:"application/json;charset=UTF-8",
 				timeout : 3000,
 				success : function(returndata) {
-					alert("성공");
+					//alert("성공");
 					$j(".car_number").empty();
 					$j(".car_name").empty();
 					$j(".car_oil_date").empty();
@@ -106,63 +106,7 @@
 				}//end error 
 			});//end ajax.productInfoWriteAction */
 	});
-    $j(document).ready(function(){
-    	$j('#request tbody tr').mouseover(function() {
-			$j(this).children().css({
-				'backgroundColor' : '#DCDCDC',
-				'cursor' : 'pointer'
-			});
-		}).mouseout(function() {
-			$j(this).children().css({
-				'backgroundColor' : '#FFFFFF',
-				'cursor' : 'default'
-			});
-		});
     	
-   	 $j(document).on("click", ".calendar td", function(){
-   			var day = $j(this).children().text();
-   			if(day.length < 2){
-   				day = "0" + day
-   			}
-   			var date = year + "-" + month + "-" + day;
-   			
-   			$j.ajax({
-   				url : "/select_schedule",
-   				type : "POST",
-   				data : {
-   					"s_date": date,
-   					}
-   				,
-   				//JSON.stringify()
-   				dataType : "json",
-   				//contentType:"application/json;charset=UTF-8",
-   				timeout : 3000,
-   				success : function(returndata) {
-   					var html = "";
-					$j(".schedule_List").empty();
-   					$j.each(returndata.select_schedule , function(idx, val) {
-							html += "<input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
-							html += "<a href='#markup'>"+val.name+"</a>"+"&nbsp"+val.s_contents
-							if(parseInt(val.s_date.split(" ")[1]) > 12){
-								html += "오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시<br>";
-							}
-							else{
-								html+= "오전" + val.s_date.split(" ")[1].substr(1,1) + "시<br>"
-							}
- 
-							
-							
-					});
-   					$j(".schedule_List").append(html);
-   				},//end success
-   				error : function(jqXHR, textStatus, errorThrown) {
-   					alert("실패");
-   					
-   				}//end error 
-   			});//end ajax.productInfoWriteAction  
-   			
-   		});
-    });
 
 	$j(document).ready(function() {
 		fn_get_events();
@@ -198,7 +142,7 @@
 						$j(".schedule_List").empty();
 	   					$j.each(returndata.select_schedule , function(idx, val) {
 								html += "<input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
-								html += "<a href='#markup'>"+val.name+"</a>"+"&nbsp"+val.s_contents
+								html += "<a href='/customer/customer.do?c_tel="+val.c_tel+"'>"+val.name+"</a>"+"&nbsp"+val.s_contents
 								if(parseInt(val.s_date.split(" ")[1]) > 12){
 									html += "오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시<br>";
 								}
