@@ -49,8 +49,34 @@ $j(function(){
 		}); 
 });
 $j(document).ready(function() {
+}).on("click", "input:radio[name=timeTF]", function(){
+		var time = $j(this).val();
+		var html = "";
+		if(time == "오전"){
+			$j('#browsers1').empty();
+			html +=  "<option>9</option>";
+			html +=  "<option>10</option>";
+			html +=  "<option>11</option>";
+			html +=  "<option>12</option>";
+			$j('#browsers1').append(html);
+				//browsers1
+		}
+		else if(time == "오후"){
+			$j('#browsers1').empty();
+			html +=  "<option>01</option>";
+			html +=  "<option>02</option>";
+			html +=  "<option>03</option>";
+			html +=  "<option>04</option>";
+			html +=  "<option>05</option>";
+			html +=  "<option>06</option>";
+			html +=  "<option>07</option>";
+			$j('#browsers1').append(html);
+		}
+	});
+$j(document).ready(function() {
 		}).on("click", "input:radio[name=chk_car]", function(){
 			var car_number = $j(this).val();
+			
 			 $j.ajax({
 					url : "/search_car",
 					type : "GET",
@@ -64,6 +90,7 @@ $j(document).ready(function() {
 					contentType:"application/json;charset=UTF-8",
 					timeout : 3000,
 					success : function(returndata) {
+							$j('#browsers1').empty();
 							$j(".car_size").empty();
 							$j(".car_type").empty();
 							$j(".car_fuel").empty();
@@ -120,6 +147,7 @@ $j(document).ready(function(){
 					contentType:"application/json;charset=UTF-8",
 					timeout : 3000,
 					success : function(returndata) {
+							$j('#browsers1').empty();
 							$j(".c_name").empty();
 							$j(".car").empty();
 							$j(".car_size").text("크기:");
@@ -291,7 +319,7 @@ $j(document).ready(function(){
             <input type="radio" value="오전" name="timeTF">오전
             <input type="radio" value="오후" name="timeTF">오후
 		   <select id="browsers1" name="time" style=" float : right;">
-			     <option value="시간선택" selected>시간선택</option>       			 
+			     <!-- <option value="시간선택" selected>시간선택</option>       			 
 			     <option value="01">01</option> 
      			 <option value="02">02</option> 
      			 <option value="03">03</option> 
@@ -303,7 +331,7 @@ $j(document).ready(function(){
      			 <option value="09">09</option> 
      			 <option value="10">10</option> 
      			 <option value="11">11</option> 
-     			 <option value="12">12</option> 
+     			 <option value="12">12</option>  -->
       		</select>
 		</td>
 	</tr>
