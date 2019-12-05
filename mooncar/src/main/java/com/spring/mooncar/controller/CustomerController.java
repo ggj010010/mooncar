@@ -40,7 +40,7 @@ public class CustomerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
-	@RequestMapping(value = "customer/customer.do", method = RequestMethod.GET)
+	@RequestMapping(value = "customer/customer", method = RequestMethod.GET)
 	 public ModelAndView customer(CustomerDTO customerDTO,CustomerDetailDTO customerdetailDTO, CarDTO carDTO) throws Exception{
         System.out.println(customerdetailDTO.getC_tel());
         List<CustomerDetailDTO> selectCustomerDetail = customerservice.selectCustomerDetail(customerdetailDTO);
@@ -98,6 +98,7 @@ public class CustomerController {
 			result.put("search_car", carservice.search_car(carDTO));
 			result.put("car_detail", carservice.car_detail(cardetailDTO));
 			result.put("selectCarSchedule", scheduleservice.selectCarSchedule(scheduleDTO));
+			System.out.println("차량 스케줄번호 : "+scheduleDTO.getCar_number());
 			System.out.println(result);
 			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 	      
@@ -106,5 +107,6 @@ public class CustomerController {
 	      return callbackMsg;
 		
 	}
+
 
 }

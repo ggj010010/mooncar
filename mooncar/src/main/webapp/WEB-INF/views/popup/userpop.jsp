@@ -6,7 +6,105 @@
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script type="text/javascript">
 
+            
+        $j(document).ready(function(){
+        	var now = new Date();
+        	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+            var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+            var today = now.getFullYear() + '-' + mon + '-' + day;
+        	$j('.userdate').val(today);
+        });
+
+        $j(document).ready(function() {
+    	}).on("click", "#btnInsert", function() {
+    		var c_tel = $j("#tel").val();
+    		var c_name = $j(".c_name").text();
+    		if($j('input:radio[name=chk_car]').is(':checked') == true){
+    			var car_number = $j('input[name="chk_car"]:checked').val();
+    		}else{
+    			alert("차량을 선택해주세요!");
+    		}
+    		if($j('input:radio[name=timeTF]').is(':checked') == true && $j('[name=time] > option:selected').val() != '시간선택'){
+    			var timeTF = $j('input[name="timeTF"]:checked').val();
+    			var time = $j('select[name="time"]').val();
+    			if(timeTF == "오후"){
+    				var time = parseInt(time, 10)+12;
+    				
+    			}
+    			var date = $j("#userdate").val()+"-"+time;
+    		}
+    		else{
+    			alert("예약 시간을 입력해주세요!");
+    		}
+    		var scheduleTitle =  $j("#desc").val();
+    		if(scheduleTitle == ""){
+    			alert("예약 제목을 입력해주세요!");
+    		}
+    		var scheduleDedail =  $j("#desc_detail").val();
+    	    	  $j.ajax({
+    				url : "/scheduleInsert",
+    				type : "GET",
+    				data : {
+    						"c_tel" : c_tel,
+    						"s_contents" : scheduleTitle,
+    						"s_comment" : scheduleDedail,
+    						"s_date" : date,
+    						"car_number" : car_number,
+    					}
+    				,
+    				//JSON.stringify()
+    				dataType : "json",
+    				//contentType:"application/json;charset=UTF-8",
+    				timeout : 3000,
+    				success : function(returndata) {
+    						//console.log(returndata.count)
+    						if(returndata == 0){
+    							
+
+    							$j(".c_name").empty();
+    							$j(".car").empty();
+    							$j(".car_size").text("크기:");
+    							$j(".car_type").text("종류:");
+    							$j(".car_fuel").text("연료:");
+    							$j("#desc").val('');
+    							$j("#desc_detail").val('');
+    							$j('input[name="timeTF"]').removeAttr('checked');
+    						    $j('#browsers1 option:eq(0)').prop('selected', true);
+    						    $j("#tel").val('');
+    						    var now = new Date();
+    						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    							$j('#userdate').val(today); 
+    							//window.location.href = "/schedule/schedule";
+    							opener.parent.location.reload();
+    							//window.close();
+    							
+    						}else{
+    							alert("예약이 존재합니다");
+    						}
+    						
+    						
+    				},//end success
+    				error : function(jqXHR, textStatus, errorThrown) {
+    				 	if(textStatus=="timeout") {
+
+    			        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+    			        } 
+    				 	else {
+
+    			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+    			        } 
+    				
+    				}//end error 
+    			});//end ajax.productInfoWriteAction   
+    		
+    	});
+
+        </script>
 </head>
 <body onresize="parent.resizeTo(750,910)" onload="parent.resizeTo(500,400)">
 <table style="width : 100%;">
@@ -15,7 +113,7 @@
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td colspan="3"><input type="text" id="input2" size="5" style="width : 50%;"></td>
+		<td colspan="3"><input type="text" id="c_name" size="5" style="width : 50%;"></td>
 	</tr>
 	<tr>
 		<td>성별</td>

@@ -64,8 +64,8 @@
 
           <c:forEach var="cv" items="${custview}">
            <tr>
-              <td><a href="/customer/customer.do?c_tel=${cv.c_tel}">${cv.c_name}</a></td>
-              <td><a href="/customer/customer.do?c_tel=${cv.c_tel}">${cv.c_tel}</a></td>
+              <td><a href="/customer/customer?c_tel=${cv.c_tel}">${cv.c_name}</a></td>
+              <td><a href="/customer/customer?c_tel=${cv.c_tel}">${cv.c_tel}</a></td>
               <c:choose>
               		<c:when test="${cv.c_gender == '1'}">
               			<td>³²ÀÚ</td>

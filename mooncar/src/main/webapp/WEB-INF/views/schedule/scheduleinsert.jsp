@@ -168,7 +168,7 @@ $j(document).ready(function(){
 
 
 	
- $j(document).ready(function() {
+ $j(document).ready(function() {//스케줄 인서트하는거임
 	}).on("click", "#btnInsert", function() {
 		var c_tel = $j("#tel").val();
 		var c_name = $j(".c_name").text();
@@ -265,7 +265,7 @@ $j(document).ready(function(){
 
 		<td colspan="3"style ="font-size : 20px;">
 		<input type="text" id="tel" size="15" style="width : 30%;">
-		<button id = "btnSearch" class ="btn" type="button" style = "width : 50px;"> 검색</button> 
+		<button id = "btnSearch" class ="button" type="button" style = "width : 50px; height : 70%"> 검색</button> 
 	</tr>
 	<tr>
 		<td>고객명</td>
@@ -318,7 +318,7 @@ $j(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4"><button id = "btnInsert" class ="btn" type="button" style = "width : 40%;"> 등록하기 </button></td>
+		<td colspan="4"><button id = "btnInsert" class ="button" type="button" style = "width : 40%;"> 등록하기 </button></td>
 	</tr>
 </table>
 </body>

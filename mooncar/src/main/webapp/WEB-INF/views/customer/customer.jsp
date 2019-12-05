@@ -15,7 +15,7 @@
         	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
             var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
             var today = now.getFullYear() + '-' + mon + '-' + day;
-        	$j('#userdate').val(today);
+        	$j('.userdate').val(today);
         });
 
         $j(document).ready(function() {
@@ -310,12 +310,12 @@
            <tr>
               <td colspan="2">
                <form id="frm" >
-                    <div>Start &nbsp<input type="date" id="userdate" name="userdate" value="2019-11-14"></div>
+                    <div>Start &nbsp<input type="date" id="userdate" name="userdate" ></div>
                 </form>
              </td>
               <td colspan="2">
                <form id="frm" >
-                    <div>End &nbsp<input type="date" id="userdate" name="userdate" value="2019-11-14"></div>
+                    <div>End &nbsp<input type="date" id="userdate" name="userdate" ></div>
                 </form>
              </td>
            </tr>
