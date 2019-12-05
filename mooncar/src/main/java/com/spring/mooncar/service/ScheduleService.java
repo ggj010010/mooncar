@@ -19,4 +19,7 @@ public interface ScheduleService {
 	List<ScheduleDTO> Select_schedule(ScheduleDTO scheduleDTO);
 	int Schedule_check(ScheduleDTO scheduleDTO);
 	List <ScheduleDTO>selectCarSchedule(ScheduleDTO scheduleDTO);
+	
+	List<ScheduleDTO> Select_scheduleUpdate(ScheduleDTO scheduleDTO);
+	int scheduleUpdate(ScheduleDTO scheduleDTO);
 }

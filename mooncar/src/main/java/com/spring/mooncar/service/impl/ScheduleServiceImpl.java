@@ -87,4 +87,16 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return scheduleDAO.selectCarSchedule(scheduleDTO);
 	}
 
+	@Override
+	public List<ScheduleDTO> Select_scheduleUpdate(ScheduleDTO scheduleDTO) {
+		// TODO Auto-generated method stub
+		return scheduleDAO.Select_scheduleUpdate(scheduleDTO);
+	}
+
+	@Override
+	public int scheduleUpdate(ScheduleDTO scheduleDTO) {
+		// TODO Auto-generated method stub
+		return scheduleDAO.scheduleUpdate(scheduleDTO);
+	}
+
 }

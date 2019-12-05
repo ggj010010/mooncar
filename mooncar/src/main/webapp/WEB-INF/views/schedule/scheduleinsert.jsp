@@ -230,7 +230,7 @@ $j(document).ready(function(){
 						"s_contents" : scheduleTitle,
 						"s_comment" : scheduleDedail,
 						"s_date" : date,
-						"car_number" : car_number,
+						"car_number" : car_number
 					}
 				,
 				//JSON.stringify()
@@ -240,7 +240,7 @@ $j(document).ready(function(){
 				success : function(returndata) {
 						//console.log(returndata.count)
 						if(returndata == 0){
-							
+							alert("예약이 완료되었습니다");
 
 							$j(".c_name").empty();
 							$j(".car").empty();
@@ -249,12 +249,14 @@ $j(document).ready(function(){
 							$j(".car_fuel").text("연료:");
 							$j("#desc").val('');
 							$j("#desc_detail").val('');
-							$j('input[name="timeTF"]').removeAttr('checked');
+							$j('input[name="timeTF"]').empty();
 						    $j('#browsers1 option:eq(0)').prop('selected', true);
 						    $j("#tel").val('');
 						    var now = new Date();
-						    var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-							$j('#userdate').val(today); 
+							var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+    						var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+    						var today = now.getFullYear() + '-' + mon + '-' + day;
+							$j('#userdate').val(today);
 							//window.location.href = "/schedule/schedule";
 							opener.parent.location.reload();
 							//window.close();

@@ -40,7 +40,17 @@
 </div>
  
 <script type="text/javascript">
-    
+	$j(document).ready(function() {
+		}).on("click", "#update", function(){
+			if($j('input:radio[name=chk_schedule]').is(':checked') == false){
+				alert("고객을 선택해주세요");
+			}
+			else{
+				var c_tel = $j('input[name="chk_schedule"]:checked').val().split(",")[0];
+				var car_number = $j('input[name="chk_schedule"]:checked').val().split(",")[1];
+				window.open('/schedule/scheduleUpdate?c_tel='+c_tel+'&car_number='+car_number, '_blank', 'toolbars=no,scrollbars=no');
+			}
+		});
     
     $j(document).ready(function() {
 	}).on("click", "input:radio[name=chk_schedule]", function(){
@@ -71,8 +81,8 @@
 					$j(".c_gender").empty();
 					$j(".c_email").empty();
 					$j(".c_comment").empty();
+					
 					$j.each(returndata.selectScheduleOne , function(idx, val) {
-						
 						$j(".car_number").text(val.carDTO.car_number);
 						$j(".car_name").text(val.carDTO.car_name);
 						$j(".car_oil_date").text(val.carDTO.car_oil_date);
@@ -84,7 +94,7 @@
 						if(val.customerDTO.c_gender == '1'){
 							$j(".c_gender").text("남자");
 						}
-						else if(val.customerDTO.c_gender == '0'){
+						else if(val.customerDTO.c_gender == '2'){
 							$j(".c_gender").text("여자");
 						}
 						$j(".c_email").text(val.customerDTO.c_email);
@@ -139,21 +149,33 @@
 	   				timeout : 3000,
 	   				success : function(returndata) {
 	   					var html = "";
-						$j(".schedule_List").empty();
+						$j("#schedule_List_table").empty();
+	   					html += "<tr><th>이름</th><th>차량번호</th><th>처리</th><th>예약내용</th><th>시간</th></tr>"
 	   					$j.each(returndata.select_schedule , function(idx, val) {
-								html += "<input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
-								html += "<a href='/customer/customer.do?c_tel="+val.c_tel+"'>"+val.name+"</a>"+"&nbsp"+val.s_contents
+								html += "<tr><td><input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
+								html += "<a href='/customer/customer.do?c_tel="+val.c_tel+"'>"+val.name+"</a></td>"
+								html +=  "<td>"+val.car_number+"</td>"
+								if(val.s_check == 0){
+									html += "<td>예약</td>"
+								}
+								else if(val.s_check == 1){
+									html += "<td>재연락</td>"
+								}
+								else if(val.c_check == 2){
+									html += "<td>완료</td>"
+								}
+								
+								html +=  "<td>"+val.s_contents+"</td>"
 								if(parseInt(val.s_date.split(" ")[1]) > 12){
-									html += "오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시<br>";
+									html += "<td>오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시</td></tr>";
 								}
 								else{
-									html+= "오전" + val.s_date.split(" ")[1].substr(1,1) + "시<br>"
+									html+= "<td>오전" + val.s_date.split(" ")[1] + "시</td></tr>"
 								}
 	 
 								
-								
 						});
-	   					$j(".schedule_List").append(html);
+	   					$j("#schedule_List_table").append(html);
 	   				},//end success
 	   				error : function(jqXHR, textStatus, errorThrown) {
 	   					alert("실패");
@@ -216,19 +238,27 @@ table.calendar td{
  	  	 <div id="left" >
  	   	  <table style = "width : 100%";>
            <tr>
-              <th style="text-align : right;">이름</th>
-              <th>정비내용</th>
-              <th style="text-align : left;">시간</th>              
+             
+                            
            </tr>
-           <tr>
-              <td colspan="3">
-              	 <div class = "schedule_List" style="overflow:scroll; width:100%; height:205px;text-align : center;">
+           <tr>  
+              <td colspan="5">
+              	<div class = "schedule_List" style="overflow:scroll; width:100%; height:205px;text-align : center;">
+	 				<table id = "schedule_List_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+	 					<tr>
+              				<th>이름</th>
+              				<th>차량번호</th>
+              				<th>처리</th>
+              				<th>정비내용</th>
+              				<th>시간</th>
+           				</tr>
+	 				</table>
 	 			</div>
 			  </td>
            </tr>
 		   <tr>
-		   		<td colspan="3">
-		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%; margin-right=5px;"> 수정 </button>
+		   		<td colspan="5">
+		   		  	<button class="button" id = "update" type="button" style="width : 25%;float : right; height : 100%; margin-right=5px;"> 수정 </button>
 		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%" onclick="window.open('/schedule/scheduleinsert', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
 		   		</td>
 		   </tr>

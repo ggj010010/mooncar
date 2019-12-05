@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class ScheduleDTO {
 	int s_no;
+	
 	String c_tel;
 	String s_contents;
 	String s_check;
@@ -11,9 +12,9 @@ public class ScheduleDTO {
 	String s_date;
 	String car_number;
 	
-	String year;
-	String month;
-	String day;
+	String date;
+	String time;
+	
 	String name;
 	String start;
 	String title;
@@ -64,24 +65,6 @@ public class ScheduleDTO {
 	public void setCar_number(String car_number) {
 		this.car_number = car_number;
 	}
-	public String getYear() {
-		return year;
-	}
-	public void setYear(String year) {
-		this.year = year;
-	}
-	public String getMonth() {
-		return month;
-	}
-	public void setMonth(String month) {
-		this.month = month;
-	}
-	public String getDay() {
-		return day;
-	}
-	public void setDay(String day) {
-		this.day = day;
-	}
 	public String getName() {
 		return name;
 	}
@@ -112,5 +95,18 @@ public class ScheduleDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
 	
 }

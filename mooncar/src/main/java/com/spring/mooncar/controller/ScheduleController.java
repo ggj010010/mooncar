@@ -2,6 +2,7 @@ package com.spring.mooncar.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CarDTO;
@@ -45,9 +46,44 @@ public class ScheduleController {
 	    return callbackMsg;
 		
 	}
+	@ResponseBody
+	@RequestMapping(value = "/scheduleUpdate", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public int scheduleUpdate(Model model, ScheduleDTO scheduleDTO) throws IOException {
+		int update = scheduleService.scheduleUpdate(scheduleDTO);
+		/*
+		 * HashMap<String, Object> result = new HashMap<String, Object>(); CommonUtil
+		 * commonUtil = new CommonUtil(); String callbackMsg =
+		 * commonUtil.getJsonCallBackString(" ",result);
+		 * System.out.println("callbackMsg::"+callbackMsg);
+		 */
+	      
+	    return update;
+		
+	}
+	@RequestMapping(value = "/schedule/scheduleUpdate", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String Select_scheduleUpdate(Model model, ScheduleDTO scheduleDTO) throws IOException {
+		List<ScheduleDTO> Select_scheduleUpdate = scheduleService.Select_scheduleUpdate(scheduleDTO);
+		
+		  HashMap<String, Object> result = new HashMap<String, Object>(); CommonUtil
+		  commonUtil = new CommonUtil();
+		  result.put("Calendar",scheduleService.Select_scheduleUpdate(scheduleDTO));
+		  String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		  System.out.println("callbackMsg::"+callbackMsg);
+		 
+		model.addAttribute("Select_scheduleUpdate",Select_scheduleUpdate);
+	    return "/schedule/scheduleupdate";
+		
+	}
 	@RequestMapping(value = "/schedule/scheduleinsert", method = RequestMethod.GET,  produces ="application/json; charset=utf8")
-	public String scheduleinsert(Model model) throws IOException {
+	public String scheduleinsert(Model model) {
+
+
 		return "/schedule/scheduleinsert";
+	}
+	
+	@RequestMapping(value = "/schedule/scheduleupdate", method = RequestMethod.GET,  produces ="application/json; charset=utf8")
+	public String scheduleupdate(Model model) throws IOException {
+		return "/schedule/scheduleupdate";
 	}
 	
 	@ResponseBody

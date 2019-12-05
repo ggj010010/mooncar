@@ -28,15 +28,18 @@
 	</resultMap>
 	
 	<resultMap type="com.spring.mooncar.dto.ScheduleDTO" id="ScheduleDTO">
+	
+		<result property="s_no" column="s_no" />
 		<result property="c_tel" column="c_tel" />
 		<result property="s_contents" column="s_contents" />
 		<result property="s_check" column="s_check" />
 		<result property="s_comment" column="s_comment" />
 		<result property="s_date" column="s_date" />
 		<result property="car_number" column="car_number" />
-		<result property="year" column="year" />
-		<result property="month" column="month" />
-		<result property="day" column="day" />
+		
+		<result property="date" column="date" />
+		<result property="time" column="time" />
+		
 		<result property="start" column="start" />
 		<result property="name" column="name" />
 		<result property="title" column="title" />
@@ -115,6 +118,7 @@
     	c_tel
     	,car_number
     	,(select c_name from customer where customer.c_tel = s.C_TEL) as name
+    	,s_check
     	,s_contents
     	,to_char(s_date, 'YY/MM/DD HH24') as s_date
 	FROM
@@ -155,7 +159,42 @@
 	where CAR_NUMBER = #{car_number}
 	</select>
 	
+	<select id="Select_scheduleUpdate" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	/*schedule.Select_scheduleUpdate*/
+	Select 
+		s_no
+    	,c_tel
+    	,car_number
+    	,S_CONTENTS
+    	,s_check
+    	,S_COMMENT
+    	,TO_CHAR(S_DATE, 'YYYY-MM-DD') "date"
+    	,TO_CHAR(S_DATE, 'HH24') "time"
+    	,(select c_name from customer where c_tel = #{c_tel}) as c_name
+    	,(select car_name from car where CAR_NUMBER = #{car_number}) as CAR_NUMBER
+    	,(select car_size from car where CAR_NUMBER = #{car_number}) as car_size
+    	,(select car_category from car where CAR_NUMBER = #{car_number}) as car_category
+    	,(select car_fuel_type from car where CAR_NUMBER = #{car_number}) as car_fuel_type
+    	,(select car_name from car where CAR_NUMBER = #{car_number}) as car_name
+    	
+	from  schedule 
+	where c_tel = #{c_tel} and CAR_NUMBER = #{car_number} and s_check in (0,1)
+	</select>
+	<update id="scheduleUpdate" parameterType="com.spring.mooncar.dto.ScheduleDTO">
+	/*schedule.scheduleUpdate*/
+		update schedule
 
-	
+		set 
+		S_CONTENTS = #{s_contents}
+		,S_CHECK = #{s_check}
+		,S_COMMENT = #{s_comment}
+		,S_DATE = TO_DATE(#{s_date}, 'YYYY-MM-DD HH24')
+
+		where S_NO = #{s_no}
+
+	</update>
+
+
+
 	
 </mapper>
