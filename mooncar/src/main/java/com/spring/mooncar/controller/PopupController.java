@@ -22,6 +22,7 @@ import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.EmailDTO;
+import com.spring.mooncar.dto.ProductInfoDTO;
 import com.spring.mooncar.service.CarService;
 import com.spring.mooncar.service.CodeService;
 import com.spring.mooncar.service.CustomerService;
@@ -40,8 +41,10 @@ public class PopupController {
 
 	//차량 대분류
 	@RequestMapping(value = "popup/userpop", method = RequestMethod.GET)
-	public String userpop(Model model, CodeDTO codeDTO) throws Exception{
+	public String userpop(Model model, CodeDTO codeDTO, ComcodeDTO comcodeDTO) throws Exception{
 		List<CodeDTO> selectAlltype = codeService.selectAlltype();
+		List<ComcodeDTO> selectAllfuel = codeService.selectAllfuel();
+		model.addAttribute("selectAllfuel",selectAllfuel);
 		model.addAttribute("selectAlltype",selectAlltype);
 		System.out.println(codeDTO.getCodeDesc());
 		return "popup/userpop";
@@ -50,7 +53,7 @@ public class PopupController {
 	//차량 중분류(이름)
 	@ResponseBody
 	@RequestMapping(value = "/selectAllCar", produces ="application/json; charset=utf8", method = RequestMethod.GET)
-	public String auto_coustomer(Model model, ComcodeDTO comcodeDTO, HttpServletResponse response) throws IOException {
+	public String selectAllCar(Model model, ComcodeDTO comcodeDTO, HttpServletResponse response) throws IOException {
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			CommonUtil commonUtil = new CommonUtil();
 			System.out.println(comcodeDTO.getCodeName());
@@ -61,6 +64,21 @@ public class PopupController {
 	    return callbackMsg;
 		
 	}
+	
+	//차량 소분류(상세)
+		@ResponseBody
+		@RequestMapping(value = "/selectCarDD", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+		public String selectCarDD(Model model, ProductInfoDTO prductinfoDTO, HttpServletResponse response) throws IOException {
+				HashMap<String, Object> result = new HashMap<String, Object>();
+				CommonUtil commonUtil = new CommonUtil();
+				System.out.println(prductinfoDTO.getPrdCtgr());
+				result.put("selectCarDD", codeService.selectCarDD(prductinfoDTO));
+				String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		    	System.out.println("callbackMsg::"+callbackMsg);
+		      
+		    return callbackMsg;
+			
+		}
 	
 	
 
@@ -79,8 +97,6 @@ public class PopupController {
 		return "popup/fixpop";
 	}
 	
-	@RequestMapping(value = "popup/emailpopgo", method = RequestMethod.GET)
-	public String emailpop(Model model,EmailDTO emailDTO) throws Exception {
 	@RequestMapping(value = "popup/emailpop", method = RequestMethod.POST)
 	public String emailpop(Model model,EmailDTO emailDTO,HttpServletRequest hrq) throws Exception {
 		System.out.println(emailDTO.getC_tel());

@@ -224,5 +224,16 @@
 			PRDIDX = #{prdIdx}
 	</update>
 	
-
+	<!-- userpop.jsp에서 차량의 이름으로 상세를 불러올 때 사용 -->
+	<select id="selectCarDD" parameterType="com.spring.mooncar.dto.ProductInfoDTO" resultMap="productInfoDTO">
+	/*product.selectCarDD*/
+		SELECT
+			*
+		FROM
+			PRODUCTINFO
+		WHERE
+			PRDCTGR = #{prdCtgr, jdbcType=VARCHAR}
+	
+	</select>
+	
 </mapper>

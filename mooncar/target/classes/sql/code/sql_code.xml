@@ -226,7 +226,7 @@
     	FROM
     		COMCODE
     	WHERE
-    		CODETYPE = 'sedan' or CODETYPE = 'eco' or CODETYPE = 'rv' or CODETYPE = 'taxi' or CODETYPE = 'truck'   and CODETYPE = #{codeType}
+    		(CODETYPE = 'sedan' or CODETYPE = 'eco' or CODETYPE = 'rv' or CODETYPE = 'taxi' or CODETYPE = 'truck')   and CODETYPE = #{codeType}
     </select>
     
     

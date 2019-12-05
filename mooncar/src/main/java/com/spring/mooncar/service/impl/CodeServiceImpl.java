@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.mooncar.dao.CodeDao;
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
+import com.spring.mooncar.dto.ProductInfoDTO;
 import com.spring.mooncar.service.CodeService;
 
 @Service
@@ -121,30 +122,35 @@ public class CodeServiceImpl implements CodeService {
 		return codeDao.comcodeDelete(comcodeDTO);
 	}
 	
-	//차량 자동완성을 위한 전체차량이름 불러오기
+	//차량 대분류(userpop.jsp 차량이름)
 	@Override
 	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO) {
 		// TODO Auto-generated method stub
 		return codeDao.selectAllCar(comcodeDTO);
 	}
 
-	@Override
-	public List<ComcodeDTO> selectAllsize() {
-		// TODO Auto-generated method stub
-		return codeDao.selectAllsize();
-	}
-
+	//차량 대분류(userpop.jsp 에서 초기 호출이며 타입)
 	@Override
 	public List<CodeDTO> selectAlltype() {
 		// TODO Auto-generated method stub
 		return codeDao.selectAlltype();
 	}
 
+	//차량 기름정보 불러오기(userpop.jsp)
 	@Override
 	public List<ComcodeDTO> selectAllfuel() {
 		// TODO Auto-generated method stub
 		return codeDao.selectAllfuel();
 	}
+
+	//차량 소분류 불러오기(userpop.jsp)
+	@Override
+	public List<ProductInfoDTO> selectCarDD(ProductInfoDTO prductinfoDTO) {
+		// TODO Auto-generated method stub
+		return codeDao.selectCarDD(prductinfoDTO);
+	}
+
+
 
 	
 }

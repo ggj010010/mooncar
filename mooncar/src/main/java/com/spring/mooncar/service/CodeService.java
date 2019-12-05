@@ -5,6 +5,7 @@ import java.util.List;
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
 import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.ProductInfoDTO;
 
 public interface CodeService {
 	
@@ -36,13 +37,13 @@ public interface CodeService {
 
 	public ComcodeDTO selectComcodeView(String prdCtgr) throws Exception;
 
-	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO);	//차량 자동완성을 위한 전체차량이름 불러오기
+	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO);	//차량 중분류 불러오기(이름)
 
-	public List<ComcodeDTO> selectAllsize();
+	public List<CodeDTO> selectAlltype();  //차량 대분류 불러오기(종류)
 
-	public List<CodeDTO> selectAlltype();
+	public List<ComcodeDTO> selectAllfuel(); //차량 기름종류 불러오기
 
-	public List<ComcodeDTO> selectAllfuel();
+	public List<ProductInfoDTO> selectCarDD(ProductInfoDTO prductinfoDTO); //차량 소분류 불러오기(상세)
 
 
 }

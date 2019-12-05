@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
+import com.spring.mooncar.dto.ProductInfoDTO;
 
 
 public interface CodeDao {
@@ -38,9 +39,9 @@ public interface CodeDao {
 
 	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO);//차량 자동완성을 위한 전체차량이름 불러오기
 
-	public List<ComcodeDTO> selectAllsize();
-
 	public List<CodeDTO> selectAlltype();
 
 	public List<ComcodeDTO> selectAllfuel();
+
+	public List<ProductInfoDTO> selectCarDD(ProductInfoDTO prductinfoDTO);
 }

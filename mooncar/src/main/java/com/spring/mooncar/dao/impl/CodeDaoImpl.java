@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.mooncar.dao.CodeDao;
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
+import com.spring.mooncar.dto.ProductInfoDTO;
 
 @Repository
 public class CodeDaoImpl implements CodeDao {
@@ -100,28 +101,31 @@ public class CodeDaoImpl implements CodeDao {
 		return sqlSession.delete("code.comcodeDelete",comcodeDTO);
 	}
 
-	//차량 자동완성을 위한 전체차량이름 불러오기
+	//차량 대분류
+	@Override
+	public List<CodeDTO> selectAlltype() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.selectAlltype");
+	}
+	
+	//차량 대분류에 따른 중분류(차량이름)
 	@Override
 	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("code.selectAllCar",comcodeDTO);
 	}
 
-	@Override
-	public List<ComcodeDTO> selectAllsize() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("code.selectAllsize");
-	}
 
-	@Override
-	public List<CodeDTO> selectAlltype() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("code.selectAlltype");
-	}
 
 	@Override
 	public List<ComcodeDTO> selectAllfuel() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("code.selectAllfuel");
+	}
+
+	@Override
+	public List<ProductInfoDTO> selectCarDD(ProductInfoDTO prductinfoDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.selectCarDD",prductinfoDTO);
 	}
 }

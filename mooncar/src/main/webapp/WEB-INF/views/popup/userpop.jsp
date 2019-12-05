@@ -31,8 +31,12 @@
  	   					 //비활성화 
  	   					 } 
  	   			 }); 
- 	    }).on("change",'#carDesc',function(){//차 맞는걸로 뽑아오기
+ 	    })
+ 	    
+ 	    //차 맞는걸로 뽑아오기 중분류
+ 	    .on("change",'#carDesc',function(){
  	    	 var codeType=$j(this).val();
+ 			 var html = "";
  	    	 $j.ajax({
 					url : "/selectAllCar",
 					type : "GET",
@@ -46,12 +50,12 @@
 					contentType:"application/json;charset=UTF-8",
 					timeout : 3000,
 					success : function(returndata) {
-							$j.each(returndata.search_car , function(idx, val) {
-					 			
-								
-								
-								
+						$j('#carName').empty();
+							$j.each(returndata.selectAllCar , function(idx, val) {
+								html +=  "<option value="+val.codeId+">"+val.codeName+"</option>";
 							});
+						
+							$j('#carName').append(html);
 					},//end success
 					error : function(jqXHR, textStatus, errorThrown) {
 					 	if(textStatus=="timeout") {
@@ -69,7 +73,48 @@
 				});//end ajax.productInfoWriteAction
     	    })
     	    
-    	    .on("click", "#btnInsert", function() {// 회원추가버튼
+    	    //차이름 선택시 소분류
+    	    .on("change",'#carName',function(){
+ 	    	 var prdCtgr=$j(this).val();
+ 			 var html = "";
+ 	    	 $j.ajax({
+					url : "/selectCarDD",
+					type : "GET",
+					data : 
+					{
+						"prdCtgr" : prdCtgr
+					}
+					,
+					//JSON.stringify()
+					dataType : "json",
+					contentType:"application/json;charset=UTF-8",
+					timeout : 3000,
+					success : function(returndata) {
+						$j('#carDD').empty();
+							$j.each(returndata.selectCarDD , function(idx, val) {
+								html +=  "<option>"+val.prdName+"</option>";
+							});
+						
+							$j('#carDD').append(html);
+					},//end success
+					error : function(jqXHR, textStatus, errorThrown) {
+					 	if(textStatus=="timeout") {
+
+				        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+				        } 
+					 	else {
+
+				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+				        } 
+					
+					}//end error 
+				});//end ajax.productInfoWriteAction
+    	    })
+    	    
+    	    // 회원추가버튼
+    	    .on("click", "#btnInsert", function() {
     		var c_name = $j("#c_name").val();
     		if(c_name == ""){
     			alert("이름을 입력해주세요.");
@@ -269,18 +314,17 @@
       		<select id="carName" name="carName" >
 			     <option value="1" selected>차량선택</option>    
       		</select>
-      		<select id="carName" name="car_size" >
-          		 <c:forEach var="selectAlltype" items="${selectAlltype}">
-			     <option value="${selectAlltype.codeDesc}" selected>${selectAlltype.codeDesc}</option>		
-			     </c:forEach>	 
-			     <option value="1" selected>차량선택</option>    
+      		<select id="carDD" name="carDD" >
+          		
+			     <option value="1" selected>세부항목</option>    
       		</select>
-      		<select id="carName" name="car_size" >
-          		 <c:forEach var="selectAlltype" items="${selectAlltype}">
-			     <option value="${selectAlltype.codeDesc}" selected>${selectAlltype.codeDesc}</option>		
+      		<select id="carFuel" name="carFuel" >
+          		 <c:forEach var="selectAllfuel" items="${selectAllfuel}">
+			     	<option value="${selectAllfuel.codeName}" selected>${selectAllfuel.codeName}</option>		
 			     </c:forEach>	 
-			     <option value="1" selected>차량선택</option>    
+			     <option value="1" selected>연료선택</option>    
       		</select>
+      		<label id="carSize" ></label>
       	</td>
 	 </tr>
 
