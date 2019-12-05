@@ -53,6 +53,7 @@
 	    		for(var i = 0 ; i<Object.keys(returndata.success).length;i++){
 	    		    		
 		    		$j("#search > tbody:last").append(
+		    				
 		    				"<tr><td><input type='checkbox' name='c_tel' value='"+returndata.success[i].c_tel+"'/>"
 	    					+"</td><td><a href='/customer/customer.do?c_tel="+returndata.success[i].c_tel+"'>"+returndata.success[i].c_name+"</a>"
 	    					+"</td><td>"+returndata.success[i].c_tel
@@ -79,23 +80,8 @@
 			$j(":checkbox[name='c_tel']").prop("checked",false);
 		}
 	}).on("click","#email_ready",function(){
-		var $frm = $j(":checkbox[name='c_tel']:checked");
-		var param = $frm.serialize();
-		alert(param);
-		$j.ajax({
-			url : "/popup/emailpopgo",
-	    	type : "GET",
-	    	data : param,
-	    	success: function(returndata, textStatus, jqXHR)
-	    	{
-	    		
-	    	},
-	    	error : function(jqXHR, textStatus, errorThrown)
-	    	{
-	    		alert("실패");
-		    	alert("code:"+jqXHR.status+"\n"+"message:"+jqXHR.responseText+"\n"+"error:"+errorThrown);
-	    	}
-		});
+		window.open("/popup/emailpop", "popup_window", "width=500, height=300, scrollbars=no");
+			$j("#emailList").submit();
 	});
 </script>
 <body>
@@ -147,6 +133,7 @@
 </table>
 <br><br>
 <div style = "margin: auto; width : 95%;">
+<form id='emailList' target='popup_window' action='/popup/emailpop' method='post'>
 <table id="search" style = "margin: auto; width : 100%;">
 	<tr>
 		<th><input type="checkbox" id="tel_all"/></th>
@@ -159,6 +146,7 @@
 		<th>제조사</th>
 	</tr>
 </table>
+</form>
      <button id="email_ready" class ="button" type="button" style="width : 6%; float : right;"> E-Mail </button>
      
 </div>
