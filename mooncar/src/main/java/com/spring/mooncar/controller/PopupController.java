@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CarDTO;
+import com.spring.mooncar.dto.CodeDTO;
+import com.spring.mooncar.dto.ComcodeDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.EmailDTO;
+import com.spring.mooncar.service.CarService;
+import com.spring.mooncar.service.CodeService;
 import com.spring.mooncar.service.CustomerService;
 
 @Controller
@@ -24,14 +30,42 @@ public class PopupController {
 	
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	CarService carService;
+	@Autowired
+	CodeService codeService;
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
+	//차량 대분류
 	@RequestMapping(value = "popup/userpop", method = RequestMethod.GET)
-	public String userpop(Model model) {
+	public String userpop(Model model, CodeDTO codeDTO) throws Exception{
+		List<CodeDTO> selectAlltype = codeService.selectAlltype();
+		model.addAttribute("selectAlltype",selectAlltype);
+		System.out.println(codeDTO.getCodeDesc());
 		return "popup/userpop";
 	}
+	
+	//차량 중분류(이름)
+	@ResponseBody
+	@RequestMapping(value = "/selectAllCar", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+	public String auto_coustomer(Model model, ComcodeDTO comcodeDTO, HttpServletResponse response) throws IOException {
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			CommonUtil commonUtil = new CommonUtil();
+			System.out.println(comcodeDTO.getCodeName());
+			result.put("selectAllCar", codeService.selectAllCar(comcodeDTO));
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	    	System.out.println("callbackMsg::"+callbackMsg);
+	      
+	    return callbackMsg;
+		
+	}
+	
+	
 
+	
+	
+	
 	@RequestMapping(value = "popup/schedulepop", method = RequestMethod.GET)
 	public String schedulepop(Model model) {
 		return "popup/schedulepop";

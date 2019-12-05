@@ -120,4 +120,31 @@ public class CodeServiceImpl implements CodeService {
 		// TODO Auto-generated method stub
 		return codeDao.comcodeDelete(comcodeDTO);
 	}
+	
+	//차량 자동완성을 위한 전체차량이름 불러오기
+	@Override
+	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO) {
+		// TODO Auto-generated method stub
+		return codeDao.selectAllCar(comcodeDTO);
+	}
+
+	@Override
+	public List<ComcodeDTO> selectAllsize() {
+		// TODO Auto-generated method stub
+		return codeDao.selectAllsize();
+	}
+
+	@Override
+	public List<CodeDTO> selectAlltype() {
+		// TODO Auto-generated method stub
+		return codeDao.selectAlltype();
+	}
+
+	@Override
+	public List<ComcodeDTO> selectAllfuel() {
+		// TODO Auto-generated method stub
+		return codeDao.selectAllfuel();
+	}
+
+	
 }

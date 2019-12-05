@@ -206,5 +206,41 @@
     
     </delete>
     
+    
+    <!-- //차량 대분류 불러오기 -->
+    <select id="selectAlltype" parameterType="com.spring.mooncar.dto.CodeDTO" resultMap="codeDTO">
+    /*code.selectAlltype*/
+    	SELECT
+    		*
+    	FROM
+    		CODE
+    	WHERE
+    		CODETYPE = 'sedan' or CODETYPE = 'eco' or CODETYPE = 'rv' or CODETYPE = 'taxi' or CODETYPE = 'truck' 
+    </select>
+    
+    <!-- //대분류에 따른차량이름 불러오기 -->
+    <select id="selectAllCar" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultMap="comcodeDTO">
+    /*code.selectAllCar*/
+    	SELECT
+    		*
+    	FROM
+    		COMCODE
+    	WHERE
+    		CODETYPE = 'sedan' or CODETYPE = 'eco' or CODETYPE = 'rv' or CODETYPE = 'taxi' or CODETYPE = 'truck'   and CODETYPE = #{codeType}
+    </select>
+    
+    
+
+    
+    <!-- //연료타입 불러오기 -->
+    <select id="selectAllfuel" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultMap="comcodeDTO">
+    /*code.selectAllfuel*/
+    	SELECT
+    		*
+    	FROM
+    		COMCODE
+    	WHERE
+    		CODETYPE = 'fuel'
+    </select>
 </mapper>
 

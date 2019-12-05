@@ -101,11 +101,18 @@ public class CustomerController {
 			System.out.println("차량 스케줄번호 : "+scheduleDTO.getCar_number());
 			System.out.println(result);
 			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
-	      
 		 	System.out.println("callbackMsg::"+callbackMsg);
 	      
 	      return callbackMsg;
 		
+	}
+    
+    @ResponseBody
+	@RequestMapping(value = "/customerInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+	public String customerInsert(Model model, CustomerDTO customerdto, CarDTO carDTO) throws IOException {
+	
+	    
+		return null;
 	}
 
 

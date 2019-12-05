@@ -99,4 +99,29 @@ public class CodeDaoImpl implements CodeDao {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("code.comcodeDelete",comcodeDTO);
 	}
+
+	//차량 자동완성을 위한 전체차량이름 불러오기
+	@Override
+	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.selectAllCar",comcodeDTO);
+	}
+
+	@Override
+	public List<ComcodeDTO> selectAllsize() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.selectAllsize");
+	}
+
+	@Override
+	public List<CodeDTO> selectAlltype() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.selectAlltype");
+	}
+
+	@Override
+	public List<ComcodeDTO> selectAllfuel() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.selectAllfuel");
+	}
 }

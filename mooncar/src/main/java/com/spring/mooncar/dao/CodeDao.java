@@ -35,4 +35,12 @@ public interface CodeDao {
 	public int comcodeDelete(ComcodeDTO comcodeDTO) throws Exception;
 
 	public ComcodeDTO selectComcodeView(ComcodeDTO comcodeDTO)  throws Exception;
+
+	public List<ComcodeDTO> selectAllCar(ComcodeDTO comcodeDTO);//차량 자동완성을 위한 전체차량이름 불러오기
+
+	public List<ComcodeDTO> selectAllsize();
+
+	public List<CodeDTO> selectAlltype();
+
+	public List<ComcodeDTO> selectAllfuel();
 }
