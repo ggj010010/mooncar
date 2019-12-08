@@ -150,6 +150,12 @@ public class CodeServiceImpl implements CodeService {
 		return codeDao.selectCarDD(prductinfoDTO);
 	}
 
+	@Override
+	public List<ComcodeDTO> selectCarSize(ComcodeDTO comcodeDTO) {
+		// TODO Auto-generated method stub
+		return codeDao.selectCarSize(comcodeDTO);
+	}
+
 
 
 	

@@ -242,5 +242,17 @@
     	WHERE
     		CODETYPE = 'fuel'
     </select>
+    
+     <!-- //연료타입 불러오기 -->
+    <select id="selectCarSize" parameterType="com.spring.mooncar.dto.ComcodeDTO" resultMap="comcodeDTO">
+    /*code.selectCarSize*/
+    	SELECT
+    		*
+    	FROM
+    		COMCODE
+    	WHERE
+    		codeid = #{codeId}
+    </select>
+    
 </mapper>
 

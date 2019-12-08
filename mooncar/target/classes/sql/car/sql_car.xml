@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="car_detail" parameterType="com.spring.mooncar.dto.CarDetailDTO" resultMap="CarDetailDTO">
-	/*schedule.search_car*/
+	/*customer.car_detail*/
 		SELECT  
 				*
 		FROM 
@@ -54,5 +54,25 @@
 		where
             car_number = #{car_number}
 	</select>
+	
+	<select id="customerCheckCarnum" parameterType="com.spring.mooncar.dto.CarDTO" resultMap="CarDTO">
+	/*userpop.customerCheckCarnum*/
+		SELECT  
+				*
+		FROM 
+			 car
+	</select>
+	
+	
+	<insert id="insertCar" parameterType="com.spring.mooncar.dto.CarDTO" >
+	/*schedule.insertCar*/
+	INSERT INTO car (
+			CAR_NUMBER, C_TEL, CAR_NAME, CAR_KM, CAR_SIZE, CAR_CATEGORY, CAR_FUEL_TYPE, CAR_OIL_DATE, CAR_COMMENT
+		)VALUES (
+			#{car_number},#{c_tel},#{car_name},#{car_km},#{car_size}, #{car_category}, #{car_fuel_type}, #{car_oil_date}, #{car_comment}
+		)
+
+
+	</insert>
 	
 </mapper>

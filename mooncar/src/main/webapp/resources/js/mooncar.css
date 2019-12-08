@@ -111,6 +111,17 @@ margin-top: 5px;
 	 font-size : 20px"
 }
 
+.num_only{
+	 color : black; 
+	 border-radius: 8px;
+	 background-color: white; 
+	 width:50%;
+	 height:35px; 
+	 letter-spacing: 2px; 
+	 text-align:center; 
+	 font-size : 20px"
+}
+
 #browsers1{
     background-color: white;
     border-radius: 10px;

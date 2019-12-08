@@ -44,4 +44,6 @@ public interface CodeDao {
 	public List<ComcodeDTO> selectAllfuel();
 
 	public List<ProductInfoDTO> selectCarDD(ProductInfoDTO prductinfoDTO);
+
+	public List<ComcodeDTO> selectCarSize(ComcodeDTO comcodeDTO);
 }

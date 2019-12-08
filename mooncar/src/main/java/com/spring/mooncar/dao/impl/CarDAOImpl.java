@@ -28,6 +28,20 @@ public class CarDAOImpl implements CarDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("car.car_detail", cardetailDTO);
 	}
+
+
+	@Override
+	public List<CarDTO> customerCheckCarnum() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("car.customerCheckCarnum");
+	}
+
+
+	@Override
+	public int insertCar(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("car.insertCar");
+	}
 	
 	
 }

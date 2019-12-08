@@ -44,7 +44,7 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public int insertCar(CarDTO carDTO) {
 		// TODO Auto-generated method stub
-		return 0;
+		return carDAO.insertCar(carDTO);
 	}
 
 	@Override
@@ -63,6 +63,12 @@ public class CarServiceImpl implements CarService {
 	public int insertCarDetail(CarDetailDTO carDetailDTO) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<CarDTO> customerCheckCarnum() {
+		// TODO Auto-generated method stub
+		return carDAO.customerCheckCarnum();
 	}
 
 	

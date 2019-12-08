@@ -16,10 +16,7 @@
             var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
             var today = now.getFullYear() + '-' + mon + '-' + day;
         	$j('.userdate').val(today);
-        });
-
-        $j(document).ready(function() {
-        		}).on("click", "input:radio[name=chk_car]", function(){
+        }).on("click", "input:radio[name=chk_car]", function(){
         			var car_number = $j(this).val();
         			 $j.ajax({
         					url : "/search",
@@ -126,7 +123,41 @@
         					
         					}//end error 
         				});//end ajax.productInfoWriteAction
-        		});
+        		}).on("click", "#insertCd", function() {
+        			var cus_d_contents = $j(CusDetail).val();
+        			var c_tel=$j("#c_tel").text();
+       			 $j.ajax({
+       					url : "/insertCusdetail",
+       					type : "GET",
+       					data : 
+       					{
+       						"c_tel" : c_tel,
+       						"cus_d_contents" : cus_d_contents
+       					}
+       					,
+       					//JSON.stringify()
+       					dataType : "json",
+       					contentType:"application/json;charset=UTF-8",
+       					timeout : 3000,
+       					success : function(insert) {
+       						alert("추가완료되었습니다.");
+       				            
+       					},//end success
+       					error : function(jqXHR, textStatus, errorThrown) {
+       					 	if(textStatus=="timeout") {
+
+       				        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+       				        } 
+       					 	else {
+
+       				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+       				        } 
+       					
+       					}//end error 
+       				});//end ajax.productInfoWriteAction
+       		});
 
         </script>
         
@@ -172,7 +203,7 @@
            </tr>
            <tr>
               <td>핸드폰</td>
-              <td>${selectCustomerOne.c_tel}</td>
+              <td id="c_tel">${selectCustomerOne.c_tel}</td>
            </tr>
              <tr>
               <td>성별</td>
@@ -215,8 +246,8 @@
 		  </tr>
        	<tr>
        	<td>
-       		<input type="text" name="my_name" size="50" style="color : black; border-radius: 8px; background-color: white; width:60%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
-        	<button class="button" type="button" style="width : 30%;float : right; height : 100%"> 추가 </button></td>
+       		<input id="CusDetail" type="text" name="my_name" size="50" style="color : black; border-radius: 8px; background-color: white; width:60%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
+        	<button id="insertCd" class="button" type="button" style="width : 30%;float : right; height : 100%"> 추가 </button></td>
         </tr>
         </table><br><br>
      </div>
@@ -301,7 +332,7 @@
         </table>
         </div>
         <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" onclick="window.open('/popup/fixpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
+          <button class ="button" type="button" onclick="window.open('/popup/schedulepop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
        </div>
         <table style = "width : 100%";>
            <tr>
@@ -339,7 +370,7 @@
         
 
         <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" onclick="window.open('/popup/schedulepop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
+          <button class ="button" type="button" onclick="window.open('/popup/fixpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
        </div>
     </div>
 </div>

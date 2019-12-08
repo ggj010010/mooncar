@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,19 +16,21 @@
 	</tr>
 	<tr>
 		<td>°í°´¸í</td>
-		<td colspan="3">¹®Á¾ÇÐ</td>
+		<td colspan="3">${selectCustomerOne.c_name}</td>
 	</tr>
+	
 	<tr>
 		<td>¿¬¶ôÃ³</td>
 
-		<td colspan="3"style ="font-size : 20px;">010	-	8991	-	3464</td>
+		<td colspan="3"style ="font-size : 20px;">${selectCustomerOne.c_tel}</td>
 	</tr>
+	
 	<tr>
 		<td>Â÷·®</td>
 		<td colspan="3">
-			<input type="radio" value="ºØºØÀÌ" name="car">ºØºØÀÌ
-			<input type="radio" value="½ÖÈ­Â÷" name="chk_car">½ÖÈ­Â÷
-			<input type="radio" value="°øÂ÷" name="chk_car">°øÂ÷
+			<c:forEach var="selectCarOne" items="${selectCarOne}">
+				<input type="radio" value="${selectCarOne.car_number}" name="chk_car">${selectCarOne.car_name}
+			 </c:forEach> 
 		</td>
 	</tr>
 	<tr>

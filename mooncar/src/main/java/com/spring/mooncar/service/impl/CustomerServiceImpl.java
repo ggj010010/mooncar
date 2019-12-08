@@ -51,7 +51,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public int insertCustomer(CustomerDTO customerDTO) {
 		// TODO Auto-generated method stub
-		return 0;
+		return customerDAO.insertCustomer(customerDTO);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public int insertCustomerDetail(CustomerDetailDTO customerDetailDTO) {
 		// TODO Auto-generated method stub
-		return 0;
+		return customerDAO.insertCustomerDetail(customerDetailDTO);
 	}
 
 	@Override
@@ -76,6 +76,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public CustomerDTO deleteCustomerOne(CustomerDTO customerDTO) {
 		String tel = customerDTO.getC_tel();
 	      return customerDAO.deleteCustomerOne(tel);
+	}
+
+	@Override
+	public List<CustomerDTO> customerChecktel() {
+		// TODO Auto-generated method stub
+		return customerDAO.customerChecktel();
 	}
 
 

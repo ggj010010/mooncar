@@ -68,10 +68,12 @@ public class PopupController {
 	//차량 소분류(상세)
 		@ResponseBody
 		@RequestMapping(value = "/selectCarDD", produces ="application/json; charset=utf8", method = RequestMethod.GET)
-		public String selectCarDD(Model model, ProductInfoDTO prductinfoDTO, HttpServletResponse response) throws IOException {
+		public String selectCarDD(Model model, ProductInfoDTO prductinfoDTO,ComcodeDTO comcodeDTO, HttpServletResponse response) throws IOException {
+				comcodeDTO.setCodeId(prductinfoDTO.getPrdCtgr());
+				System.out.println("컴코드의 아이디는? : "+comcodeDTO.getCodeId());
 				HashMap<String, Object> result = new HashMap<String, Object>();
 				CommonUtil commonUtil = new CommonUtil();
-				System.out.println(prductinfoDTO.getPrdCtgr());
+				result.put("selectCarSize", codeService.selectCarSize(comcodeDTO));
 				result.put("selectCarDD", codeService.selectCarDD(prductinfoDTO));
 				String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		    	System.out.println("callbackMsg::"+callbackMsg);
@@ -93,7 +95,11 @@ public class PopupController {
 
 	
 	@RequestMapping(value = "popup/fixpop", method = RequestMethod.GET)
-	public String fixpop(Model model) {
+	public String fixpop(Model model,CustomerDTO customerDTO,CarDTO carDTO,HttpServletRequest hrq)throws Exception {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
+		model.addAttribute("selectCustomerOne",selectCustomerOne);
+		model.addAttribute("selectCarOne",selectCarOne);
 		return "popup/fixpop";
 	}
 	
@@ -127,6 +133,57 @@ public class PopupController {
 	      return callbackMsg;
 		
 	}
+    
+    //전화번호 중복확인을 위해 전화번호부 전부를 userpop.jsp로 넘겨준다.
+    @ResponseBody
+	@RequestMapping(value = "/customerChecktel", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+	public String customerChecktel(Model model, CustomerDTO customerDTO, HttpServletResponse response) throws IOException {
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			CommonUtil commonUtil = new CommonUtil();
+			result.put("customerChecktel", customerService.customerChecktel());
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	    	System.out.println("callbackMsg::"+callbackMsg);
+	      
+	    return callbackMsg;
+		
+	}
+    //차량번호 중복확인을 위해 차량번호부 전부를 userpop.jsp로 넘겨준다.
+    @ResponseBody
+	@RequestMapping(value = "/customerCheckCarnum", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+	public String customerCheckCarnum(Model model, CarDTO cardto, HttpServletResponse response) throws IOException {
+    	System.out.println("123");
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			CommonUtil commonUtil = new CommonUtil();
+			result.put("customerCheckCarnum", carService.customerCheckCarnum());
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+	    	System.out.println("callbackMsg::"+callbackMsg);
+	      
+	    return callbackMsg;
+		
+	}
+    
+    @ResponseBody
+   	@RequestMapping(value = "/customerInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+   	public int customerInsert(Model model, CustomerDTO customerDTO, CarDTO carDTO) throws IOException {
+   	
+   	    System.out.println(customerDTO.getC_tel());
+   	    System.out.println(customerDTO.getC_name());
+   	    System.out.println(customerDTO.getC_gender());
+   	    System.out.println(customerDTO.getC_email());
+   	    System.out.println(customerDTO.getC_comment());
+   	    System.out.println(carDTO.getC_tel());
+   	    System.out.println(carDTO.getC_name());
+   	    System.out.println(carDTO.getCar_name());
+   	    System.out.println(carDTO.getCar_km());
+   	    System.out.println(carDTO.getCar_size());
+   	    System.out.println(carDTO.getCar_category());
+   	    System.out.println("퓨엘타입 : "+carDTO.getCar_fuel_type());
+   	    System.out.println("차량커멘트 : "+carDTO.getCar_comment());
+   	    System.out.println("오일데이트 : "+carDTO.getCar_oil_date());
+   	    int insert= customerService.insertCustomer(customerDTO);
+   	    int insertCar= carService.insertCar(carDTO);
+   	    return(insert);
+   	}
 }
 	
 	

@@ -21,5 +21,6 @@ public interface CustomerService {
 	int insertCustomerDetail(CustomerDetailDTO customerDetailDTO);//회원 특이사항 추가
 	
 	List<CustomerDTO> selectCustomerEmail(EmailDTO emailDTO);//search에서 email 보낼때 사용
+	List<CustomerDTO> customerChecktel();
 
 }

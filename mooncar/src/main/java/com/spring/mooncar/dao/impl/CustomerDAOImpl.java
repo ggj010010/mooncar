@@ -53,6 +53,25 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return sqlSession.selectOne("customer.deleteCustomerOne",tel);
 	}
 
+	@Override
+	public List<CustomerDTO> customerChecktel() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("customer.customerChecktel");
+	}
+
+	@Override
+	public int insertCustomer(CustomerDTO customerDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("customer.insertCustomer", customerDTO);
+
+	}
+
+	@Override
+	public int insertCustomerDetail(CustomerDetailDTO customerDetailDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("customerDetail.insertCustomerDetail", customerDetailDTO);
+	}
+
 
 	
 }

@@ -21,6 +21,12 @@ public interface CustomerDAO {
 
 	List<CustomerDTO> selectCustomerEmail(EmailDTO emailDTO);
 
+	public List<CustomerDTO> customerChecktel();
+
+	public int insertCustomer(CustomerDTO customerDTO);
+
+	public int insertCustomerDetail(CustomerDetailDTO customerDetailDTO);
+
 
 
 }

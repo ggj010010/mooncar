@@ -108,12 +108,15 @@ public class CustomerController {
 	}
     
     @ResponseBody
-	@RequestMapping(value = "/customerInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
-	public String customerInsert(Model model, CustomerDTO customerdto, CarDTO carDTO) throws IOException {
-	
-	    
-		return null;
+    @RequestMapping(value = "/insertCusdetail", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public int insertCustomerDetail(Model model,CustomerDetailDTO customerdetailDTO) throws IOException {
+    	System.out.println(customerdetailDTO.getC_tel());
+    	System.out.println(customerdetailDTO.getCus_d_contents());
+    	int insert=customerservice.insertCustomerDetail(customerdetailDTO);
+	      return insert;
+		
 	}
+    
 
 
 }

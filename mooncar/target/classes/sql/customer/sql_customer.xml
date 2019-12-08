@@ -12,7 +12,9 @@
 		<result property="c_email" column="c_email" />
 		<result property="c_comment" column="c_comment" />
 
-	</resultMap> 
+	</resultMap>
+
+	
     <select id="selectCustomerAll" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
         SELECT 
            *
@@ -42,10 +44,33 @@
 	    </if>
 
 	</select>
+	<select id="customerChecktel" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
+	/*customer.customerChecktel*/
+		select
+			*
+		from
+		    customer
+		
+
+	</select>
     
     <delete id="deleteCustomerOne">
         DELETE FROM customer
         WHERE c_tel = #{c_tel}
     </delete>
+    
+    
+    <insert id="insertCustomer" parameterType="com.spring.mooncar.dto.CustomerDTO">
+	/*schedule.insertCustomer*/
+	INSERT INTO CUSTOMER (
+			C_TEL, C_NAME, C_GENDER, C_EMAIL, C_COMMENT
+		)VALUES (
+			#{c_tel}, #{c_name}, #{c_gender}, #{c_email}, #{c_comment}
+		)
+
+
+	</insert>
+	
+	
 
 </mapper>

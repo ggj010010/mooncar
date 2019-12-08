@@ -128,4 +128,10 @@ public class CodeDaoImpl implements CodeDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.selectCarDD",prductinfoDTO);
 	}
+
+	@Override
+	public List<ComcodeDTO> selectCarSize(ComcodeDTO comcodeDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("code.selectCarSize",comcodeDTO);
+	}
 }

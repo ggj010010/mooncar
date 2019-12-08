@@ -45,5 +45,7 @@ public interface CodeService {
 
 	public List<ProductInfoDTO> selectCarDD(ProductInfoDTO prductinfoDTO); //차량 소분류 불러오기(상세)
 
+	public List<ComcodeDTO> selectCarSize(ComcodeDTO comcodeDTO); //차량 크기 불러오기
+
 
 }

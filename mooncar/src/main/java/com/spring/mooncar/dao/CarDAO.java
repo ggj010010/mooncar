@@ -10,4 +10,8 @@ public interface CarDAO {
 	public List<CarDTO> search_car(CarDTO carDTO);
 
 	public List<CarDetailDTO> car_detail(CarDetailDTO cardetailDTO);
+
+	public List<CarDTO> customerCheckCarnum();
+
+	public int insertCar(CarDTO carDTO);
 }

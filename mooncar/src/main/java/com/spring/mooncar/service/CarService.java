@@ -14,4 +14,5 @@ public interface CarService {
 	int insertCarDetail(CarDetailDTO carDetailDTO);//정비 등록
 	public List<CarDTO> search_car(CarDTO carDTO);//차량찾기
 	public List<CarDetailDTO> car_detail(CarDetailDTO cardetailDTO);//차량 상세정보
+	public List<CarDTO> customerCheckCarnum();
 }
