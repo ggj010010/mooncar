@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,17 @@ import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.Check_searchDTO;
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
-import com.spring.mooncar.dto.ProductInfoDTO;
+import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.service.CodeService;
+import com.spring.mooncar.service.CustomerService;
 import com.spring.mooncar.service.SearchService;
 
 @Controller
 public class SearchController {
 	
+	@Autowired
+	CustomerService customerService;
 	@Autowired 
 	CodeService codeService;
 	@Autowired
@@ -82,5 +88,15 @@ public class SearchController {
 		System.out.println("callbackMsg::" + callbackMsg);
 
 		return callbackMsg;
+	}
+	
+	@RequestMapping(value = "/popup/emailpop", method = RequestMethod.POST)
+	public String emailpop(Model model,EmailDTO emailDTO,HttpServletRequest hrq) throws Exception {
+		System.out.println(emailDTO.getC_tel());
+		System.out.println("hra : " + hrq.getParameterValues("c_tel"));
+		emailDTO.setC_tel( hrq.getParameterValues("c_tel"));
+		List<CustomerDTO> selectCustomerEmail = customerService.selectCustomerEmail(emailDTO);
+		model.addAttribute("emailList",selectCustomerEmail);
+		return "popup/emailpop";
 	}
 }

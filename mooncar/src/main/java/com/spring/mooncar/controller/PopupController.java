@@ -103,16 +103,6 @@ public class PopupController {
 		return "popup/fixpop";
 	}
 	
-	@RequestMapping(value = "popup/emailpop", method = RequestMethod.POST)
-	public String emailpop(Model model,EmailDTO emailDTO,HttpServletRequest hrq) throws Exception {
-		System.out.println(emailDTO.getC_tel());
-		System.out.println("hra : " + hrq.getParameterValues("c_tel"));
-		emailDTO.setC_tel( hrq.getParameterValues("c_tel"));
-		List<CustomerDTO> selectCustomerEmail = customerService.selectCustomerEmail(emailDTO);
-		model.addAttribute("emailList",selectCustomerEmail);
-		return "popup/emailpop";
-	}
-	
 	@RequestMapping(value = "popup/carpop", method = RequestMethod.GET)
 	public String carpop(Model model,CustomerDTO customerDTO,HttpServletRequest hrq) {
 		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
