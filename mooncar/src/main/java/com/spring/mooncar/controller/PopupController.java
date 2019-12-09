@@ -36,6 +36,7 @@ public class PopupController {
 	CarService carService;
 	@Autowired
 	CodeService codeService;
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
@@ -95,17 +96,25 @@ public class PopupController {
 
 	
 	@RequestMapping(value = "popup/fixpop", method = RequestMethod.GET)
-	public String fixpop(Model model,CustomerDTO customerDTO,CarDTO carDTO,HttpServletRequest hrq)throws Exception {
+	public String fixpop(Model model,CustomerDTO customerDTO,CarDTO carDTO, CodeDTO codeDTO, ComcodeDTO comcodeDTO, HttpServletRequest hrq)throws Exception {
+		List<CodeDTO> selectAlltype = codeService.selectAlltype();
+		List<ComcodeDTO> selectAllfuel = codeService.selectAllfuel();
 		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
 		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
+		model.addAttribute("selectAllfuel",selectAllfuel);
+		model.addAttribute("selectAlltype",selectAlltype);
 		model.addAttribute("selectCustomerOne",selectCustomerOne);
 		model.addAttribute("selectCarOne",selectCarOne);
 		return "popup/fixpop";
 	}
 	
 	@RequestMapping(value = "popup/carpop", method = RequestMethod.GET)
-	public String carpop(Model model,CustomerDTO customerDTO,HttpServletRequest hrq) {
+	public String carpop(Model model,CustomerDTO customerDTO,CarDTO carDTO, CodeDTO codeDTO, ComcodeDTO comcodeDTO, HttpServletRequest hrq)throws Exception {
+		List<CodeDTO> selectAlltype = codeService.selectAlltype();
+		List<ComcodeDTO> selectAllfuel = codeService.selectAllfuel();
 		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		model.addAttribute("selectAllfuel",selectAllfuel);
+		model.addAttribute("selectAlltype",selectAlltype);
 		model.addAttribute("selectCustomerOne",selectCustomerOne);
 		return "popup/carpop";
 	}
@@ -176,6 +185,25 @@ public class PopupController {
    	    int insertCar= carService.insertCar(carDTO);
    	    return(insert);
    	}
+    @ResponseBody
+   	@RequestMapping(value = "/carInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+   	public int carInsert(Model model, CarDTO carDTO) throws IOException {
+   	
+   	    System.out.println(carDTO.getC_tel());
+   	    System.out.println(carDTO.getC_name());
+   	    System.out.println(carDTO.getCar_name());
+   	    System.out.println(carDTO.getCar_km());
+   	    System.out.println(carDTO.getCar_size());
+   	    System.out.println(carDTO.getCar_category());
+   	    System.out.println("퓨엘타입 : "+carDTO.getCar_fuel_type());
+   	    System.out.println("차량커멘트 : "+carDTO.getCar_comment());
+   	    System.out.println("오일데이트 : "+carDTO.getCar_oil_date());
+   	    int insertCar= carService.insertCar(carDTO);
+   	    return(insertCar);
+   	}
+    
+    
+   
 }
 	
 	

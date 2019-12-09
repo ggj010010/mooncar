@@ -37,7 +37,6 @@
         							$j(".car_size").empty();
         							$j(".car_category").empty();
         							$j(".car_fuel_type").empty();
-        							$j(".car_oil_type").empty();
         							$j(".car_oil_date").empty();
         							$j(".car_comment").empty();
         				              
@@ -48,7 +47,6 @@
         								$j(".car_size").text(val.car_size);
         								$j(".car_category").text(val.car_category);
         								$j(".car_fuel_type").text(val.car_fuel_type); 
-        								$j(".car_oil_type").text(val.car_oil_type);
         								$j(".car_oil_date").text(val.car_oil_date + " 개월");
         								$j(".car_comment").text(val.car_comment); 
         								//정비정보 찍어주는 거
@@ -265,10 +263,10 @@
            <c:forEach var="selectCarOne" items="${selectCarOne}" varStatus ="sta">
 				<c:choose>
 				<c:when test="${sta.index eq 0}">
-				<th><input type="radio" value="${selectCarOne.car_number}" name="chk_car" checked="checked">${selectCarOne.car_name}</th>				
+				<th><input type="radio" value="${selectCarOne.car_number}" title="${selectCarOne.car_number}" name="chk_car" checked="checked">${selectCarOne.car_name}</th>				
 				</c:when>
 				<c:otherwise>
-				<th><input type="radio" value="${selectCarOne.car_number}" name="chk_car">${selectCarOne.car_name}</th>
+				<th><input type="radio" value="${selectCarOne.car_number}" title="${selectCarOne.car_number}" name="chk_car">${selectCarOne.car_name}</th>
 				</c:otherwise>
 				</c:choose>
 				
@@ -305,10 +303,7 @@
               <td>연료</td>
               <td class=car_fuel_type> - </td>
            </tr>
-           <tr>
-              <td>엔진오일명</td>
-              <td class=car_oil_type> - </td>
-           </tr>
+          
            <tr>
            	  <td>엔진오일교체</td>
               <td class=car_oil_date> - </td>
