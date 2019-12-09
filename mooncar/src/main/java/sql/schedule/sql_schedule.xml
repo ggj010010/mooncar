@@ -107,7 +107,7 @@
 	<select id="Calendar" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="CalendarDTO">
 	/*schedule.Calendar*/
 	select 
-		to_char(s_date, 'YYYY-MM-DD') as "start"
+		to_char(s_date, 'YYYY-MM-DD HH24:mi') as "start"
 		,(select c_name from customer where c_tel = schedule.c_tel) as title
 	from schedule
 	where to_char(s_date, 'YY') =  to_char(sysdate, 'YY')
@@ -149,7 +149,7 @@
 	from 
 		Schedule
 	where 
-		CAR_NUMBER = #{car_number} and s_check = 0
+		CAR_NUMBER = #{car_number} and s_check in (0,1)
 	</select>
 	<select id="selectCarSchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
 	/*schedule.Select_schedule*/

@@ -15,20 +15,50 @@ $j(document).ready(function() {
 
         if($j(this).val().length > 100) {
             $j(this).val($j(this).val().substring(0, 100));
-            alert("제목은 100자를 넘을수 없습니다.");
+            alert("예약 제목은 100자를 넘을수 없습니다.");
         }
 
     });
+    $j('#desc').on('keydown', function() {
 
+        if($j(this).val().length > 100) {
+            $j(this).val($j(this).val().substring(0, 100));
+            alert("예약 제목은 100자를 넘을수 없습니다.");
+        }
+
+    });
+    $j('#desc').on('keypress', function() {
+
+        if($j(this).val().length > 100) {
+            $j(this).val($j(this).val().substring(0, 100));
+            alert("예약 제목은 100자를 넘을수 없습니다.");
+        }
+
+    });
     $j('#desc_detail').on('keyup', function() {
 
         if($j(this).val().length > 500) {
             $j(this).val($j(this).val().substring(0, 500));
-            alert("제목은 500자를 넘을수 없습니다.");
+            alert("예약 내용은 500자를 넘을수 없습니다.");
         }
 
     });
+    $j('#desc_detail').on('keydown', function() {
 
+        if($j(this).val().length > 500) {
+            $j(this).val($j(this).val().substring(0, 500));
+            alert("예약 내용은 500자를 넘을수 없습니다.");
+        }
+
+    });
+    $j('#desc_detail').on('keypress', function() {
+
+        if($j(this).val().length > 500) {
+            $j(this).val($j(this).val().substring(0, 500));
+            alert("예약 내용은 500자를 넘을수 없습니다.");
+        }
+
+    });
 });
 
 
@@ -81,12 +111,12 @@ $j(document).ready(function() {
 			html +=  "<option>9</option>";
 			html +=  "<option>10</option>";
 			html +=  "<option>11</option>";
-			html +=  "<option>12</option>";
 			$j('#browsers1').append(html);
 				//browsers1
 		}
 		else if(time == "오후"){
 			$j('#browsers1').empty();
+			html +=  "<option>12</option>";
 			html +=  "<option>01</option>";
 			html +=  "<option>02</option>";
 			html +=  "<option>03</option>";
@@ -194,10 +224,12 @@ $j(document).ready(function(){
     						var today = now.getFullYear() + '-' + mon + '-' + day;
 							$j('#userdate').val(today);
 							
-							if(returndata.search_customer[0].c_name != null){
+							if(returndata.search_customer.length != 0){
 								$j(".c_name").text(returndata.search_customer[0].c_name);
 							}
-							
+							if(returndata.search_customer.length == 0){
+								alert("예약을 등록할수 있는 차가 없습니다.");
+							}
 								$j.each(returndata.search_customer , function(idx, val) {
 									html = "<input type='radio' value='"+val.car_number+"'"+" name='chk_car'>"+val.car_name
 									$j(".car").append(html);
@@ -239,8 +271,9 @@ $j(document).ready(function(){
 				var time = $j('select[name="time"]').val();
 				var scheduleTitle =  $j("#desc").val();
 				if(timeTF == "오후"){
-					var time = parseInt(time, 10)+12;
-					
+					if(time != 12){
+						var time = parseInt(time, 10)+12;
+					}
 				}
 				var date = $j("#userdate").val()+"-"+time;
 				if(scheduleTitle == ""){
@@ -341,8 +374,8 @@ $j(document).ready(function(){
 			<input type="date" id="userdate" style="width : 75%; float : center; name="userdate">
 		</td>
 		<td>  
-            <input type="radio" value="오전" name="timeTF">오전
-            <input type="radio" value="오후" name="timeTF">오후
+            <input type="radio" value="오전" name="timeTF" id="time1"><label for='time1'>오전</label>
+            <input type="radio" value="오후" name="timeTF" id="time2"><label for='time2'>오후</label>
 		   <select id="browsers1" name="time" style=" float : right;">
 			     <option value="시간선택" selected>시간선택</option>       			 
 			     

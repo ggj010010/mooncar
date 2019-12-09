@@ -8,20 +8,22 @@
 $j(document).ready(function() {
 	var time = ${Select_scheduleUpdate[0].time};
 	var html = "";
-	if(time <= 12){
+	if(time <= 11){
 		$j('input:radio[name=timeTF]:input[value=오전]').attr("checked", true);
 		$j('#browsers1').empty();
 		html +=  "<option value='9'>9</option>";
 		html +=  "<option value='10'>10</option>";
 		html +=  "<option value='11'>11</option>";
-		html +=  "<option value='12'>12</option>";
 		
 		$j('#browsers1').append(html);
 		$j('#browsers1').val(time).prop("selected", true);
 	}else{
-		time = time - 12;
 		$j('input:radio[name=timeTF]:input[value=오후]').attr("checked", true);
 		$j('#browsers1').empty();
+		if(time != 12){
+			time = time - 12;
+		}
+		html +=  "<option value='12'>12</option>";
 		html +=  "<option value='1'>01</option>";
 		html +=  "<option value='2'>02</option>";
 		html +=  "<option value='3'>03</option>";
@@ -52,12 +54,12 @@ $j(document).ready(function() {
 			html +=  "<option>9</option>";
 			html +=  "<option>10</option>";
 			html +=  "<option>11</option>";
-			html +=  "<option>12</option>";
 			$j('#browsers1').append(html);
 				//browsers1
 		}
 		else if(time == "오후"){
 			$j('#browsers1').empty();
+			html +=  "<option>12</option>";
 			html +=  "<option>01</option>";
 			html +=  "<option>02</option>";
 			html +=  "<option>03</option>";
@@ -79,7 +81,9 @@ $j(document).ready(function() {
 			var timeTF = $j('input[name="timeTF"]:checked').val();
 			var time = $j('select[name="time"]').val();
 			if(timeTF == "오후"){
-				var time = parseInt(time, 10)+12;
+				if(time != 12){
+					var time = parseInt(time, 10)+12;
+				}
 			}
 			var date = $j("#userdate").val()+"-"+time;
 		}
@@ -176,8 +180,8 @@ $j(document).ready(function() {
 		</td>
 		
 		<td>  
-            <input type="radio" value="오전" name="timeTF">오전
-            <input type="radio" value="오후" name="timeTF">오후
+            <input type="radio" value="오전" name="timeTF" id="time1"><label for='time1'>오전</label>
+            <input type="radio" value="오후" name="timeTF" id="time2"><label for='time2'>오후</label>
 		   <select id="browsers1" name="time" style=" float : right;">
 
       	   </select>

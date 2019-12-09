@@ -98,8 +98,12 @@
 							$j(".c_gender").text("여자");
 						}
 						$j(".c_email").text(val.customerDTO.c_email);
-						$j(".c_comment").text(val.customerDTO.c_comment);
 					});
+					html = "";
+					$j.each(returndata.customer_detail , function(idx, val) {
+						html += val.cus_d_contents+"&nbsp&nbsp"+val.cus_d_date+"&nbsp&nbsp<br>";
+					});
+					$j(".c_comment").append(html);
 				},//end success
 				error : function(jqXHR, textStatus, errorThrown) {
 				 	if(textStatus=="timeout") {
@@ -161,13 +165,18 @@
 								else if(val.s_check == 1){
 									html += "<td>재연락</td>"
 								}
-								else if(val.c_check == 2){
+								else if(val.s_check == 2){
 									html += "<td>완료</td>"
 								}
 								
 								html +=  "<td>"+val.s_contents+"</td>"
-								if(parseInt(val.s_date.split(" ")[1]) > 12){
-									html += "<td>오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시</td></tr>";
+								if(parseInt(val.s_date.split(" ")[1]) > 11){
+									if(parseInt(val.s_date.split(" ")[1]) != 12){
+										html += "<td>오후 " + parseInt(val.s_date.split(" ")[1]-12) + "시</td></tr>";
+									}
+									else{
+										html += "<td>오후 " + parseInt(val.s_date.split(" ")[1]) + "시</td></tr>";
+									}
 								}
 								else{
 									html+= "<td>오전" + val.s_date.split(" ")[1] + "시</td></tr>"
@@ -184,6 +193,7 @@
 	   			});//end ajax.productInfoWriteAction  
 			},
 			events : data
+			//timeFormat: 'h:mm' 
 		
 		});
 

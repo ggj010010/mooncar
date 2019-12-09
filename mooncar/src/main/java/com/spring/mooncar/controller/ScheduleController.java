@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.CustomerDetailDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
+import com.spring.mooncar.service.CustomerService;
 import com.spring.mooncar.service.ScheduleService;
 
 
@@ -27,6 +28,8 @@ import com.spring.mooncar.service.ScheduleService;
 public class ScheduleController {
 	@Autowired
 	ScheduleService scheduleService;
+	@Autowired
+	CustomerService customerservice;
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
 	
 	@RequestMapping(value = "/schedule/schedule", method = RequestMethod.GET,  produces ="application/json; charset=utf8")
@@ -146,6 +149,7 @@ public class ScheduleController {
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			CommonUtil commonUtil = new CommonUtil();
 			result.put("select_schedule", scheduleService.Select_schedule(scheduleDTO));
+			
 			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 			System.out.println("callbackMsg::"+callbackMsg);
 	      
@@ -154,10 +158,11 @@ public class ScheduleController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/selectScheduleOne", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-	public String selectScheduleOne(Model model, ScheduleDTO scheduleDTO) throws IOException {
+	public String selectScheduleOne(Model model, ScheduleDTO scheduleDTO,CustomerDetailDTO customerdetailDTO) throws IOException {
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			CommonUtil commonUtil = new CommonUtil();
 			result.put("selectScheduleOne", scheduleService.selectScheduleOne(scheduleDTO));
+			result.put("customer_detail", customerservice.selectCustomerDetail(customerdetailDTO));
 			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 	      
 	    	System.out.println("callbackMsg::"+callbackMsg);
