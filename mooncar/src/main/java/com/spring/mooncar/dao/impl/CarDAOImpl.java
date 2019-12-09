@@ -40,7 +40,7 @@ public class CarDAOImpl implements CarDAO{
 	@Override
 	public int insertCar(CarDTO carDTO) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("car.insertCar");
+		return sqlSession.insert("car.insertCar",carDTO);
 	}
 	
 	

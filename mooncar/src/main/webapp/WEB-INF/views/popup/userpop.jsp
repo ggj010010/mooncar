@@ -304,6 +304,10 @@
         			    									}
         			    									else{
     			    											var car_comment = $j("#car_comment").val();
+    			    											if(car_comment==""){
+    			    												var car_comment="차량특이사항이 없습니다.";
+    			    											}
+    			    											alert(car_comment);
     			    											
     			    											var c_comment = $j("#c_comment").val();
     			    											

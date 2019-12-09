@@ -14,13 +14,15 @@
 		<th colspan="4">차량등록</th>
 	</tr>
 	<tr>
-		<td>이름</td>
-		<td colspan="3">문종학</td>
+		<td>고객명</td>
+		<td colspan="3">${selectCustomerOne.c_name}</td>
 	</tr>
-    <tr>
-        <td>연락처</td>
-        <td colspan="3">010-1234-1234</td>
-    </tr>
+	
+	<tr>
+		<td>연락처</td>
+
+		<td colspan="3"style ="font-size : 20px;">${selectCustomerOne.c_tel}</td>
+	</tr>
 
 	<tr>
 		<td>차종</td>

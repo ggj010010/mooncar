@@ -52,7 +52,7 @@
 <script>
 //삭제버튼
 	$(document).ready(function() {
-		$("#btnDelete").click(function() {
+		$(".btnDelete").click(function() {
 			var val = $(this).val();
 			alert(val);
 			if (confirm("삭제하시겠습니까?")) {
@@ -74,7 +74,7 @@
               			<td>여자</td>
               		</c:otherwise>
                </c:choose>
-              <td><button class="button" type="button" style="width : 60%;float : center; height : 100%" id="btnDelete" value="${cv.c_tel}"> 삭제 </button></td>
+              <td><button class="button btnDelete" type="button" style="width : 60%;float : center; height : 100%"  value="${cv.c_tel}"> 삭제 </button></td>
 		  </c:forEach>
         </table>
    

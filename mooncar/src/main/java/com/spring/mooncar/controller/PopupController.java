@@ -114,7 +114,9 @@ public class PopupController {
 	}
 	
 	@RequestMapping(value = "popup/carpop", method = RequestMethod.GET)
-	public String carpop(Model model) {
+	public String carpop(Model model,CustomerDTO customerDTO,HttpServletRequest hrq) {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		model.addAttribute("selectCustomerOne",selectCustomerOne);
 		return "popup/carpop";
 	}
 	
