@@ -92,13 +92,9 @@ public class CustomerController {
 	public String search_car(Model model, CarDTO carDTO, CarDetailDTO cardetailDTO,ScheduleDTO scheduleDTO) throws IOException {
 			HashMap<String, Object> result = new HashMap<String, Object>();
 			CommonUtil commonUtil = new CommonUtil();
-			System.out.println("차량번호 : "+cardetailDTO.getCar_number());
-			System.out.println("차량 디테일번호 : "+carDTO.getCar_number());
-			System.out.println("차량 스케줄번호 : "+scheduleDTO.getCar_number());
 			result.put("search_car", carservice.search_car(carDTO));
 			result.put("car_detail", carservice.car_detail(cardetailDTO));
 			result.put("selectCarSchedule", scheduleservice.selectCarSchedule(scheduleDTO));
-			System.out.println("차량 스케줄번호 : "+scheduleDTO.getCar_number());
 			System.out.println(result);
 			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
 		 	System.out.println("callbackMsg::"+callbackMsg);

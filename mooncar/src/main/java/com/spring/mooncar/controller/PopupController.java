@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CarDTO;
+import com.spring.mooncar.dto.CarDetailDTO;
 import com.spring.mooncar.dto.CodeDTO;
 import com.spring.mooncar.dto.ComcodeDTO;
 import com.spring.mooncar.dto.CustomerDTO;
+import com.spring.mooncar.dto.CustomerDetailDTO;
 import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.dto.ProductInfoDTO;
+import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.CarService;
 import com.spring.mooncar.service.CodeService;
 import com.spring.mooncar.service.CustomerService;
@@ -89,7 +92,11 @@ public class PopupController {
 	
 	
 	@RequestMapping(value = "popup/schedulepop", method = RequestMethod.GET)
-	public String schedulepop(Model model) {
+	public String schedulepop(Model model,CustomerDTO customerDTO,CarDTO carDTO, HttpServletRequest hrq)throws Exception {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
+		model.addAttribute("selectCustomerOne",selectCustomerOne);
+		model.addAttribute("selectCarOne",selectCarOne);
 		return "popup/schedulepop";
 	}
 	
@@ -118,6 +125,20 @@ public class PopupController {
 		model.addAttribute("selectCustomerOne",selectCustomerOne);
 		return "popup/carpop";
 	}
+	
+	 @ResponseBody
+	 @RequestMapping(value = "/carDetailInsert", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	 public int carDetailInsert(Model model, CarDetailDTO carDetailDTO,CarDTO carDTO) throws IOException {
+		 System.out.println("car : "+carDTO.getCar_km());
+		 System.out.println("car D : "+carDetailDTO.getCar_d_km());
+		 int check = carService.Detail_check(carDetailDTO);
+			if(check == 0) {
+				carService.car_kmUpdate(carDTO);
+				int insert = carService.carDetailInsert(carDetailDTO);
+			}
+		    
+			return check;
+		}
 	
     @ResponseBody
     @RequestMapping(value = "/insert", method = RequestMethod.GET, produces ="application/json; charset=utf8")
@@ -166,21 +187,6 @@ public class PopupController {
     @ResponseBody
    	@RequestMapping(value = "/customerInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
    	public int customerInsert(Model model, CustomerDTO customerDTO, CarDTO carDTO) throws IOException {
-   	
-   	    System.out.println(customerDTO.getC_tel());
-   	    System.out.println(customerDTO.getC_name());
-   	    System.out.println(customerDTO.getC_gender());
-   	    System.out.println(customerDTO.getC_email());
-   	    System.out.println(customerDTO.getC_comment());
-   	    System.out.println(carDTO.getC_tel());
-   	    System.out.println(carDTO.getC_name());
-   	    System.out.println(carDTO.getCar_name());
-   	    System.out.println(carDTO.getCar_km());
-   	    System.out.println(carDTO.getCar_size());
-   	    System.out.println(carDTO.getCar_category());
-   	    System.out.println("퓨엘타입 : "+carDTO.getCar_fuel_type());
-   	    System.out.println("차량커멘트 : "+carDTO.getCar_comment());
-   	    System.out.println("오일데이트 : "+carDTO.getCar_oil_date());
    	    int insert= customerService.insertCustomer(customerDTO);
    	    int insertCar= carService.insertCar(carDTO);
    	    return(insert);
@@ -188,16 +194,6 @@ public class PopupController {
     @ResponseBody
    	@RequestMapping(value = "/carInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
    	public int carInsert(Model model, CarDTO carDTO) throws IOException {
-   	
-   	    System.out.println(carDTO.getC_tel());
-   	    System.out.println(carDTO.getC_name());
-   	    System.out.println(carDTO.getCar_name());
-   	    System.out.println(carDTO.getCar_km());
-   	    System.out.println(carDTO.getCar_size());
-   	    System.out.println(carDTO.getCar_category());
-   	    System.out.println("퓨엘타입 : "+carDTO.getCar_fuel_type());
-   	    System.out.println("차량커멘트 : "+carDTO.getCar_comment());
-   	    System.out.println("오일데이트 : "+carDTO.getCar_oil_date());
    	    int insertCar= carService.insertCar(carDTO);
    	    return(insertCar);
    	}

@@ -71,5 +71,23 @@ public class CarServiceImpl implements CarService {
 		return carDAO.customerCheckCarnum();
 	}
 
+	@Override
+	public int Detail_check(CarDetailDTO carDetailDTO) {
+		// TODO Auto-generated method stub
+		return carDAO.Detail_check(carDetailDTO);
+	}
+
+	@Override
+	public int carDetailInsert(CarDetailDTO carDetailDTO) {
+		// TODO Auto-generated method stub
+		return carDAO.carDetailInsert(carDetailDTO);
+	}
+
+	@Override
+	public void car_kmUpdate(CarDTO carDTO) {
+		 carDAO.car_kmUpdate(carDTO);
+		
+	}
+
 	
 }

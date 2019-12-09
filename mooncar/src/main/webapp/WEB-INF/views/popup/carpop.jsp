@@ -23,7 +23,7 @@
 
     });
 
-    $j(document).on('keyup', 'input.num_only', function(e){
+    $j(document).on('keydown', 'input.num_only', function(e){
 
         if( $j(this).val() != null && $j(this).val() != '' ) {
 
@@ -99,7 +99,7 @@
     								$j('#carSize').val(val.codeComment);
     							});
     							$j.each(returndata.selectCarDD , function(idx, val) {
-    								html +=  "<option>"+val.prdName+"</option>";
+    								html +=  "<option value="+val.prdIdx+">"+val.prdName+"</option>";
     							});
     											
     							$j('#carDD').append(html);
@@ -169,7 +169,8 @@
 				alert("차량의 종류를 입력해주세요.");
 	    	}
 	    	else{
-	    		var car_name = $j("#carName option:checked").text() +"/"+ $j('select[name="carDD"]').val();	
+	    		var car_name = $j("#carName option:checked").text() +"/"+ $j("#carDD option:checked").text() 
+    			var car_oil_type= $j('select[name="carDD"]').val();
 	    		if(car_name=="/"){
 	    			alert("차이름을 입력해주세요.");
 	    		}
@@ -216,7 +217,6 @@
     				}
     			}
     		}    		
-				
     	    	  $j.ajax({
     				url : "/carInsert",
     				type : "GET",
@@ -230,6 +230,7 @@
     						"car_fuel_type" : car_fuel,
     						"car_comment" : car_comment,
     						"car_oil_date" : car_oil_date,
+    						"car_oil_type" : car_oil_type
     					}
     				,
     				//JSON.stringify()
@@ -249,12 +250,12 @@
     			        } 
     				 	else {
 
-    			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
 
     			        } 
     				
     				}//end error 
     			});//end ajax.productInfoWriteAction   
+			   
     		
     	});
 </script>
@@ -310,7 +311,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td>키로수</td>
+		<td>주행거리</td>
 		<td colspan="3"><input type="text" size="20" id="car_km" class="num_only" style="width : 65%; height : 25px; float : center;">Km</td>
 	</tr>
 	<tr>

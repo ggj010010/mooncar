@@ -22,8 +22,7 @@
         if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
 
     });
-
-    $j(document).on('keyup', 'input.num_only', function(e){
+    $j(document).on('keydown', 'input.num_only', function(e){
 
         if( $j(this).val() != null && $j(this).val() != '' ) {
 
@@ -121,7 +120,7 @@
     								$j('#carSize').val(val.codeComment);
     							});
     							$j.each(returndata.selectCarDD , function(idx, val) {
-    								html +=  "<option>"+val.prdName+"</option>";
+    								html +=  "<option value="+val.prdIdx+">"+val.prdName+"</option>";
     							});
     											
     							$j('#carDD').append(html);
@@ -261,8 +260,8 @@
 	    					alert("차량의 종류를 입력해주세요.");
     			    		}
     			    		else{
-    			    			var car_name = $j("#carName option:checked").text() +"/"+ $j('select[name="carDD"]').val();
-		    					alert("차량이름 : "+car_name);
+    			    			var car_name = $j("#carName option:checked").text() +"/"+ $j("#carDD option:checked").text() 
+    			    			var car_oil_type= $j('select[name="carDD"]').val();
 		    					
     			    			if(car_name=="/"){
 	    			    			alert("차이름을 입력해주세요.");
@@ -285,7 +284,6 @@
     			    						}
     			    						else{
     			    							var car_km = $j("#car_km").val();
-    			    							alert(car_km);
         			    						if(car_km==""){
         			    							alert("주행거리를 입력해주세요.");
     			    							}
@@ -307,7 +305,6 @@
     			    											if(car_comment==""){
     			    												var car_comment="차량특이사항이 없습니다.";
     			    											}
-    			    											alert(car_comment);
     			    											
     			    											var c_comment = $j("#c_comment").val();
     			    											
@@ -344,6 +341,7 @@
     						"car_fuel_type" : car_fuel,
     						"car_comment" : car_comment,
     						"car_oil_date" : car_oil_date,
+    						"car_oil_type" : car_oil_type
     					}
     				,
     				//JSON.stringify()
@@ -364,7 +362,7 @@
     			        } 
     				 	else {
 
-    			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+    			    //    	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
 
     			        } 
     				
