@@ -25,6 +25,7 @@ import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.CustomerDetailDTO;
 import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.dto.ProductInfoDTO;
+import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.CarService;
 import com.spring.mooncar.service.CodeService;
 import com.spring.mooncar.service.CustomerService;
@@ -91,7 +92,11 @@ public class PopupController {
 	
 	
 	@RequestMapping(value = "popup/schedulepop", method = RequestMethod.GET)
-	public String schedulepop(Model model) {
+	public String schedulepop(Model model,CustomerDTO customerDTO,CarDTO carDTO, HttpServletRequest hrq)throws Exception {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
+		model.addAttribute("selectCustomerOne",selectCustomerOne);
+		model.addAttribute("selectCarOne",selectCarOne);
 		return "popup/schedulepop";
 	}
 	
@@ -123,11 +128,12 @@ public class PopupController {
 	
 	 @ResponseBody
 	 @RequestMapping(value = "/carDetailInsert", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-	 public int carDetailInsert(Model model, CarDetailDTO carDetailDTO,CarDTO cardto) throws IOException {
-		 
+	 public int carDetailInsert(Model model, CarDetailDTO carDetailDTO,CarDTO carDTO) throws IOException {
+		 System.out.println("car : "+carDTO.getCar_km());
+		 System.out.println("car D : "+carDetailDTO.getCar_d_km());
 		 int check = carService.Detail_check(carDetailDTO);
-			System.out.println(check);
 			if(check == 0) {
+				carService.car_kmUpdate(carDTO);
 				int insert = carService.carDetailInsert(carDetailDTO);
 			}
 		    

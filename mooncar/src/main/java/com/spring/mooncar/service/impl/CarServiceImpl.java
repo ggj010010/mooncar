@@ -85,7 +85,7 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public void car_kmUpdate(CarDTO carDTO) {
-		// TODO Auto-generated method stub
+		 carDAO.car_kmUpdate(carDTO);
 		
 	}
 

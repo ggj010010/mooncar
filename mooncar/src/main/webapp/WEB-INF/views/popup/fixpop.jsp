@@ -121,7 +121,6 @@ $j(document).on('keydown', 'input.num_only', function(e){
 				alert("차량을 선택해주세요!");
 			}
 			else{
-			alert(car_number);
 				//if($j('input:radio[name=timeTF]').is(':checked') == true && $j('[name=time] > option:selected').val() != '시간선택'){
 				var timeTF = $j('input[name="timeTF"]:checked').val();
 				var time = $j('select[name="time"]').val();
@@ -135,6 +134,7 @@ $j(document).on('keydown', 'input.num_only', function(e){
 				}
 				else{
 					var car_km = $j("#car_km").val();
+					alert(car_km);
 					if(car_km==""){
 							alert("주행거리를 입력해주세요.");
 					}
@@ -150,7 +150,6 @@ $j(document).on('keydown', 'input.num_only', function(e){
 									}
 								}
 						});
-						alert(car_repair);
 						if(car_repair==""){
 							alert("정비내역을 입력해주세요");
 						}
@@ -168,7 +167,9 @@ $j(document).on('keydown', 'input.num_only', function(e){
 							"car_number" : car_number,
 							"car_repair" : car_repair,
 							"car_next_repair" : car_next_repair,
-							"car_date" : date
+							"car_date" : date,
+							"car_d_km" : car_km,
+							"car_km" : car_km
 						}
 					,
 					//JSON.stringify()
@@ -193,7 +194,6 @@ $j(document).on('keydown', 'input.num_only', function(e){
 
 				        } 
 					 	else {
-				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
 
 				        } 
 					

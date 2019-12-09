@@ -123,7 +123,11 @@
         				});//end ajax.productInfoWriteAction
         		}).on("click", "#insertCd", function() {
         			var cus_d_contents = $j(CusDetail).val();
-        			var c_tel=$j("#c_tel").text();
+        			if(cus_d_contents==""){
+        				alert("내용을 입력해주세요");
+        			}else{        				
+	        			var c_tel=$j("#c_tel").text();
+        			}
        			 $j.ajax({
        					url : "/insertCusdetail",
        					type : "GET",
