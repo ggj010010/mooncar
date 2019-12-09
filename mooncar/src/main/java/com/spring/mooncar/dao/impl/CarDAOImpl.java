@@ -42,6 +42,29 @@ public class CarDAOImpl implements CarDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("car.insertCar",carDTO);
 	}
+
+
+	@Override
+	public int Detail_check(CarDetailDTO carDetailDTO) {
+		// TODO Auto-generated method stub
+		System.out.println(carDetailDTO.getCar_date());
+		return sqlSession.selectOne("car.Detail_check", carDetailDTO);
+	}
+
+
+	@Override
+	public int carDetailInsert(CarDetailDTO carDetailDTO) {
+		// TODO Auto-generated method stub
+		System.out.println(carDetailDTO.getCar_date());
+		return sqlSession.insert("car.carDetailInsert", carDetailDTO);
+	}
+
+
+	@Override
+	public void car_kmUpdate(CarDTO carDTO) {
+		
+		sqlSession.update("car.car_kmUpdate", carDTO);
+	}
 	
 	
 }

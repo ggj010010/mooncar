@@ -19,7 +19,7 @@
     
     
     <insert id="insertCustomerDetail" parameterType="com.spring.mooncar.dto.CustomerDetailDTO">
-	/*schedule.insertCustomer*/
+	/*customer.insertCustomerDetail*/
 	INSERT INTO customer_detail (
 	
 			cus_d_no, c_tel, cus_d_contents, cus_d_date

@@ -14,4 +14,10 @@ public interface CarDAO {
 	public List<CarDTO> customerCheckCarnum();
 
 	public int insertCar(CarDTO carDTO);
+
+	public int Detail_check(CarDetailDTO carDetailDTO);
+
+	public int carDetailInsert(CarDetailDTO carDetailDTO);
+
+	public void car_kmUpdate(CarDTO carDTO);
 }

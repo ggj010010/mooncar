@@ -36,7 +36,7 @@
     </select>
     
     <select id="search_car" parameterType="com.spring.mooncar.dto.CarDTO" resultMap="CarDTO">
-	/*schedule.search_car*/
+	/*Customer.search_car*/
 		SELECT  
 				*
 		FROM 
@@ -65,14 +65,47 @@
 	
 	
 	<insert id="insertCar" parameterType="com.spring.mooncar.dto.CarDTO" >
-	/*schedule.insertCar*/
+	/*carpop.insertCar*/
 	INSERT INTO car (
-			CAR_NUMBER, C_TEL, CAR_NAME, CAR_KM, CAR_SIZE, CAR_CATEGORY, CAR_FUEL_TYPE, CAR_OIL_DATE, CAR_COMMENT
+			CAR_NUMBER, C_TEL, CAR_NAME, CAR_KM, CAR_SIZE, CAR_CATEGORY, CAR_FUEL_TYPE, car_oil_type, CAR_OIL_DATE, CAR_COMMENT
 		)VALUES (
-			#{car_number},#{c_tel},#{car_name},#{car_km},#{car_size}, #{car_category}, #{car_fuel_type}, #{car_oil_date}, #{car_comment}
+			#{car_number},#{c_tel},#{car_name},#{car_km},#{car_size}, #{car_category}, #{car_fuel_type}, #{car_oil_type}, #{car_oil_date} , #{car_comment}
 		)
 
 
 	</insert>
 	
+	<select id="Detail_check" parameterType="com.spring.mooncar.dto.CarDetailDTO" resultType="Integer">
+	/*Fixpop.Detail_check   */
+	Select 
+    	count(*)
+	from 
+		car_detail
+	where 
+		CAR_NUMBER = #{car_number} and car_date =  to_date(#{car_date}, 'YYYY-MM-DD HH24') 
+		
+	</select>
+	
+	<insert id="carDetailInsert" parameterType="com.spring.mooncar.dto.CarDetailDTO" >
+	/*Fixpop.carDetailInsert    */
+	INSERT INTO car_detail (
+			car_d_no, car_number, car_repair, car_next_repair, car_d_km, car_date
+		)VALUES (
+			(SELECT NVL(MAX(car_d_no)+1, 1)FROM car_detail),#{car_number},#{car_repair},#{car_next_repair},#{car_d_km}, to_date(#{car_date}, 'YYYY-MM-DD HH24')
+		)
+
+	</insert>
+	
+	<update id="car_kmUpdate" parameterType="com.spring.mooncar.dto.CarDTO">
+	/*fixpop.car_kmUpdate*/
+		update car
+
+		set 
+		car_km = #{car_km}
+
+		where car_number = #{car_number}
+
+	</update>
+
+
 </mapper>

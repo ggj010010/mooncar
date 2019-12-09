@@ -84,6 +84,7 @@
 				,car_size
 				,car_category
 				,car_fuel_type
+				,car_km
 		FROM 
 			 car
 		where

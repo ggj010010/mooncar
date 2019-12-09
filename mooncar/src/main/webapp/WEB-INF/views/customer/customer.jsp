@@ -329,7 +329,7 @@
               <th>종류</th>
               <th>날짜</th>              
            </tr>
-           <tr><td></td>-<td>-</td><td>-</td><td>-</td></tr>
+           <tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
           
         </table>
         </div>
@@ -366,7 +366,7 @@
               <th>키로수</th>     
               <th>방문날짜</th>              
            </tr>
-           <tr><td></td>-<td>-</td><td>-</td><td>-</td></tr>
+           <tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
         </table>
         </div>
         

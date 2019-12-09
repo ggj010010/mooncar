@@ -15,6 +15,23 @@ $j(document).ready(function(){
 
     var today = now.getFullYear() + '-' + mon + '-' + day;
 	$j('#userdate').val(today);
+})  //숫자만 나오게하기
+$j(document).on('keypress', 'input.num_only', function(e){
+
+    if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
+
+});
+
+$j(document).on('keydown', 'input.num_only', function(e){
+
+    if( $j(this).val() != null && $j(this).val() != '' ) {
+
+        var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+        $j(this).val(tmps);
+
+    }
+
 }).on("click", "input:radio[name=chk_car]", function(){
 			var car_number = $j(this).val();
 			
@@ -31,14 +48,9 @@ $j(document).ready(function(){
 					contentType:"application/json;charset=UTF-8",
 					timeout : 3000,
 					success : function(returndata) {
-							$j('#browsers1').empty();
 							$j(".car_size").empty();
 							$j(".car_type").empty();
 							$j(".car_fuel").empty();
-							$j("#desc").val('');
-							$j("#desc_detail").val('');
-							$j('input[name="timeTF"]').removeAttr('checked');
-							$j('#browsers1 option:eq(0)').prop('selected', true);
 							
 							var now = new Date();
 							var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
@@ -50,6 +62,7 @@ $j(document).ready(function(){
 					 			$j(".car_size").text("크기: "+val.car_size);
 								$j(".car_type").text("종류: "+val.car_category);
 								$j(".car_fuel").text("연료: "+val.car_fuel_type); 
+								$j("#car_km").val(val.car_km);
 							});
 					},//end success
 					error : function(jqXHR, textStatus, errorThrown) {
@@ -66,14 +79,49 @@ $j(document).ready(function(){
 					
 					}//end error 
 				});//end ajax.productInfoWriteAction
+		}).on("click", "input:radio[name=timeTF]", function(){
+			var time = $j(this).val();
+			var html = "";
+			if(time == "오전"){
+				$j('#browsers1').empty();
+				html +=  "<option>00</option>";
+				html +=  "<option>01</option>";
+				html +=  "<option>02</option>";
+				html +=  "<option>03</option>";
+				html +=  "<option>04</option>";
+				html +=  "<option>05</option>";
+				html +=  "<option>06</option>";
+				html +=  "<option>07</option>";
+				html +=  "<option>08</option>";
+				html +=  "<option>09</option>";
+				html +=  "<option>10</option>";
+				html +=  "<option>11</option>";
+				html +=  "<option>12</option>";
+				$j('#browsers1').append(html);
+					//browsers1
+			}
+			else if(time == "오후"){
+				$j('#browsers1').empty();
+				html +=  "<option>01</option>";
+				html +=  "<option>02</option>";
+				html +=  "<option>03</option>";
+				html +=  "<option>04</option>";
+				html +=  "<option>05</option>";
+				html +=  "<option>06</option>";
+				html +=  "<option>07</option>";
+				html +=  "<option>08</option>";
+				html +=  "<option>09</option>";
+				html +=  "<option>10</option>";
+				html +=  "<option>11</option>";
+				$j('#browsers1').append(html);
+			}
 		}).on("click", "#btnInsert", function() {
-			var c_tel = $j("#tel").val();
-			var c_name = $j(".c_name").text();
 			var car_number = $j('input[name="chk_car"]:checked').val();
-			if(car_number==""){
+			if(car_number==undefined){
 				alert("차량을 선택해주세요!");
 			}
 			else{
+			alert(car_number);
 				//if($j('input:radio[name=timeTF]').is(':checked') == true && $j('[name=time] > option:selected').val() != '시간선택'){
 				var timeTF = $j('input[name="timeTF"]:checked').val();
 				var time = $j('select[name="time"]').val();
@@ -82,58 +130,58 @@ $j(document).ready(function(){
 				}
 				var date = $j("#userdate").val()+"-"+time;
 				//}
-				if(date==$j("#userdate").val()+"-"){
+				if(date==$j("#userdate").val()+"-"+null){
 					alert("정비 시간을 입력해주세요!");
 				}
-				var car_km = $j("#car_km").val();
-				if(car_km==""){
-						alert("주행거리를 입력해주세요.");
-				}else{
-					
+				else{
+					var car_km = $j("#car_km").val();
+					if(car_km==""){
+							alert("주행거리를 입력해주세요.");
+					}
+					else{
+						var car_repair="";
+						$j(":checkbox[name='FixedCar']:checked").each(function(car,val){
+							
+								if(val.value!="기타"){
+									car_repair = car_repair+val.value+" ";
+								}else{
+									if($j("#FixedOther").val()!=""){
+										car_repair = car_repair+val.value+" : "+$j("#FixedOther").val()+" ";
+									}
+								}
+						});
+						alert(car_repair);
+						if(car_repair==""){
+							alert("정비내역을 입력해주세요");
+						}
+						else{
+							var car_next_repair="엔진오일 교체" + $j("#car_next_repair").val()
+						}
+					}
 				}
 			}
 			
 		    	  $j.ajax({
-					url : "/scheduleInsert",
+					url : "/carDetailInsert",
 					type : "GET",
 					data : {
-							"c_tel" : c_tel,
-							"s_contents" : scheduleTitle,
-							"s_comment" : scheduleDedail,
-							"s_date" : date,
-							"car_number" : car_number
+							"car_number" : car_number,
+							"car_repair" : car_repair,
+							"car_next_repair" : car_next_repair,
+							"car_date" : date
 						}
 					,
 					//JSON.stringify()
 					dataType : "json",
 					//contentType:"application/json;charset=UTF-8",
 					timeout : 3000,
-					success : function(returndata) {
+					success : function(check) {
 							//console.log(returndata.count)
-							if(returndata == 0){
-								alert("예약이 완료되었습니다");
-
-								$j(".c_name").empty();
-								$j(".car").empty();
-								$j(".car_size").text("크기:");
-								$j(".car_type").text("종류:");
-								$j(".car_fuel").text("연료:");
-								$j("#desc").val('');
-								$j("#desc_detail").val('');
-								$j('input[name="timeTF"]').empty();
-							    $j('#browsers1 option:eq(0)').prop('selected', true);
-							    $j("#tel").val('');
-							    var now = new Date();
-								var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
-	    						var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
-	    						var today = now.getFullYear() + '-' + mon + '-' + day;
-								$j('#userdate').val(today);
-								//window.location.href = "/schedule/schedule";
-								opener.parent.location.reload();
-								//window.close();
+							if(check == 0){
+								alert("정비가 등록되었습니다");
 								
 							}else{
-								alert("예약이 존재합니다");
+								alert("이미 정비기록이 존재합니다");
 							}
 							
 							
@@ -145,7 +193,6 @@ $j(document).ready(function(){
 
 				        } 
 					 	else {
-
 				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
 
 				        } 
@@ -194,50 +241,37 @@ $j(document).ready(function(){
 		<td>  
             <input type="radio" value="오전" name="timeTF">오전
             <input type="radio" value="오후" name="timeTF">오후
-		   <select id="browsers1" name="time" style=" float : right;">
-			     <option value="01" selected>01</option> 
-     			 <option value="02" selected>02</option> 
-     			 <option value="03" selected>03</option> 
-     			 <option value="04" selected>04</option> 
-     			 <option value="05" selected>05</option> 
-     			 <option value="06" selected>06</option> 
-     			 <option value="07" selected>07</option> 
-     			 <option value="08" selected>08</option> 
-     			 <option value="09" selected>09</option> 
-     			 <option value="10" selected>10</option> 
-     			 <option value="11" selected>11</option> 
-     			 <option value="12" selected>12</option> 
-			     <option value="" selected>시간선택</option>       			 
+		   <select id="browsers1" name="time" style=" float : right;">			 
       		</select>
 		</td>
 	</tr>
 	<tr>
 	
 		<td>키로수</td>
-		<td colspan="3"><input type="text" size="20" id="input2" style="width : 80%; float : center;">Km</td>
+		<td colspan="3"><input type="text" size="20" class="num_only" id="car_km" style="width : 80%; float : center;">Km</td>
 	</tr>
 	<tr>
 	
 		<td rowspan="2">정비내역</td>
 		<td colspan="3">
-			  <input type='checkbox' name='FixedCar' value='EnginOil' />엔진오일
-			  <input type='checkbox' name='FixedCar' value='GearOrl' />기어오일
-			  <input type='checkbox' name='FixedCar' value='BreakOil' />브레이크액
-			  <input type='checkbox' name='FixedCar' value='AirconFilter' />에어컨필터
-			  <input type='checkbox' name='FixedCar' value='TireChange' />타이어교체
+			  <input type='checkbox' name='FixedCar' value='엔진오일' />엔진오일
+			  <input type='checkbox' name='FixedCar' value='기어오일' />기어오일
+			  <input type='checkbox' name='FixedCar' value='브레이크액' />브레이크액
+			  <input type='checkbox' name='FixedCar' value='에어컨필터' />에어컨필터
+			  <input type='checkbox' name='FixedCar' value='타이어교체' />타이어교체
 		</td>
 	</tr>
 	<tr><td colspan="3">
-			  <input type='checkbox' name='FixedCar' value='Other' />기타
-			  <textarea name="desc" id="desc" rows="1" cols="90" style="width : 60%;"></textarea></td></tr>
+			  <input type='checkbox' name='FixedCar' value='기타' />기타
+			  <textarea name="desc" classs = "browser1" id="FixedOther" rows="1" cols="90" style="width : 60%;"></textarea></td></tr>
 	<tr>
 		<td>다음정비</td>
 		<td colspan="3">
-			<textarea name="desc" id="desc" rows="3" cols="90" style="width : 85%;"></textarea>
+			<textarea name="desc" classs = "browser1" id="car_next_repair" rows="3" cols="90" style="width : 85%;"></textarea>
 		</td>
 	</tr>
 	<tr>
-		<td colspan="4"><button class ="button" type="button" style = "width : 40%;"> 등록하기 </button></td>
+		<td colspan="4"><button class ="button" id="btnInsert" type="button" style = "width : 40%;"> 등록하기 </button></td>
 	</tr>
 </table>
 </body>
