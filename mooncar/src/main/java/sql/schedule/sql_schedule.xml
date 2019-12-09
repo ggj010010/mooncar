@@ -75,7 +75,7 @@
 		FROM 
 			customer , car
 		where
-            customer.c_tel = car.c_tel and car.c_tel = #{c_tel}
+            customer.c_tel = car.c_tel and car.c_tel = #{c_tel} and car_number not in (select car_number from schedule where s_check in (0,1))
 	</select>
 	<select id="search_car" parameterType="com.spring.mooncar.dto.CarDTO" resultMap="CarDTO">
 	/*schedule.search_car*/

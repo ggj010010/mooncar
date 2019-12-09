@@ -113,7 +113,6 @@ $j(document).ready(function() {
 					//console.log(returndata.count)
 					if(returndata == 1){
 						alert("수정이 완료되었습니다");
-
 						opener.parent.location.reload();
 						window.close();
 						
@@ -180,6 +179,7 @@ $j(document).ready(function() {
             <input type="radio" value="오전" name="timeTF">오전
             <input type="radio" value="오후" name="timeTF">오후
 		   <select id="browsers1" name="time" style=" float : right;">
+
       	   </select>
 		</td>
 		<td>
