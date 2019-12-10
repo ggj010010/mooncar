@@ -12,7 +12,64 @@
 <SCRIPT type="text/javascript">
 
         $j(document).ready(function(){
-        	
+             $j('#c_comment').on('keydown', function() {
+                 if($j(this).val().length > 50) {
+                     $j(this).val($j(this).val().substring(0, 50));
+                     alert("특이사항은 50자를 넘을수 없습니다.");
+                 }
+             });
+             
+             $j('#c_email').on('keydown', function() {
+                 if($j(this).val().length > 20) {
+                     $j(this).val($j(this).val().substring(0, 20));
+                     alert("올바른 e-mail이 아닙니다.");
+                 }
+             });
+             
+             $j('#c_email2').on('keydown', function() {
+                 if($j(this).val().length > 20) {
+                     $j(this).val($j(this).val().substring(0, 20));
+                     alert("올바른 주소가 아닙니다.");
+                 }
+             });
+             
+             $j('#c_name').on('keydown', function() {
+                 if($j(this).val().length > 15) {
+                     $j(this).val($j(this).val().substring(0, 15));
+                     alert("이름은 15자를 넘을 수 없습니다.");
+                 }
+             });
+            
+           //한글 안나오게 하기
+ 			$j('.not_korean').keyup(function(event){
+ 				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+ 					var inputVal = $j(this).val();
+ 					$j(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+ 				}
+ 			});
+             //한글만 나오게 하기
+ 			$j(".only_korean").keyup(function(event){
+ 				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+ 				var inputVal = $j(this).val();
+ 				$j(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+ 				}
+ 			});
+ 			 $j(document).on('keypress', 'input.num_only', function(e){
+
+ 		        if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
+
+ 		    });
+ 		    $j(document).on('keydown', 'input.num_only', function(e){
+
+ 		        if( $j(this).val() != null && $j(this).val() != '' ) {
+
+ 		            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+ 		            $j(this).val(tmps);
+
+ 		        }
+
+ 		    });
     	    var checkTel = "0";
         	var now = new Date();
         	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
@@ -21,37 +78,9 @@
         	$j('.userdate').val(today);
         	
         })
-        //한글 안나오게 하기
-			$j('.not_korean').keyup(function(event){
-				if (!(event.keyCode >=37 && event.keyCode<=40)) {
-					var inputVal = $j(this).val();
-					$j(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
-				}
-			});
-            //한글만 나오게 하기
-			$j(".only_korean").keyup(function(event){
-				if (!(event.keyCode >=37 && event.keyCode<=40)) {
-				var inputVal = $j(this).val();
-				$j(this).val(inputVal.replace(/[a-z0-9]/gi,''));
-				}
-			});
+        
         //숫자만 나오게하기
-       $j(document).on('keypress', 'input.num_only', function(e){
-
-        if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
-
-    });
-    $j(document).on('keydown', 'input.num_only', function(e){
-
-        if( $j(this).val() != null && $j(this).val() != '' ) {
-
-            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-            $j(this).val(tmps);
-
-        }
-
-    })
+      
     
     .on("변화이름",'#아이디이름',function(){//이렇게 추가하면 됩니다요
 	   		  

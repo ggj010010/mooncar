@@ -9,39 +9,62 @@
 <title>Insert title here</title>
 <script>
 $j(document).ready(function(){
+     $j('#FixedOther').on('keydown', function() {
+         if($j(this).val().length > 30) {
+             $j(this).val($j(this).val().substring(0, 30));
+             alert("기타 정비사항은 30자를 넘을수 없습니다.");
+         }
+     });
+     
+     $j('#car_next_repair').on('keydown', function() {
+         if($j(this).val().length > 50) {
+             $j(this).val($j(this).val().substring(0, 50));
+             alert("다음 정비사항은 50자를 넘을수 없습니다.");
+         }
+     });
+     
+     $j('#car_km').on('keydown', function() {
+         if($j(this).val().length > 6) {
+             $j(this).val($j(this).val().substring(0, 6));
+             alert("주행거리는 1000000km를 넘을 수 없습니다.");
+         }
+     });
+     
+    
+     //숫자만 나오게하기
+     $j(document).on('keypress', 'input.num_only', function(e){
+
+      if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
+
+  });
+  $j(document).on('keyup', 'input.num_only', function(e){
+
+      if( $j(this).val() != null && $j(this).val() != '' ) {
+
+          var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+          $j(this).val(tmps);
+
+      }
+
+  });
+  $j(document).on('keydown', 'input.num_only', function(e){
+
+      if( $j(this).val() != null && $j(this).val() != '' ) {
+
+          var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+          $j(this).val(tmps);
+
+      }
+
+  });
 	var now = new Date();
 	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
     var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
 
     var today = now.getFullYear() + '-' + mon + '-' + day;
 	$j('#userdate').val(today);
-})  //숫자만 나오게하기
-$j(document).on('keypress', 'input.num_only', function(e){
-
-    if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
-
-});
-$j(document).on('keyup', 'input.num_only', function(e){
-
-    if( $j(this).val() != null && $j(this).val() != '' ) {
-
-        var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-        $j(this).val(tmps);
-
-    }
-
-});
-$j(document).on('keydown', 'input.num_only', function(e){
-
-    if( $j(this).val() != null && $j(this).val() != '' ) {
-
-        var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-        $j(this).val(tmps);
-
-    }
-
 }).on("click", "input:radio[name=chk_car]", function(){
 			var car_number = $j(this).val();
 			
@@ -272,8 +295,8 @@ $j(document).on('keydown', 'input.num_only', function(e){
 		</td>
 	</tr>
 	<tr><td colspan="3">
-			  <input type='checkbox' name='FixedCar' value='기타' />기타
-			  <textarea name="desc" classs = "browser1" id="FixedOther" rows="1" cols="90" style="resize: none; width : 60%;"></textarea></td></tr>
+			  <input type='checkbox'  name='FixedCar' value='기타' />기타
+			  <textarea name="desc"  classs = "browser1" id="FixedOther" rows="1" cols="90" style="resize: none; width : 60%;"></textarea></td></tr>
 	<tr>
 		<td>다음정비</td>
 		<td colspan="3">

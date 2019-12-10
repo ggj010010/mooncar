@@ -9,41 +9,69 @@
 <title>Insert title here</title>
 <SCRIPT type="text/javascript">
         $j(document).ready(function(){
+            $j('#car_comment').on('keydown', function() {
+                if($j(this).val().length > 50) {
+                    $j(this).val($j(this).val().substring(0, 50));
+                    alert("차량특이사항은 50자를 넘을수 없습니다.");
+                }
+            });
+            
+            $j('#car_km').on('keydown', function() {
+                if($j(this).val().length > 6) {
+                    $j(this).val($j(this).val().substring(0, 6));
+                    alert("주행거리는 1000000km를 넘을 수 없습니다.");
+                }
+            });
+           
+            //한글 안나오게 하기
+			$j('.not_korean').keydown(function(event){
+				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+					var inputVal = $j(this).val();
+					$j(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+				}
+			});
+            //한글만 나오게 하기
+			$j(".only_korean").keydown(function(event){
+				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+				var inputVal = $j(this).val();
+				$j(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+				}
+				});
+            //숫자만 나오게하기
+            $j(document).on('keypress', 'input.num_only', function(e){
+
+             if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
+
+         });
+         $j(document).on('keyup', 'input.num_only', function(e){
+
+             if( $j(this).val() != null && $j(this).val() != '' ) {
+
+                 var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+                 $j(this).val(tmps);
+
+             }
+
+         });
+         $j(document).on('keydown', 'input.num_only', function(e){
+
+             if( $j(this).val() != null && $j(this).val() != '' ) {
+
+                 var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+                 $j(this).val(tmps);
+
+             }
+
+         });
     	    var checkTel = "0";
         	var now = new Date();
         	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
             var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
             var today = now.getFullYear() + '-' + mon + '-' + day;
         	$j('.userdate').val(today);
-        })
-        //숫자만 나오게하기
-       $j(document).on('keypress', 'input.num_only', function(e){
-
-        if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
-
-    });
-    $j(document).on('keyup', 'input.num_only', function(e){
-
-        if( $j(this).val() != null && $j(this).val() != '' ) {
-
-            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-            $j(this).val(tmps);
-
-        }
-
-    });
-    $j(document).on('keydown', 'input.num_only', function(e){
-
-        if( $j(this).val() != null && $j(this).val() != '' ) {
-
-            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-            $j(this).val(tmps);
-
-        }
-
-    }).on("change",'#carDesc',function(){//기능2 차 맞는걸로 뽑아오기 중분류
+        }).on("change",'#carDesc',function(){//기능2 차 맞는걸로 뽑아오기 중분류
  	    	 var codeType=$j(this).val();
  			 var html = "";
  			 var html2="";
