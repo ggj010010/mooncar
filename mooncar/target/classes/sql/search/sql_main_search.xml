@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainsearch">
+	<resultMap type="com.spring.mooncar.dto.CustomerDTO"
+
+		id="CustomerDTO">
+
+		<result property="c_tel" column="c_tel" />
+		<result property="c_name" column="c_name" />
+		<result property="c_gender" column="c_gender" />
+		<result property="c_email" column="c_email" />
+		<result property="c_comment" column="c_comment" />
+
+	</resultMap>
+	<resultMap type="com.spring.mooncar.dto.MainSearchDTO"
+
+		id="MainSearchDTO">
+
+		<result property="search_option" column="search_option" />
+		<result property="search_customer" column="search_customer" />
+
+	</resultMap>
+	
+	<select id="main_Search" parameterType="com.spring.mooncar.dto.MainSearchDTO" resultMap="CustomerDTO">
+	/*Main_search*/
+		select
+		    *
+		from
+		    customer 
+		where
+		<if test="search_option == '이름'">
+			c_name = #{search_customer}
+		</if>
+		<if test="search_option == '연락처'">
+			c_tel = #{search_customer}
+		</if>
+		<if test="search_option == '성별'">
+			c_gender = #{search_customer}
+		</if>
+
+	</select>
+</mapper>

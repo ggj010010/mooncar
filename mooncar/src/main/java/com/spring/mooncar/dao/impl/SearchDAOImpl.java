@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.spring.mooncar.dao.SearchDAO;
 import com.spring.mooncar.dto.Check_searchDTO;
+import com.spring.mooncar.dto.MainSearchDTO;
 import com.spring.mooncar.dto.SearchDTO;
 
 @Repository
@@ -22,4 +23,9 @@ public class SearchDAOImpl implements SearchDAO{
 		return  sqlSession.selectList("search.selectSearch", check_searchDTO);
 	}
 
+	@Override
+	public List<SearchDTO> Main_Search(MainSearchDTO mainsearchDTO) {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectList("mainsearch.main_Search", mainsearchDTO);
+	}
 }

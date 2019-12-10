@@ -16,18 +16,64 @@
 <script src='/resources/js/fullcalendar-4.3.1/packages/moment/main.min.js'></script>
 
 <title>Schedule</title>
+<script type="text/javascript">
+$j(document).ready(function() {
+	}).on("click", ".button1", function(){
+		alert("검색");
+		var search_option = $j('#browsers2 option:selected').val();
+		var search_customer = $j("#search_customer").val();
+		if(search_customer == ""){
+			alert("검색어를 입력해주세요");
+			
+		}
+		alert(search_customer+search_option);
 
+		  $j.ajax({
+				url : "/main_search",
+				type : "GET",
+				data : 
+				{
+					"search_option" : search_option,
+					"search_customer" : search_customer
+				}
+				,
+				//JSON.stringify()
+				dataType : "json",
+				contentType:"application/json;charset=UTF-8",
+				timeout : 3000,
+				success : function(returndata) {
+					alert("성공");
+					window.location.href = "/customer/custview?"+returndata.main_search;
 
+				},//end success
+				error : function(jqXHR, textStatus, errorThrown) {
+				 	if(textStatus=="timeout") {
+
+			        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+			        } 
+				 	else {
+
+			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
+
+			        } 
+				
+				}//end error 
+			});//end ajax.productInfoWriteAction  
+			
+	});
+</script>
 <!--상단 (공통) -->
    <h1 align = "center">MoonCar</h1>
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
       <select id="browsers2" name="startdate" >
-            <option value="이름">이름</option>
-          <option value="차량번호">차량번호</option>
+          <option value="이름">이름</option>
+          <option value="핸드폰">핸드폰</option>
+          <option value="성별">성별</option>
       </select>
-	  		 <input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
+	  		 <input type="text" id = "search_customer" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
              <button class ="button1" type="button"> 검색 </button>
    </div></div>
 </div>
@@ -330,7 +376,7 @@ table.calendar td{
         <table style = "width : 100%;">
            <tr>
               <th colspan="2">
-			  	<input type="text" name="my_name" size="50" style="color : black; border-radius: 8px; background-color: white; width:80%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
+			  	Comment
 			  </th>
            </tr>
            <tr>
