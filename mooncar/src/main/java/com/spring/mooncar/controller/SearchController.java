@@ -5,11 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +40,8 @@ public class SearchController {
 	CodeService codeService;
 	@Autowired
 	SearchService searchService;
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
@@ -98,5 +105,29 @@ public class SearchController {
 		List<CustomerDTO> selectCustomerEmail = customerService.selectCustomerEmail(emailDTO);
 		model.addAttribute("emailList",selectCustomerEmail);
 		return "popup/emailpop";
+	}
+	
+	@RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+	public void sendEmail(final EmailDTO emailDTO) { 
+		final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+			@Override public void prepare(MimeMessage mimeMessage) throws Exception {
+				final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				
+				helper.setFrom("answhdgkr9494@gmail.com");
+				for(int i = 0; i< emailDTO.getC_email().length;i++) {
+					System.out.println(emailDTO.getC_email()[i]);
+				}
+				InternetAddress[] toAddr = new InternetAddress[emailDTO.getC_email().length];
+				for(int i = 0; i< emailDTO.getC_email().length;i++) {
+					toAddr[i] = new InternetAddress (emailDTO.getC_email()[i]);
+				}
+				helper.setTo(toAddr);
+				System.out.println(emailDTO.getTitle());
+				helper.setSubject(emailDTO.getTitle());
+				System.out.println(emailDTO.getDesc());
+				helper.setText(emailDTO.getDesc(), true);
+			} 
+		};
+		mailSender.send(preparator);
 	}
 }
