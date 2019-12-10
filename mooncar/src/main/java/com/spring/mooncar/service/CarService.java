@@ -18,4 +18,5 @@ public interface CarService {
 	int Detail_check(CarDetailDTO carDetailDTO);
 	int carDetailInsert(CarDetailDTO carDetailDTO);
 	void car_kmUpdate(CarDTO carDTO);
+	int carUpdate(CarDTO carDTO);
 }

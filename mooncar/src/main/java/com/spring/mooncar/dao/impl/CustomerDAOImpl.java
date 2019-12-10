@@ -72,6 +72,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return sqlSession.insert("customerDetail.insertCustomerDetail", customerDetailDTO);
 	}
 
+	@Override
+	public int customerUpdate(CustomerDTO customerDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("customer.customerUpdate", customerDTO);
+	}
+
 
 	
 }

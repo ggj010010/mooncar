@@ -384,12 +384,12 @@ $j(document).ready(function(){
 	</tr>
 	<tr>
 		<td>예약 제목</td>
-		<td colspan="3"><textarea name="desc" id="desc" rows="2" cols="90" style="width : 85%;"></textarea></td>
+		<td colspan="3"><textarea name="desc" id="desc" rows="2" cols="90" style="resize: none; width : 85%;"></textarea></td>
 	</tr>
 	<tr>
 		<td>예약 내용</td>
 		<td colspan="3">
-			<textarea name="desc_detail" id="desc_detail" rows="4" cols="90" style="width : 85%;"></textarea>
+			<textarea name="desc_detail" id="desc_detail" rows="4" cols="90" style="resize: none; width : 85%;"></textarea>
 		</td>
 	</tr>
 	<tr>

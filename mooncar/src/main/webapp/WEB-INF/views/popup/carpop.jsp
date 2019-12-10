@@ -22,7 +22,17 @@
         if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
 
     });
+    $j(document).on('keyup', 'input.num_only', function(e){
 
+        if( $j(this).val() != null && $j(this).val() != '' ) {
+
+            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+            $j(this).val(tmps);
+
+        }
+
+    });
     $j(document).on('keydown', 'input.num_only', function(e){
 
         if( $j(this).val() != null && $j(this).val() != '' ) {
@@ -239,7 +249,7 @@
     				timeout : 3000,
     				success : function(insertCar) {
 						alert(car_name+"("+car_number+")차량이 추가되었습니다");
-							
+						window.close();
     						
     				},//end success
     				error : function(jqXHR, textStatus, errorThrown) {
@@ -332,7 +342,7 @@
 	<tr>
 		<td>특이사항</td>
 		<td colspan="3">
-			<textarea class="input2" name="car_comment" id="car_comment" rows="4" cols="90" style="width : 85%; height : 50px"></textarea>
+			<textarea class="input2" name="car_comment" id="car_comment" rows="4" cols="90" style="resize: none; width : 85%; height : 50px"></textarea>
 		</td>
 	</tr>
 	<tr>

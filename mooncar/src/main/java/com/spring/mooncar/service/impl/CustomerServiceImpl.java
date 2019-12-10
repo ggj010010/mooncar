@@ -84,6 +84,12 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDAO.customerChecktel();
 	}
 
+	@Override
+	public int customerUpdate(CustomerDTO customerDTO) {
+		// TODO Auto-generated method stub
+		return customerDAO.customerUpdate(customerDTO);
+	}
+
 
 
 }

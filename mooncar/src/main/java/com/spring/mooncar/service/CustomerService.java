@@ -22,5 +22,6 @@ public interface CustomerService {
 	
 	List<CustomerDTO> selectCustomerEmail(EmailDTO emailDTO);//search에서 email 보낼때 사용
 	List<CustomerDTO> customerChecktel();
+	int customerUpdate(CustomerDTO customerDTO);
 
 }

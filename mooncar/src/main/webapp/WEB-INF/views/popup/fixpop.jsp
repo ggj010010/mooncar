@@ -21,7 +21,17 @@ $j(document).on('keypress', 'input.num_only', function(e){
     if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
 
 });
+$j(document).on('keyup', 'input.num_only', function(e){
 
+    if( $j(this).val() != null && $j(this).val() != '' ) {
+
+        var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+        $j(this).val(tmps);
+
+    }
+
+});
 $j(document).on('keydown', 'input.num_only', function(e){
 
     if( $j(this).val() != null && $j(this).val() != '' ) {
@@ -180,7 +190,7 @@ $j(document).on('keydown', 'input.num_only', function(e){
 							//console.log(returndata.count)
 							if(check == 0){
 								alert("정비가 등록되었습니다");
-								
+								window.close();
 							}else{
 								alert("이미 정비기록이 존재합니다");
 							}
@@ -263,11 +273,11 @@ $j(document).on('keydown', 'input.num_only', function(e){
 	</tr>
 	<tr><td colspan="3">
 			  <input type='checkbox' name='FixedCar' value='기타' />기타
-			  <textarea name="desc" classs = "browser1" id="FixedOther" rows="1" cols="90" style="width : 60%;"></textarea></td></tr>
+			  <textarea name="desc" classs = "browser1" id="FixedOther" rows="1" cols="90" style="resize: none; width : 60%;"></textarea></td></tr>
 	<tr>
 		<td>다음정비</td>
 		<td colspan="3">
-			<textarea name="desc" classs = "browser1" id="car_next_repair" rows="3" cols="90" style="width : 85%;"></textarea>
+			<textarea name="desc" classs = "browser1" id="car_next_repair" rows="3" cols="90" style="resize: none; width : 85%;"></textarea>
 		</td>
 	</tr>
 	<tr>

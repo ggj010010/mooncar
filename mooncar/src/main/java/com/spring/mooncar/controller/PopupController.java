@@ -103,13 +103,9 @@ public class PopupController {
 
 	
 	@RequestMapping(value = "popup/fixpop", method = RequestMethod.GET)
-	public String fixpop(Model model,CustomerDTO customerDTO,CarDTO carDTO, CodeDTO codeDTO, ComcodeDTO comcodeDTO, HttpServletRequest hrq)throws Exception {
-		List<CodeDTO> selectAlltype = codeService.selectAlltype();
-		List<ComcodeDTO> selectAllfuel = codeService.selectAllfuel();
+	public String fixpop(Model model,CustomerDTO customerDTO,CarDTO carDTO, HttpServletRequest hrq)throws Exception {
 		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
 		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
-		model.addAttribute("selectAllfuel",selectAllfuel);
-		model.addAttribute("selectAlltype",selectAlltype);
 		model.addAttribute("selectCustomerOne",selectCustomerOne);
 		model.addAttribute("selectCarOne",selectCarOne);
 		return "popup/fixpop";
@@ -198,7 +194,45 @@ public class PopupController {
    	    return(insertCar);
    	}
     
+    @RequestMapping(value = "popup/userupdate", method = RequestMethod.GET)
+	public String userupdate(Model model,CustomerDTO customerDTO, HttpServletRequest hrq)throws Exception {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+    	String email=selectCustomerOne.getC_email();
+    	System.out.println("이메일 :"+email);
+    	String emails[] = email.split("@");
+    	selectCustomerOne.setC_email1(emails[0]);
+    	selectCustomerOne.setC_email2(emails[1]);
+    	System.out.println("이메일앞 :"+selectCustomerOne.getC_email1());
+    	System.out.println("이메일뒤 :"+selectCustomerOne.getC_email2());
+    	model.addAttribute("selectCustomerOne",selectCustomerOne);
+		return "popup/userupdate";
+	}
     
+    @RequestMapping(value = "popup/carupdate", method = RequestMethod.GET)
+	public String carupdate(Model model,CustomerDTO customerDTO,CarDTO carDTO,  HttpServletRequest hrq)throws Exception {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
+		model.addAttribute("selectCustomerOne",selectCustomerOne);
+		model.addAttribute("selectCarOne",selectCarOne);
+		return "popup/carupdate";
+	}
+    
+    @ResponseBody
+   	@RequestMapping(value = "/customerUpdate", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+   	public int customerUpdate(Model model, CustomerDTO customerDTO) throws IOException {
+   	    int insert= customerService.customerUpdate(customerDTO);
+   	    return(insert);
+   	}
+    
+    @ResponseBody
+   	@RequestMapping(value = "/carUpdate", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+   	public int carUpdate(Model model, CarDTO carDTO) throws IOException {
+    	String carnum[] = carDTO.getCar_number().split(" 번호 : ");
+    	carDTO.setCar_number(carnum[1]);
+    	
+   	    int carUpdate= carService.carUpdate(carDTO);
+   	    return(carUpdate);
+   	}
    
 }
 	

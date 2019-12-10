@@ -27,6 +27,8 @@ public interface CustomerDAO {
 
 	public int insertCustomerDetail(CustomerDetailDTO customerDetailDTO);
 
+	public int customerUpdate(CustomerDTO customerDTO);
+
 
 
 }

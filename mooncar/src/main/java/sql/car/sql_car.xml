@@ -53,6 +53,8 @@
 			 car_detail
 		where
             car_number = #{car_number}
+            
+        order by Car_DATE desc
 	</select>
 	
 	<select id="customerCheckCarnum" parameterType="com.spring.mooncar.dto.CarDTO" resultMap="CarDTO">
@@ -106,6 +108,21 @@
 		where car_number = #{car_number}
 
 	</update>
+	
+	<update id="carUpdate" parameterType="com.spring.mooncar.dto.CarDTO">
+	/*fixpop.carUpdate*/
+		update car
+
+		set 
+		car_km = #{car_km}
+		,car_comment = #{car_comment}
+		,car_oil_date = #{car_oil_date}
+
+		where car_number = #{car_number}
+
+	</update>
+	
+	
 
 
 </mapper>

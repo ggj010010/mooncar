@@ -65,6 +65,13 @@ public class CarDAOImpl implements CarDAO{
 		
 		sqlSession.update("car.car_kmUpdate", carDTO);
 	}
+
+
+	@Override
+	public int carUpdate(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("car.carUpdate", carDTO);
+	}
 	
 	
 }

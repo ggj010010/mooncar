@@ -15,11 +15,41 @@
             var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
             var today = now.getFullYear() + '-' + mon + '-' + day;
         	$j('.userdate').val(today);
+        	
         })
+        $j('#c_comment').on('keyup', function() {
+
+        if($j(this).val().length > 50) {
+            $j(this).val($j(this).val().substring(0, 50));
+            alert("인적사항은 50자를 넘을수 없습니다.");
+        }
+
+    });
+
+    $j('#car_comment').on('keyup', function() {
+
+        if($j(this).val().length > 50) {
+            $j(this).val($j(this).val().substring(0, 50));
+            alert("차량 특이사항은 50자를 넘을수 없습니다.");
+        }
+
+    });
+        
         //숫자만 나오게하기
        $j(document).on('keypress', 'input.num_only', function(e){
 
         if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
+
+    });
+    $j(document).on('keyup', 'input.num_only', function(e){
+
+        if( $j(this).val() != null && $j(this).val() != '' ) {
+
+            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+            $j(this).val(tmps);
+
+        }
 
     });
     $j(document).on('keydown', 'input.num_only', function(e){
@@ -250,9 +280,9 @@
     	    			alert("전화번호를 입력해주세요.");
     	    		}
     				else{
-    					var c_email = $j("#c_email").val()+ $j("#c_email2").val();
-    					if(c_email.length<=10){
-    						alert("이메일을 입력해주세요.");
+    					var c_email = $j("#c_email").val()+"@"+ $j("#c_email2").val();
+    					if(c_email.length<=15){
+    						alert("이메일을 올바르게 입력해주세요.");
     					}
     					else{    			    				
     						var car_category = $j('select[name="carDesc"]').val();
@@ -350,7 +380,7 @@
     				timeout : 3000,
     				success : function(insert) {
 						alert(c_name+"("+c_tel+")회원이 추가되었습니다");
-						window.close;
+						window.close();
 							
     						
     				},//end success
@@ -421,7 +451,7 @@
 	</tr>
 	<tr>
 		<td>인적사항</td>
-		<td colspan="3"><textarea class="input2" name="c_comment" id="c_comment" rows="2" cols="90" style="width : 85%;"></textarea></td>
+		<td colspan="3"><textarea class="input2" name="c_comment" id="c_comment" rows="2" cols="90" style="resize: none; width : 85%;"></textarea></td>
 	</tr>
 	<tr>
 		<td>차종</td>
@@ -478,7 +508,7 @@
 	<tr>
 		<td>특이사항</td>
 		<td colspan="3">
-			<textarea class="input2" name="car_comment" id="car_comment" rows="4" cols="90" style="width : 85%; height : 50px"></textarea>
+			<textarea class="input2" name="car_comment" id="car_comment" rows="4" cols="90" style="resize: none; width : 85%; height : 50px"></textarea>
 		</td>
 	</tr>
 	<tr>

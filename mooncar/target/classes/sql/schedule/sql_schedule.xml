@@ -85,10 +85,14 @@
 				,car_category
 				,car_fuel_type
 				,car_km
+				,car_name
 		FROM 
 			 car
 		where
             car_number = #{car_number}
+        
+        order by S_DATE desc
+            
 	</select>
 	<insert id="insertSchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO">
 	/*schedule.insertSchedule*/

@@ -11,6 +11,7 @@
 
             
         $j(document).ready(function(){
+
         	var now = new Date();
         	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
             var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
@@ -85,13 +86,13 @@
         										html += "<tr><td style='display: none;'>"+val.car_d_no+"</td>"
         										html += "<td>"+val.s_contents+"</td>"
         										html += "<td>"+val.s_comment+"</td>"
-        										if(val.s_check==1){
+        										if(val.s_check==0){
         											html += "<td>첫연락</td>"
         										}
-        										else if(val.s_check==2){
+        										else if(val.s_check==1){
         											html += "<td>재연락</td>"
         										}
-        										else if(val.s_check==3){
+        										else if(val.s_check==2){
         											html += "<td>정비완료</td>"
         										}
         										html += "<td>"+val.s_date+"</td></tr>"
@@ -153,7 +154,6 @@
        				        } 
        					 	else {
 
-       				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
 
        				        } 
        					
@@ -168,6 +168,10 @@
 
 <!--상단 (공통) -->
    <h1 align = "center">MoonCar</h1>
+            <button class="btn" id="btn" type="button" onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;" 
+            style="float : right; border : 0; background-color : white";>
+            	<img class="btn-img" src="/resources/js/image/image2.png"style="width : 80px; height : 80px;">
+            </button><br><br><br><br>
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
@@ -204,7 +208,7 @@
               <td>${selectCustomerOne.c_name}</td>
            </tr>
            <tr>
-              <td>핸드폰</td>
+              <td>연락처</td>
               <td id="c_tel">${selectCustomerOne.c_tel}</td>
            </tr>
              <tr>
@@ -218,13 +222,19 @@
               		</c:otherwise>
                </c:choose>
            </tr>
+           
            <tr>
               <td>이메일</td>
               <td>${selectCustomerOne.c_email}</td>
            </tr>
+           <tr>
+              <td>특이사항</td>
+              	<td>${selectCustomerOne.c_comment}</td>
+           </tr>
        	 <tr>
        		<td colspan="2">
-       		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
+       		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"
+       		    onclick="window.open('/popup/userupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
        		</td>
       	 </tr>
        </table>
@@ -238,7 +248,7 @@
            </tr>
            <tr>
              <td style = "text-align : right">
-             	<div style="overflow:scroll; width:100%; height:159px;">
+             	<div style="overflow:scroll; width:100%; height:202px;">
           			<c:forEach var="selectCustomerDetail" items="${selectCustomerDetail}">
                 		${selectCustomerDetail.cus_d_contents} &nbsp&nbsp
               	     	${selectCustomerDetail.cus_d_date}<br>&nbsp&nbsp
@@ -320,7 +330,7 @@
      <br>
         <div class="wrap" style="float: right; width : 30%;">
           <button class ="button" type="button" onclick="window.open('/popup/carpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
-          <button class="button" type="button"> 수정 </button>
+          <button class="button" type="button" onclick="window.open('/popup/carupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
           <button class="button" type="button"> 삭제 </button>
        </div>
   </div>

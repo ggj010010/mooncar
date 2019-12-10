@@ -6,6 +6,21 @@ public class CustomerDTO {
 	int c_gender;
 	String c_email;
 	String c_comment;
+	String c_email1;
+	String c_email2;
+	
+	public String getC_email1() {
+		return c_email1;
+	}
+	public void setC_email1(String c_email1) {
+		this.c_email1 = c_email1;
+	}
+	public String getC_email2() {
+		return c_email2;
+	}
+	public void setC_email2(String c_email2) {
+		this.c_email2 = c_email2;
+	}
 	
 	public String getC_tel() {
 		return c_tel;

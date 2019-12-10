@@ -61,7 +61,7 @@
     
     
     <insert id="insertCustomer" parameterType="com.spring.mooncar.dto.CustomerDTO">
-	/*schedule.insertCustomer*/
+	/*custpop.insertCustomer*/
 	INSERT INTO CUSTOMER (
 			C_TEL, C_NAME, C_GENDER, C_EMAIL, C_COMMENT
 		)VALUES (
@@ -71,6 +71,18 @@
 
 	</insert>
 	
+	<update id="customerUpdate" parameterType="com.spring.mooncar.dto.CustomerDTO">
+	/*customerupdate.customerUpdate*/
+		update CUSTOMER
+
+		set 
+		C_NAME = #{c_name}
+		,C_EMAIL = #{c_email}
+		,C_COMMENT = #{c_comment}
+
+		where C_TEL = #{c_tel}
+
+	</update>
 	
 
 </mapper>

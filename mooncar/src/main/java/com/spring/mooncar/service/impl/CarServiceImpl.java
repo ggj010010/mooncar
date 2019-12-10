@@ -89,5 +89,11 @@ public class CarServiceImpl implements CarService {
 		
 	}
 
+	@Override
+	public int carUpdate(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return carDAO.carUpdate(carDTO);
+	}
+
 	
 }

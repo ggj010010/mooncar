@@ -20,4 +20,6 @@ public interface CarDAO {
 	public int carDetailInsert(CarDetailDTO carDetailDTO);
 
 	public void car_kmUpdate(CarDTO carDTO);
+
+	public int carUpdate(CarDTO carDTO);
 }
