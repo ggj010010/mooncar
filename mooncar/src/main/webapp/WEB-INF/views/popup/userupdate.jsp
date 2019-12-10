@@ -21,6 +21,20 @@
         	$j('.userdate').val(today);
         	
         })
+        //한글 안나오게 하기
+			$j('.not_korean').keyup(function(event){
+				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+					var inputVal = $j(this).val();
+					$j(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+				}
+			});
+            //한글만 나오게 하기
+			$j(".only_korean").keyup(function(event){
+				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+				var inputVal = $j(this).val();
+				$j(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+				}
+			});
         //숫자만 나오게하기
        $j(document).on('keypress', 'input.num_only', function(e){
 
@@ -128,7 +142,7 @@
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td colspan="3"><input type="text"  class = "input2" value ="${selectCustomerOne.c_name}" id="c_name" size="5" style="width : 50%; height : 25px;"></td>
+		<td colspan="3"><input type="text"  class = "input2 only_korean" value ="${selectCustomerOne.c_name}" id="c_name" size="5" style="width : 50%; height : 25px;"></td>
 	</tr>
 	<tr>
               <td>성별</td>
@@ -146,8 +160,8 @@
 		
 		<td colspan = "3";">
 		
-			<input type="text" size="20" class = "input2" id="c_email" style = "width : 20%; height : 25px;" value="${selectCustomerOne.c_email1}">&nbsp&nbsp@&nbsp&nbsp</input>
-			<input type="text"  class = "input2"  name = "c_email2" id="c_email2" value="${selectCustomerOne.c_email2}" style = "width : 20%; height : 25px;">&nbsp&nbsp&nbsp&nbsp</input>
+			<input type="text" size="20" class = "input2 not_korean" id="c_email" style = "width : 20%; height : 25px;" value="${selectCustomerOne.c_email1}">&nbsp&nbsp@&nbsp&nbsp</input>
+			<input type="text"  class = "input2 not_korean"  name = "c_email2" id="c_email2" value="${selectCustomerOne.c_email2}" style = "width : 20%; height : 25px;">&nbsp&nbsp&nbsp&nbsp</input>
 			<select  id="selectEmail" style="position: relative;"> 
      			 <option value="1"selected>직접입력</option> 
      			 <option value="naver.com">naver.com</option> 

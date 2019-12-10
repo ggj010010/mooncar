@@ -8,7 +8,126 @@
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>회 원 등 록</title>
 <SCRIPT type="text/javascript">
+
+
         $j(document).ready(function(){
+            $j('#car_comment').on('keyup', function() {
+                if($j(this).val().length > 50) {
+                    $j(this).val($j(this).val().substring(0, 50));
+                    alert("차량특이사항은 50자를 넘을수 없습니다.");
+                }
+            });
+            $j('#car_comment').on('keydown', function() {
+                if($j(this).val().length > 50) {
+                    $j(this).val($j(this).val().substring(0, 50));
+                    alert("차량특이사항은 50자를 넘을수 없습니다.");
+                }
+            });
+            $j('#car_comment').on('keypress', function() {
+                if($j(this).val().length > 50) {
+                    $j(this).val($j(this).val().substring(0, 50));
+                    alert("차량특이사항은 50자를 넘을수 없습니다.");
+                }
+            });
+            
+            $j('#c_comment').on('keydown', function() {
+                if($j(this).val().length > 50) {
+                    $j(this).val($j(this).val().substring(0, 50));
+                    alert("특이사항은 50자를 넘을수 없습니다.");
+                }
+            });
+            
+            $j('#car_km').on('keydown', function() {
+                if($j(this).val().length > 6) {
+                    $j(this).val($j(this).val().substring(0, 6));
+                    alert("주행거리는 1000000km를 넘을 수 없습니다.");
+                }
+            });
+            
+            $j('#c_email').on('keydown', function() {
+                if($j(this).val().length > 20) {
+                    $j(this).val($j(this).val().substring(0, 20));
+                    alert("올바른 e-mail이 아닙니다.");
+                }
+            });
+            
+            $j('#c_email2').on('keydown', function() {
+                if($j(this).val().length > 20) {
+                    $j(this).val($j(this).val().substring(0, 20));
+                    alert("올바른 주소가 아닙니다.");
+                }
+            });
+            
+            $j('#c_name').on('keydown', function() {
+                if($j(this).val().length > 15) {
+                    $j(this).val($j(this).val().substring(0, 15));
+                    alert("이름은 15자를 넘을 수 없습니다.");
+                }
+            });
+            
+            $j('#tel2').on('keydown', function() {
+                if($j(this).val().length > 8) {
+                    $j(this).val($j(this).val().substring(0, 8));
+                    alert("전화번호가 너무 깁니다.");
+                }
+            });
+            
+            $j('#tel3').on('keydown', function() {
+                if($j(this).val().length > 8) {
+                    $j(this).val($j(this).val().substring(0, 8));
+                    alert("전화번호가 너무 깁니다.");
+                }
+            });
+            
+            $j('#car_number').on('keydown', function() {
+                if($j(this).val().length > 20) {
+                    $j(this).val($j(this).val().substring(0, 20));
+                    alert("차량번호가 너무 깁니다.");
+                }
+            });
+           
+            //한글 안나오게 하기
+			$j('.not_korean').keyup(function(event){
+				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+					var inputVal = $j(this).val();
+					$j(this).val(inputVal.replace(/[^a-z0-9]/gi,''));
+				}
+			});
+            //한글만 나오게 하기
+			$j(".only_korean").keyup(function(event){
+				if (!(event.keyCode >=37 && event.keyCode<=40)) {
+				var inputVal = $j(this).val();
+				$j(this).val(inputVal.replace(/[a-z0-9]/gi,''));
+				}
+				});
+            //숫자만 나오게하기
+            $j(document).on('keypress', 'input.num_only', function(e){
+
+             if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
+
+         });
+         $j(document).on('keyup', 'input.num_only', function(e){
+
+             if( $j(this).val() != null && $j(this).val() != '' ) {
+
+                 var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+                 $j(this).val(tmps);
+
+             }
+
+         });
+         $j(document).on('keydown', 'input.num_only', function(e){
+
+             if( $j(this).val() != null && $j(this).val() != '' ) {
+
+                 var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
+
+                 $j(this).val(tmps);
+
+             }
+
+         });
     	    var checkTel = "0";
         	var now = new Date();
         	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
@@ -17,52 +136,9 @@
         	$j('.userdate').val(today);
         	
         })
-        $j('#c_comment').on('keyup', function() {
 
-        if($j(this).val().length > 50) {
-            $j(this).val($j(this).val().substring(0, 50));
-            alert("인적사항은 50자를 넘을수 없습니다.");
-        }
-
-    });
-
-    $j('#car_comment').on('keyup', function() {
-
-        if($j(this).val().length > 50) {
-            $j(this).val($j(this).val().substring(0, 50));
-            alert("차량 특이사항은 50자를 넘을수 없습니다.");
-        }
-
-    });
         
-        //숫자만 나오게하기
-       $j(document).on('keypress', 'input.num_only', function(e){
-
-        if(e.which && (e.which < 48 || e.which > 57) ) e.preventDefault();
-
-    });
-    $j(document).on('keyup', 'input.num_only', function(e){
-
-        if( $j(this).val() != null && $j(this).val() != '' ) {
-
-            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-            $j(this).val(tmps);
-
-        }
-
-    });
-    $j(document).on('keydown', 'input.num_only', function(e){
-
-        if( $j(this).val() != null && $j(this).val() != '' ) {
-
-            var tmps = parseInt($j(this).val().replace(/[^0-9]/g, '')) || 0;
-
-            $j(this).val(tmps);
-
-        }
-
-    })
+       
     
     .on("변화이름",'#아이디이름',function(){//이렇게 추가하면 됩니다요
 	   		  
@@ -409,7 +485,7 @@
 	</tr>
 	<tr>
 		<td>이름</td>
-		<td colspan="3"><input type="text" class = "input2" id="c_name" size="5" style="width : 50%; height : 25px;"></td>
+		<td colspan="3"><input type="text" class = "input2 only_korean" id="c_name" size="5" style="width : 50%; height : 25px;"></td>
 	</tr>
 	<tr>
 		<td>성별</td>
@@ -429,8 +505,8 @@
 		<td>E-Mail</td>
 		
 		<td colspan = "3";">
-			<input type="text" size="20" class = "input2" id="c_email" style = "width : 20%; height : 25px;">&nbsp&nbsp@&nbsp&nbsp</input>
-			<input type="text"  class = "input2"  name = "c_email2" id="c_email2" disabled value="naver.com" style = "width : 20%; height : 25px;">&nbsp&nbsp&nbsp&nbsp</input>
+			<input type="text" size="20" class = "input2 not_korean"id="c_email" style = "width : 20%; height : 25px;">&nbsp&nbsp@&nbsp&nbsp</input>
+			<input type="text"  class = "input2 not_korean"  name = "c_email2" id="c_email2" disabled value="naver.com" style = "width : 20%; height : 25px;">&nbsp&nbsp&nbsp&nbsp</input>
 			<select  id="selectEmail"  style="position: relative;"> 
      			 <option value="1">직접입력</option> 
      			 <option value="naver.com"selected>naver.com</option> 
