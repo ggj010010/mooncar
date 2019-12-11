@@ -1,25 +1,66 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
-<title>Insert title here</title>
 
-<!--»ó´Ü (°øÅë) -->
+<title>Search</title>
+<script type="text/javascript">
+$j(document).on("keyup", "#search_customer", function() {
+	if($j("#browsers2").val() == "ì´ë¦„"){
+		$j(this).val($j(this).val().replace(/[^(ã„±-í£)]/gi, ''));
+
+	}
+	else if($j("#browsers2").val() == "í•¸ë“œí°"){
+		$j(this).val( $j(this).val().replace(/[^0-9]/gi,"") );
+		if($j(this).val().length > 11) {
+            $j(this).val($j(this).val().substring(0, 11));
+            alert("11ìë¥¼ ë„˜ì„ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        }
+		  
+	}
+	else if($j("#browsers2").val() == "ì„±ë³„"){
+		$j(this).val($j(this).val().replace(/[^(ã„±-í£)]/gi, ''));
+	}
+});
+
+$j(document).ready(function() {
+	}).on("click", ".button1", function(){
+		if($j("#browsers2").val() == "ì´ë¦„"){
+			$j("#main_search").submit();
+		}
+		else if($j("#browsers2").val() == "í•¸ë“œí°"){
+			$j("#main_search").submit();
+		}
+		else if($j("#browsers2").val() == "ì„±ë³„"){
+			if($j("#search_customer").val() != "ë‚¨ì" ||$j("#search_customer").val() != "ë‚¨" ||$j("#search_customer").val() != "ì—¬ì" ||$j("#search_customer").val() != "ì—¬" ){
+				  
+				alert("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
+			}else{
+				$j("#main_search").submit();
+			}
+		}
+		
+	});
+</script>
+<!--ìƒë‹¨ (ê³µí†µ) -->
    <h1 align = "center">MoonCar</h1>
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
-      <select id="browsers2" name="startdate" >
-            <option value="ÀÌ¸§">ÀÌ¸§</option>
-          <option value="Â÷·®¹øÈ£">Â÷·®¹øÈ£</option>
+  	<form id='main_search' target='_self' action='/main_search' method='post'>
+      <select id="browsers2" name="search_option" >
+          <option value="ì´ë¦„">ì´ë¦„</option>
+          <option value="í•¸ë“œí°">í•¸ë“œí°</option>
+          <option value="ì„±ë³„">ì„±ë³„</option>
       </select>
-	  		 <input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
-             <button class ="button1" type="button"> °Ë»ö </button>
-  </div></div>
+	  		 <input type="text" id = "search_customer" name="search_customer" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
+             <button class ="button1" type="button"> ê²€ìƒ‰ </button>
+   	</form>
+   </div></div>
 </div>
    <br><br>
 <div class="wrap">
@@ -47,7 +88,7 @@
 	    	{
 	    		
     			$j("#search > tbody:last").html(
-	    				"<tr><th><input type='checkbox' id='tel_all'/></th><th>°í°´¸í</th><th>ÀüÈ­¹øÈ£</th><th>Â÷¿¬·á</th><th>Â÷Á¾</th><th>Â÷¿ÀÀÏ</th><th>¸¶Áö¸·Á¤ºñ³»¿ë</th><th>¸¶Áö¸·¹æ¹®³¯Â¥</th></tr>'>"
+	    				"<tr><th><input type='checkbox' id='tel_all'/></th><th>ê³ ê°ëª…</th><th>ì „í™”ë²ˆí˜¸</th><th>ì°¨ì—°ë£Œ</th><th>ì°¨ì¢…</th><th>ì°¨ì˜¤ì¼</th><th>ë§ˆì§€ë§‰ì •ë¹„ë‚´ìš©</th><th>ë§ˆì§€ë§‰ë°©ë¬¸ë‚ ì§œ</th></tr>'>"
 	    		);
 
 	    		for(var i = 0 ; i<Object.keys(returndata.success).length;i++){
@@ -68,7 +109,7 @@
 	    	},
 	    	error : function(jqXHR, textStatus, errorThrown)
 	    	{
-	    		alert("½ÇÆĞ");
+	    		alert("ì‹¤íŒ¨");
 		    	alert("code:"+jqXHR.status+"\n"+"message:"+jqXHR.responseText+"\n"+"error:"+errorThrown);
 	    	}
 	    });
@@ -86,7 +127,7 @@
 </script>
 <body>
 <br>
-   <h2 align = "center">ÅëÇÕ°Ë»ö</h2>
+   <h2 align = "center">í†µí•©ê²€ìƒ‰</h2>
 <table style = "margin: auto; width : 95%;">
 	<c:forEach var="cl" items="${codeList}">
 			<%int i = 0; %>
@@ -119,15 +160,15 @@
 	</c:forEach>
 	<tr >
 		<th>
-		°Ë»ö
+		ê²€ìƒ‰
 		</th>
 		<td colspan="5">
 			<select id="browsers2" name="startdate" >
-				<option value="ÀÌ¸§">ÀÌ¸§</option>
-				<option value="Â÷·®¹øÈ£">Â÷·®¹øÈ£</option>
+				<option value="ì´ë¦„">ì´ë¦„</option>
+				<option value="ì°¨ëŸ‰ë²ˆí˜¸">ì°¨ëŸ‰ë²ˆí˜¸</option>
 			</select>
 			<input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
-			<button id=check_search class ="button1" type="button"> °Ë»ö </button>
+			<button id=check_search class ="button1" type="button"> ê²€ìƒ‰ </button>
 		</td>
 	</tr>
 </table>
@@ -137,13 +178,13 @@
 <table id="search" style = "margin: auto; width : 100%;">
 	<tr>
 		<th><input type="checkbox" id="tel_all"/></th>
-		<th>°í°´¸í</th>
-		<th>ÀüÈ­¹øÈ£</th>
-		<th>Â÷Á¾</th>
-		<th>Á¤ºñ³»¿ª</th>
-		<th>¿¬·á</th>
-		<th>³¯Â¥</th>
-		<th>Á¦Á¶»ç</th>
+		<th>ê³ ê°ëª…</th>
+		<th>ì „í™”ë²ˆí˜¸</th>
+		<th>ì°¨ì¢…</th>
+		<th>ì •ë¹„ë‚´ì—­</th>
+		<th>ì—°ë£Œ</th>
+		<th>ë‚ ì§œ</th>
+		<th>ì œì¡°ì‚¬</th>
 	</tr>
 </table>
 </form>

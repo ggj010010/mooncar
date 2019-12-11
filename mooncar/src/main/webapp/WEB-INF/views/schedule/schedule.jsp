@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
@@ -17,50 +17,41 @@
 
 <title>Schedule</title>
 <script type="text/javascript">
+$j(document).on("keyup", "#search_customer", function() {
+	if($j("#browsers2").val() == "이름"){
+		$j(this).val($j(this).val().replace(/[^(ㄱ-힣)]/gi, ''));
+
+	}
+	else if($j("#browsers2").val() == "핸드폰"){
+		$j(this).val( $j(this).val().replace(/[^0-9]/gi,"") );
+		if($j(this).val().length > 11) {
+            $j(this).val($j(this).val().substring(0, 11));
+            alert("11자를 넘을수 없습니다.");
+        }
+		  
+	}
+	else if($j("#browsers2").val() == "성별"){
+		$j(this).val($j(this).val().replace(/[^(ㄱ-힣)]/gi, ''));
+	}
+});
+
 $j(document).ready(function() {
 	}).on("click", ".button1", function(){
-		alert("검색");
-		var search_option = $j('#browsers2 option:selected').val();
-		var search_customer = $j("#search_customer").val();
-		if(search_customer == ""){
-			alert("검색어를 입력해주세요");
-			
+		if($j("#browsers2").val() == "이름"){
+			$j("#main_search").submit();
 		}
-		alert(search_customer+search_option);
-
-		  $j.ajax({
-				url : "/main_search",
-				type : "GET",
-				data : 
-				{
-					"search_option" : search_option,
-					"search_customer" : search_customer
-				}
-				,
-				//JSON.stringify()
-				dataType : "json",
-				contentType:"application/json;charset=UTF-8",
-				timeout : 3000,
-				success : function(returndata) {
-					alert("성공");
-					window.location.href = "/customer/custview?"+returndata.main_search;
-
-				},//end success
-				error : function(jqXHR, textStatus, errorThrown) {
-				 	if(textStatus=="timeout") {
-
-			        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
-
-			        } 
-				 	else {
-
-			        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"데이터 전송에 실패했습니다. 다시 시도해 주세요");
-
-			        } 
-				
-				}//end error 
-			});//end ajax.productInfoWriteAction  
-			
+		else if($j("#browsers2").val() == "핸드폰"){
+			$j("#main_search").submit();
+		}
+		else if($j("#browsers2").val() == "성별"){
+			if($j("#search_customer").val() != "남자" ||$j("#search_customer").val() != "남" ||$j("#search_customer").val() != "여자" ||$j("#search_customer").val() != "여" ){
+				  
+				alert("다시 입력해주세요");
+			}else{
+				$j("#main_search").submit();
+			}
+		}
+		
 	});
 </script>
 <!--상단 (공통) -->
@@ -68,13 +59,15 @@ $j(document).ready(function() {
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
-      <select id="browsers2" name="startdate" >
+  	<form id='main_search' target='_self' action='/main_search' method='post'>
+      <select id="browsers2" name="search_option" >
           <option value="이름">이름</option>
           <option value="핸드폰">핸드폰</option>
           <option value="성별">성별</option>
       </select>
-	  		 <input type="text" id = "search_customer" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
+	  		 <input type="text" id = "search_customer" name="search_customer" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
              <button class ="button1" type="button"> 검색 </button>
+   	</form>
    </div></div>
 </div>
    <br><br>

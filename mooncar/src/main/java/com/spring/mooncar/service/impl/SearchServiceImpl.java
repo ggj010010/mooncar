@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.mooncar.dao.SearchDAO;
 import com.spring.mooncar.dto.Check_searchDTO;
+import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.MainSearchDTO;
 import com.spring.mooncar.dto.SearchDTO;
 import com.spring.mooncar.service.SearchService;
@@ -24,7 +25,7 @@ public class SearchServiceImpl implements SearchService{
 	}
 
 	@Override
-	public List<SearchDTO> Main_Search(MainSearchDTO mainsearchDTO) {
+	public List<CustomerDTO> Main_Search(MainSearchDTO mainsearchDTO) {
 		// TODO Auto-generated method stub
 		return searchDAO.Main_Search(mainsearchDTO);
 	}

@@ -32,7 +32,7 @@
 		<if test="search_option == '이름'">
 			c_name = #{search_customer}
 		</if>
-		<if test="search_option == '연락처'">
+		<if test="search_option == '핸드폰'">
 			c_tel = #{search_customer}
 		</if>
 		<if test="search_option == '성별'">
