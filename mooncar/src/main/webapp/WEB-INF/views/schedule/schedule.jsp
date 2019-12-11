@@ -289,8 +289,7 @@ table.calendar td{
   </div>
   <br><br>
  	 <div id="right" >
- 	  	 <div id="left" >
- 	   	  <table style = "width : 100%";>
+ 	  <table style = "width : 100%";>
            <tr>
              
                             
@@ -316,6 +315,30 @@ table.calendar td{
 		   		  	<button class="button" type="button" style="width : 25%;float : right; height : 100%" onclick="window.open('/schedule/scheduleinsert', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
 		   		</td>
 		   </tr>
+        </table>
+ 	  	 <div id="left" >
+ 	   	 
+        <table style = "float : center; width : 100%;">
+           <tr>
+              <th colspan="2">회원정보</th>
+           </tr>
+           <tr>
+              <td>이름</td>
+              <td class = "c_name"></td>
+           </tr>
+           <tr>
+              <td>핸드폰</td>
+              <td class = "c_tel"></td>
+           </tr>
+             <tr>
+              <td>성별</td>
+              <td class = "c_gender"></td>
+           </tr>
+           <tr>
+              <td>이메일</td>
+              <td class = "c_email"></td>
+           </tr>
+
         </table>
         </div>
         <div id="right" >
@@ -344,34 +367,10 @@ table.calendar td{
               <td class = "car_fuel_type"></td>
            </tr>
         </table>
-        </div>
-            <div id="left">
-        <table style = "float : center; width : 100%;">
-           <tr>
-              <th colspan="2">회원정보</th>
-           </tr>
-           <tr>
-              <td>이름</td>
-              <td class = "c_name"></td>
-           </tr>
-           <tr>
-              <td>핸드폰</td>
-              <td class = "c_tel"></td>
-           </tr>
-             <tr>
-              <td>성별</td>
-              <td class = "c_gender"></td>
-           </tr>
-           <tr>
-              <td>이메일</td>
-              <td class = "c_email"></td>
-           </tr>
-
-        </table>
-
-    </div>
-    <div id="right">
-        <table style = "width : 100%;">
+       
+        
+     </div>
+     <table style = "width : 100%;">
            <tr>
               <th colspan="2">
 			  	Comment
@@ -385,10 +384,9 @@ table.calendar td{
 			  </td>
            </tr>
        	<tr>
-
         </tr>
-        </table><br><br>
-     </div>
+        </table>
+        <br><br>
       </div>
 </div>
 </body>
