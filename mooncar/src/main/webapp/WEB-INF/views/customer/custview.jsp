@@ -54,7 +54,7 @@ $j(document).ready(function() {
 <h1 align = "center">MoonCar</h1>
 <button class="btn" id="btn" type="button" onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;" 
             style="float : right; border : 0; background-color : white";>
-            	<img class="btn-img" src="/resources/js/image/image2.png"style="width : 80px; height : 80px;">
+            	<img class="btn-img" src="/resources/js/image/image2.png"style="cursor:pointer; width : 80px; height : 80px;">
             </button><br><br><br><br>
 <div class="board-container" >
 <div id="right">

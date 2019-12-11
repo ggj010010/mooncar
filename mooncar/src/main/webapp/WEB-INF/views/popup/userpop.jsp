@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
+
 <title>회 원 등 록</title>
 <SCRIPT type="text/javascript">
 
