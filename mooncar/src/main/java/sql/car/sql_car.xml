@@ -27,6 +27,9 @@
 		<result property="car_next_repair" column="car_next_repair" />
 		<result property="car_d_km" column="car_d_km" />
 		<result property="car_date" column="car_date" />
+		<result property="keyword" column="keyword" />
+		<result property="startDate" column="startDate" />
+		<result property="endDate" column="endDate" />
 
 	</resultMap> 
     
@@ -122,6 +125,16 @@
 
 	</update>
 	
+	<select id="btnsearchFix" parameterType="com.spring.mooncar.dto.CarDetailDTO" resultMap="CarDetailDTO">
+	/*customer.btnsearchFix*/
+		select * from CAR_DETAIL
+			WHERE (car_repair like '%'||#{keyword}||'%'
+            OR car_next_repair like '%'||#{keyword}||'%') 
+            and (car_number=#{car_number} 
+            and car_date 
+            BETWEEN TO_DATE(#{startDate}) AND TO_DATE(#{endDate}))
+            order by Car_DATE desc
+	</select>
 	
 
 

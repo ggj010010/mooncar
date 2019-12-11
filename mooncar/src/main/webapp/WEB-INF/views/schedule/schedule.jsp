@@ -16,6 +16,7 @@
 <script src='/resources/js/fullcalendar-4.3.1/packages/moment/main.min.js'></script>
 
 <title>Schedule</title>
+
 <script type="text/javascript">
 $j(document).on("keyup", "#search_customer", function() {
 	if($j("#browsers2").val() == "이름"){
@@ -56,6 +57,10 @@ $j(document).ready(function() {
 </script>
 <!--상단 (공통) -->
    <h1 align = "center">MoonCar</h1>
+   <button class="btn" id="btn" type="button" onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;" 
+            style="float : right; border : 0; background-color : white";>
+            	<img class="btn-img" src="/resources/js/image/image2.png"style="width : 80px; height : 80px;">
+            </button><br><br><br><br>
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">

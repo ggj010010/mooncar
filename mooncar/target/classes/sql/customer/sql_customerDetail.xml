@@ -18,6 +18,12 @@
         order by CUS_D_DATE desc
     </select>
     
+    <select id="btnsearchCD" resultType="com.spring.mooncar.dto.CustomerDetailDTO">
+        SELECT * FROM customer_detail
+        WHERE c_tel = #{c_tel}
+        and cus_d_contents like '%'||#{cus_d_contents}||'%'
+        order by CUS_D_DATE desc
+    </select>
     
     <insert id="insertCustomerDetail" parameterType="com.spring.mooncar.dto.CustomerDetailDTO">
 	/*customer.insertCustomerDetail*/

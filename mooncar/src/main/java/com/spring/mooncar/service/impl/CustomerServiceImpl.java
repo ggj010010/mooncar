@@ -90,6 +90,12 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerDAO.customerUpdate(customerDTO);
 	}
 
+	@Override
+	public List<CustomerDetailDTO> btnsearchCD(CustomerDetailDTO customerdetailDTO) {
+		// TODO Auto-generated method stub
+		return customerDAO.btnsearchCD(customerdetailDTO);
+	}
+
 
 
 }

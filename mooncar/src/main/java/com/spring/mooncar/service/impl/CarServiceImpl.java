@@ -95,5 +95,11 @@ public class CarServiceImpl implements CarService {
 		return carDAO.carUpdate(carDTO);
 	}
 
+	@Override
+	public List<CarDetailDTO> btnsearchFix(CarDetailDTO carDetailDTO) {
+		// TODO Auto-generated method stub
+		return carDAO.btnsearchFix(carDetailDTO);
+	}
+
 	
 }

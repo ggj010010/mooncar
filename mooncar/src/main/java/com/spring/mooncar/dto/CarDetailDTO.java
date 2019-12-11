@@ -10,6 +10,28 @@ public class CarDetailDTO {
 	int car_d_km;
 	String car_date;
 	String c_tel;
+	String startDate;
+	String endDate;
+	String keyword;
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 	public int getCar_d_no() {
 		return car_d_no;
 	}

@@ -22,4 +22,6 @@ public interface CarDAO {
 	public void car_kmUpdate(CarDTO carDTO);
 
 	public int carUpdate(CarDTO carDTO);
+
+	public List<CarDetailDTO> btnsearchFix(CarDetailDTO carDetailDTO);
 }

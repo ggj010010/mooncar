@@ -113,6 +113,36 @@ public class CustomerController {
 		
 	}
     
-
-
+    @ResponseBody
+    @RequestMapping(value = "/btnsearchFix", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String btnsearchFix(Model model, CarDetailDTO cardetailDTO) throws IOException {
+    		System.out.println("넘버 : "+cardetailDTO.getCar_number());
+    		System.out.println("키워드 : "+cardetailDTO.getKeyword());
+    		System.out.println("스타트 : "+cardetailDTO.getStartDate());
+    		System.out.println("엔드 : "+cardetailDTO.getEndDate());
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			CommonUtil commonUtil = new CommonUtil();
+			result.put("btnsearchFix", carservice.btnsearchFix(cardetailDTO));
+			System.out.println(result);
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		 	System.out.println("callbackMsg::"+callbackMsg);
+	      
+	      return callbackMsg;
+		
+	}
+    
+    @ResponseBody
+    @RequestMapping(value = "/btnsearchCD", method = RequestMethod.GET, produces ="application/json; charset=utf8")
+	public String btnsearchCD(Model model, CustomerDetailDTO customerdetailDTO) throws IOException {
+			HashMap<String, Object> result = new HashMap<String, Object>();
+			CommonUtil commonUtil = new CommonUtil();
+			result.put("btnsearchCD", customerservice.btnsearchCD(customerdetailDTO));
+			System.out.println(result);
+			String callbackMsg = commonUtil.getJsonCallBackString(" ",result);
+		 	System.out.println("callbackMsg::"+callbackMsg);
+	      
+	      return callbackMsg;
+		
+	}
+    
 }

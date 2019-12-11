@@ -11,6 +11,13 @@
 
             
         $j(document).ready(function(){
+        	$j('#CusDetail').on('keydown', function() {
+
+                if($j(this).val().length > 10) {
+                    $j(this).val($j(this).val().substring(0, 10));
+                    alert("코멘트가 너무 깁니다.");
+                }
+        	});
 
         	var now = new Date();
         	var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
@@ -144,6 +151,7 @@
        					timeout : 3000,
        					success : function(insert) {
        						alert("추가완료되었습니다.");
+       						location.reload();
        				            
        					},//end success
        					error : function(jqXHR, textStatus, errorThrown) {
@@ -159,7 +167,123 @@
        					
        					}//end error 
        				});//end ajax.productInfoWriteAction
-       		});
+       			
+       		}).on("click", "#btnsearchFix", function() {
+        		var car_number=$j(".car_number").text();
+    			if(car_number=="-"){
+    				alert("차량을 선택한 후 검색해주세요.");
+    			}
+    			else{
+	    			var startDate = $j("#startDate").val();
+	        		var endDate=$j("#endDate").val();
+	        		var keyword=$j("#keyword").val();
+	    			if(startDate==""){
+	    				startDate="0001-01-01"
+	    			}
+	    			if(endDate==""){
+	    				endDate="9999-12-30"
+	    			}
+	    			alert("start : "+startDate+" end : "+ endDate+" keyword : "+keyword+" car_number : "+car_number);    				
+    			}
+   			 $j.ajax({
+   					url : "/btnsearchFix",
+   					type : "GET",
+   					data : 
+   					{
+   						"car_number" : car_number,
+   						"startDate" : startDate,
+   						"endDate" : endDate,
+   						"keyword" : keyword
+   					}
+   					,
+   					//JSON.stringify()
+   					dataType : "json",
+   					contentType:"application/json;charset=UTF-8",
+   					timeout : 3000,
+   					success : function(returnFix) {
+   						var html = "";
+						$j("#car_detail").empty();
+						html += "<table id='response_date_table'; style='width : 100%';>";
+						html += "<tr><th>정비내역</th><th>다음정비</th><th>키로수</th><th>날짜</th></tr>";
+						
+						var car_detail = returnFix.btnsearchFix;
+						$j.each(car_detail , function(idx, val) {
+							
+							html += "<tr><td style='display: none;'>"+val.car_d_no+"</td>"
+							html += "<td>"+val.car_repair+"</td>"
+							html += "<td>"+val.car_next_repair+"</td>"
+							html += "<td>"+val.car_d_km+" km</td>"
+							html += "<td>"+val.car_date+"</td></tr>"
+							
+							
+							
+							
+						});
+						html += "</table>";
+						$j("#car_detail").append(html);
+   				            
+   					},//end success
+   					error : function(jqXHR, textStatus, errorThrown) {
+   					 	if(textStatus=="timeout") {
+
+   				        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+   				        } 
+   					 	else {
+
+
+   				        } 
+   					
+   					}//end error 
+   				});//end ajax.productInfoWriteAction
+   		})
+   		
+   		.on("keyup", "#btnsearchCD", function() {
+    			var searchCd=$j("#btnsearchCD").val();
+    			var c_tel=$j("#c_tel").text();
+			
+			 $j.ajax({
+					url : "/btnsearchCD",
+					type : "GET",
+					data : 
+					{
+						"cus_d_contents" : searchCd,
+						"c_tel" : c_tel
+					}
+					,
+					//JSON.stringify()
+					dataType : "json",
+					contentType:"application/json;charset=UTF-8",
+					timeout : 3000,
+					success : function(returnCD) {
+   						var html = "";
+						$j("#customerD").empty();
+						html+="<div style='overflow:scroll; width:100%; height:202px;'>";
+						var cus_detail = returnCD.btnsearchCD;
+						$j.each(cus_detail , function(idx, val) {
+						          			html+=val.cus_d_contents+"&nbsp&nbsp"+val.cus_d_date+"&nbsp&nbsp<br>";
+										
+							
+							
+						});
+						html+="</div>";
+						$j("#customerD").append(html);
+   				            
+   					},//end success 
+					error : function(jqXHR, textStatus, errorThrown) {
+					 	if(textStatus=="timeout") {
+
+				        	alert("시간이 초과되어 데이터를 수신하지 못하였습니다.");
+
+				        } 
+					 	else {
+
+
+				        } 
+					
+					}//end error 
+				});//end ajax.productInfoWriteAction
+		});
 
         </script>
         
@@ -240,28 +364,31 @@
        </table>
     </div>
     <div id="right">
-        <table style = "width : 100%;">
-           <tr>
+    	<div id="customerdetail">
+          <table style = "width : 100%;">
+          	 <tr>
               <th colspan="2">
-			  	<input type="text" name="my_name" size="50" style="color : black; border-radius: 8px; background-color: white; width:80%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
-			  </th>
-           </tr>
-           <tr>
-             <td style = "text-align : right">
-             	<div style="overflow:scroll; width:100%; height:202px;">
-          			<c:forEach var="selectCustomerDetail" items="${selectCustomerDetail}">
-                		${selectCustomerDetail.cus_d_contents} &nbsp&nbsp
-              	     	${selectCustomerDetail.cus_d_date}<br>&nbsp&nbsp
-					</c:forEach>
-				</div>
-		   	 </td>
-		  </tr>
-       	<tr>
-       	<td>
-       		<input id="CusDetail" type="text" name="my_name" size="50" style="color : black; border-radius: 8px; background-color: white; width:60%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
-        	<button id="insertCd" class="button" type="button" style="width : 30%;float : right; height : 100%"> 추가 </button></td>
-        </tr>
-        </table><br><br>
+				  	<input type="text" id="btnsearchCD" name="btnsearchCD" size="50" style="color : black; border-radius: 8px; background-color: white; width:80%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
+				  </th>
+	           </tr>
+	           <tr>
+	             <td id ="customerD"style = "text-align : right">
+	             	<div style="overflow-x:auto;  width:100%; height:202px;">
+	          			<c:forEach var="selectCustomerDetail" items="${selectCustomerDetail}">
+	                		${selectCustomerDetail.cus_d_contents} &nbsp&nbsp
+	              	     	${selectCustomerDetail.cus_d_date}&nbsp&nbsp<br>
+						</c:forEach>
+					</div>
+			   	 </td>
+			  </tr>
+	       	  <tr>
+	       	  	<td>
+	       			<input id="CusDetail" type="text" name="CusDetail" size="50" style="color : black; border-radius: 8px; background-color: white; width:60%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
+	        		<button id="insertCd" class="button" type="button" style="width : 30%;float : right; height : 100%"> 추가 </button>
+	        	</td>
+	          </tr>
+	       </table>
+	    </div><br><br>
      </div>
 
 
@@ -295,11 +422,11 @@
            </tr>
            <tr>
               <td>차량번호</td>
-              <td class=car_number>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+              <td class=car_number>-</td>
            </tr>
            <tr>
               <td>차종</td>
-              <td class=car_name> - </td>
+              <td class=car_name> &nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp</td>
            </tr>
            <tr>
               <td>키로수</td>
@@ -357,18 +484,18 @@
            <tr>
               <td colspan="2">
                <form id="frm" >
-                    <div>Start &nbsp<input type="date" id="userdate" name="userdate" ></div>
+                    <div>Start &nbsp<input type="date" id="startDate" name="startDate" ></div>
                 </form>
              </td>
               <td colspan="2">
                <form id="frm" >
-                    <div>End &nbsp<input type="date" id="userdate" name="userdate" ></div>
+                    <div>End &nbsp<input type="date" id="endDate" name="startDate" ></div>
                 </form>
              </td>
            </tr>
            <tr>
-              <td colspan="3">KeyWord &nbsp : &nbsp <input type="text" name="my_name" size="40"></td>
-              <td><button class="button" type="button" style = "width : 60%; height : 60%;"> 검색 </button></td>
+              <td colspan="3">KeyWord &nbsp : &nbsp <input type="text" id="keyword" name="keyword" size="40"></td>
+              <td><button class="button" id="btnsearchFix" type="button" style = "width : 60%; height : 60%;"> 검색 </button></td>
            </tr>
         </table>
         <br>

@@ -29,6 +29,8 @@ public interface CustomerDAO {
 
 	public int customerUpdate(CustomerDTO customerDTO);
 
+	public List<CustomerDetailDTO> btnsearchCD(CustomerDetailDTO customerdetailDTO);
+
 
 
 }

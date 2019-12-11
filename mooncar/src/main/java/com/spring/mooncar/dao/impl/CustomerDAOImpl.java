@@ -78,6 +78,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return sqlSession.update("customer.customerUpdate", customerDTO);
 	}
 
+	@Override
+	public List<CustomerDetailDTO> btnsearchCD(CustomerDetailDTO customerdetailDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("customerDetail.btnsearchCD",customerdetailDTO);
+	}
+
 
 	
 }
