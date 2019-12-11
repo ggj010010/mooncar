@@ -11,7 +11,7 @@ public class ScheduleDTO {
 	String s_comment;
 	String s_date;
 	String car_number;
-	
+	String c_email;
 	String date;
 	String time;
 	
@@ -22,6 +22,12 @@ public class ScheduleDTO {
 	CustomerDTO customerDTO;
 	CarDTO carDTO;
 	
+	public String getC_email() {
+		return c_email;
+	}
+	public void setC_email(String c_email) {
+		this.c_email = c_email;
+	}
 	public int getS_no() {
 		return s_no;
 	}

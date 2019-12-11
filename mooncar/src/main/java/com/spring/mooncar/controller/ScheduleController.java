@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +24,7 @@ import com.spring.common.CommonUtil;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.CustomerDetailDTO;
+import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.CustomerService;
 import com.spring.mooncar.service.ScheduleService;
@@ -30,6 +36,8 @@ public class ScheduleController {
 	ScheduleService scheduleService;
 	@Autowired
 	CustomerService customerservice;
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
 	
 	@RequestMapping(value = "/schedule/schedule", method = RequestMethod.GET,  produces ="application/json; charset=utf8")
@@ -51,16 +59,31 @@ public class ScheduleController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/scheduleUpdate", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-	public int scheduleUpdate(Model model, ScheduleDTO scheduleDTO) throws IOException {
+	public int scheduleUpdate(Model model, ScheduleDTO scheduleDTO, final EmailDTO emailDTO) throws IOException {
 		int update = scheduleService.scheduleUpdate(scheduleDTO);
-		/*
-		 * HashMap<String, Object> result = new HashMap<String, Object>(); CommonUtil
-		 * commonUtil = new CommonUtil(); String callbackMsg =
-		 * commonUtil.getJsonCallBackString(" ",result);
-		 * System.out.println("callbackMsg::"+callbackMsg);
-		 */
-	      
-	    return update;
+	    if(update == 1) {
+	    	final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+				@Override public void prepare(MimeMessage mimeMessage) throws Exception {
+					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+					
+					helper.setFrom("answhdgkr9494@gmail.com");
+					for(int i = 0; i< emailDTO.getC_email().length;i++) {
+						System.out.println(emailDTO.getC_email()[i]);
+					}
+					InternetAddress[] toAddr = new InternetAddress[emailDTO.getC_email().length];
+					for(int i = 0; i< emailDTO.getC_email().length;i++) {
+						toAddr[i] = new InternetAddress (emailDTO.getC_email()[i]);
+					}
+					helper.setTo(toAddr);
+					System.out.println(emailDTO.getTitle());
+					helper.setSubject(emailDTO.getTitle());
+					System.out.println(emailDTO.getDesc());
+					helper.setText(emailDTO.getDesc(), true);
+				} 
+			};
+			mailSender.send(preparator);
+	    }
+		return update;
 		
 	}
 	@RequestMapping(value = "/schedule/scheduleUpdate", method = RequestMethod.GET, produces ="application/json; charset=utf8")

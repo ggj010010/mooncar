@@ -43,8 +43,6 @@ public class MainController {
 	    @RequestMapping(value = "/main_search", method = RequestMethod.POST)
 		public String search_car(Model model, MainSearchDTO mainsearchDTO, HttpServletRequest hrq) throws IOException {
 	    	hrq.setCharacterEncoding("UTF-8");
-	    	System.out.println("hra : " + hrq.getParameter("search_option"));
-	    	System.out.println("hra : " + hrq.getParameter("search_customer"));
 	    	if(hrq.getParameter("search_option").equals("성별") && hrq.getParameter("search_customer").equals("남자") || hrq.getParameter("search_customer").equals("남")) {
 	    		mainsearchDTO.setSearch_customer("1");
 	    	}

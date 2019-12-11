@@ -200,7 +200,12 @@ $j(document).ready(function() {
 						$j("#schedule_List_table").empty();
 	   					html += "<tr><th>이름</th><th>차량번호</th><th>처리</th><th>예약내용</th><th>시간</th></tr>"
 	   					$j.each(returndata.select_schedule , function(idx, val) {
-								html += "<tr><td><input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
+	   						if(val.s_check == 2){
+								html += "<td>"
+	   						}
+	   						else{
+	   							html += "<tr><td><input type='radio' value='"+val.c_tel+','+val.car_number+"'"+" name='chk_schedule'>"
+	   						}
 								html += "<a href='/customer/customer.do?c_tel="+val.c_tel+"'>"+val.name+"</a></td>"
 								html +=  "<td>"+val.car_number+"</td>"
 								if(val.s_check == 0){
