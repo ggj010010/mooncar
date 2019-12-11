@@ -88,96 +88,50 @@ $j(document).ready(function() {
 <body>
  <br>
 <div class="board-container" >
-    <div id="left">
-    <h2 align = "center">정비알림</h2>
-        <table style = "margin: auto; width : 90%;">
+   
+
+    <h2 align = "center">연락목록</h2>
+        <table style = "margin: auto; width : 70%";>
+        
            <tr>
               <th>이름</th>
-              <th>정비내용</th>
+              <th>번호</th>
+              <th>차량</th>
               <th>차량번호</th>
+              <th>예약내용</th>
+              <th>특이사항</th>
+              <th>구분</th>
+              <th>예약날짜</th>
            </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
+           <c:forEach var="todaySchedule" items="${todaySchedule}">
+	              	     	<tr>
+              					<td><a href="/customer/customer?c_tel=${todaySchedule.c_tel}">${todaySchedule.name}</a></td>
+              					<td><a href="/customer/customer?c_tel=${todaySchedule.c_tel}">${todaySchedule.c_tel}</a></td>
+              					<td><a href="/customer/customer?c_tel=${todaySchedule.c_tel}">${todaySchedule.cname}</a></td>
+              					<td><a href="/customer/customer?c_tel=${todaySchedule.c_tel}">${todaySchedule.car_number}</a></td>
+              					<td><a href="/schedule/schedule">${todaySchedule.s_contents}</td>
+              					<td><a href="/schedule/schedule">${todaySchedule.s_comment}</td>
+								<c:choose>
+									<c:when test="${todaySchedule.s_check == '0'}">
+										<td><a href="/schedule/scheduleUpdate?c_tel=${todaySchedule.c_tel}&car_number=${todaySchedule.car_number}" onclick="window.open(this.href, '_blank', 'toolbars=no,scrollbars=no'); return false;">
+										첫연락</td>
+										
+									</c:when>
+									<c:when test="${todaySchedule.s_check == '1'}">
+										<td><a href="/schedule/scheduleUpdate?c_tel=${todaySchedule.c_tel}&car_number=${todaySchedule.car_number}" onclick="window.open(this.href, '_blank', 'toolbars=no,scrollbars=no'); return false;">
+										재연락</td>
+									</c:when>
+									<c:otherwise>
+										<td><a href="/schedule/scheduleUpdate?c_tel=${todaySchedule.c_tel}&car_number=${todaySchedule.car_number}" onclick="window.open(this.href, '_blank', 'toolbars=no,scrollbars=no'); return false;">
+										정비완료</td>
+									</c:otherwise>
+								</c:choose>
+								<td>${todaySchedule.s_date}</td>
+					</tr>
+			</c:forEach>
+           
         </table>
-    </div>
-    <div id="right">
-    <h2 align = "center">예약알림</h2>
-        <table style = "margin: auto; width : 90%";>
-           <tr>
-              <th>이름</th>
-              <th>정비내용</th>
-              <th>차량번호</th>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-           <tr>
-              <td>김메시</td>
-              <td>바퀴갈음</td>
-              <td>1234</td>
-           </tr>
-        </table>
-    </div>
+
 </div>
 
 

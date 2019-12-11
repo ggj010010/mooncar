@@ -22,4 +22,5 @@ public interface ScheduleService {
 	
 	List<ScheduleDTO> Select_scheduleUpdate(ScheduleDTO scheduleDTO);
 	int scheduleUpdate(ScheduleDTO scheduleDTO);
+	List<ScheduleDTO> todaySchedule();
 }

@@ -22,6 +22,16 @@ public class ScheduleDTO {
 	CustomerDTO customerDTO;
 	CarDTO carDTO;
 	
+	String cname;
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+
+
 	public String getC_email() {
 		return c_email;
 	}

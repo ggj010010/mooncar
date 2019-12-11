@@ -36,6 +36,7 @@
 		<result property="s_comment" column="s_comment" />
 		<result property="s_date" column="s_date" />
 		<result property="car_number" column="car_number" />
+		<result property="cname" column="cname" />
 		
 		<result property="date" column="date" />
 		<result property="time" column="time" />
@@ -198,7 +199,12 @@
 
 	</update>
 
-
-
-	
+	<select id="todaySchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO" resultMap="ScheduleDTO">
+	/*main.todaySchedule*/
+	Select 
+    	sc.*,cs.C_NAME name,c.CAR_NAME cname
+	from  schedule sc,customer cs, car c
+	where sc.CAR_NUMBER=c.CAR_NUMBER and sc.C_TEL= cs.C_TEL and(S_DATE BETWEEN sysdate AND sysdate+1)
+	order by s_check, s_date 
+	</select>
 </mapper>

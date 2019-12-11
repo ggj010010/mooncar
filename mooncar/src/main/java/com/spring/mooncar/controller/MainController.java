@@ -21,7 +21,9 @@ import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.dto.MainSearchDTO;
+import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.dto.SearchDTO;
+import com.spring.mooncar.service.ScheduleService;
 import com.spring.mooncar.service.SearchService;
 
 
@@ -29,13 +31,16 @@ import com.spring.mooncar.service.SearchService;
 public class MainController {
 	@Autowired
 	SearchService searchService;
+	@Autowired
+	ScheduleService scheduleService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main(Model model, ScheduleDTO scheduleDTO) {
+		List<ScheduleDTO> todaySchedule = scheduleService.todaySchedule();
+		model.addAttribute("todaySchedule",todaySchedule);
 		logger.info("main");
-		
 		return "main/main";
 	}
 

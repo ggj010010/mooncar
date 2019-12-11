@@ -99,4 +99,10 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return scheduleDAO.scheduleUpdate(scheduleDTO);
 	}
 
+	@Override
+	public List<ScheduleDTO> todaySchedule() {
+		// TODO Auto-generated method stub
+		return scheduleDAO.todaySchedule();
+	}
+
 }

@@ -20,4 +20,5 @@ public interface ScheduleDAO {
 	
 	List<ScheduleDTO> Select_scheduleUpdate(ScheduleDTO scheduleDTO);
 	int scheduleUpdate(ScheduleDTO scheduleDTO);
+	public List<ScheduleDTO> todaySchedule();
 }
