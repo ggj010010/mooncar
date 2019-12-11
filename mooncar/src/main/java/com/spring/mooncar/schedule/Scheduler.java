@@ -31,8 +31,8 @@ public class Scheduler {
 	int i = 0;
 	 
 
-	//@Scheduled(cron="* * 8 * * *") 
-	@Scheduled(cron="*/20 * * * * *") 
+	@Scheduled(cron="* * 8 * * *") 
+	//@Scheduled(cron="*/20 * * * * *") 
 	public void scheduleRun(){
 		  
 		  final List<Schedule_EmailDTO> schedule_email = scheduleService.schedule_email();
@@ -53,7 +53,7 @@ public class Scheduler {
 						//System.out.println(emailDTO.getTitle());
 						helper.setSubject("<MoonCar> "+schedule_email.get(i).getC_name()+"고객님 내일 방문 있지않으셨죠 ?");
 						//System.out.println(emailDTO.getDesc());
-						helper.setText("내일"+schedule_email.get(i).getS_date()+"시에 "+schedule_email.get(i).getCar_name()+"("
+						helper.setText("내일 "+schedule_email.get(i).getS_date()+"시에 "+schedule_email.get(i).getCar_name()+"("
 						+schedule_email.get(i).getCar_number()+")의 "+schedule_email.get(i).getS_contents()+"점검 예약이 있습니다.", true);
 					} 
 				};
