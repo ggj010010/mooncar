@@ -79,6 +79,13 @@ public class CarDAOImpl implements CarDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("car.btnsearchFix", carDetailDTO);
 	}
+
+
+	@Override
+	public int carDelete(CarDTO carDTO) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("car.carDelete", carDTO);
+	}
 	
 	
 }

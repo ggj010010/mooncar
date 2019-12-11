@@ -497,7 +497,7 @@ $j(document).ready(function() {
         <div class="wrap" style="float: right; width : 30%;">
           <button class ="button" type="button" onclick="window.open('/popup/carpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 추가 </button>
           <button class="button" type="button" onclick="window.open('/popup/carupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 수정 </button>
-          <button class="button" type="button"> 삭제 </button>
+          <button class="button" type="button" onclick="window.open('/popup/cardelete?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> 삭제 </button>
        </div>
   </div>
     <div id="right" >

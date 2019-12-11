@@ -190,25 +190,25 @@ $j(document).ready(function() {
 	});
 </SCRIPT>
 </head>
-<body onresize="parent.resizeTo(700,650)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(680,600)" onload="parent.resizeTo(680,600)">
 <table style="width : 100%;">
 	<tr>
-		<th colspan="4">예약등록</th>
+		<th colspan="5">예약등록</th>
 	</tr>
 	<tr>
 		<td>고객명</td>
-		<td colspan="3" id="c_name" >${selectCustomerOne.c_name}</td>
+		<td colspan="4" id="c_name" >${selectCustomerOne.c_name}</td>
 	</tr>
 	
 	<tr>
 		<td>연락처</td>
 
-		<td colspan="3"style ="font-size : 20px;" id="c_tel">${selectCustomerOne.c_tel}</td>
+		<td colspan="4"style ="font-size : 20px;" id="c_tel">${selectCustomerOne.c_tel}</td>
 	</tr>
 	
 	<tr>
 		<td>차량</td>
-		<td colspan="3">
+		<td colspan="4">
 			<c:forEach var="selectCarOne" items="${selectCarOne}">
 				<input type="radio" value="${selectCarOne.car_number}" title="${selectCarOne.car_number}" name="chk_car">${selectCarOne.car_name}
 			 </c:forEach> 
@@ -216,16 +216,16 @@ $j(document).ready(function() {
 	</tr>
 	
 	 <tr>
-		<td>차형          </td>
+		<td>차형          </td><td></td>
 		<td class="car_size">크기 : </td>
 		<td class="car_type">종류 : </td>
 		<td class="car_fuel">연료 : </td>
 	<tr>
 		<td>방문일자</td>
 		<td colspan="2">
-			<input type="date" id="userdate" style="width : 75%; float : center; name="userdate">
+			<input type="date" id="userdate" style="width : 75%; float : right; name="userdate">
 		</td>
-		<td>  
+		<td colspan="2">  
             <input type="radio" value="오전" name="timeTF">오전
             <input type="radio" value="오후" name="timeTF">오후
 		   <select id="browsers1" name="time" style=" float : right;">
@@ -236,11 +236,11 @@ $j(document).ready(function() {
 	</tr>
 	<tr>
 		<td>예약 제목</td>
-		<td colspan="3"><textarea name="desc" id="desc" rows="2" cols="90" style="resize: none; width : 85%;"></textarea></td>
+		<td colspan="4"><textarea name="desc" id="desc" rows="2" cols="90" style="resize: none; width : 85%;"></textarea></td>
 	</tr>
 	<tr>
 		<td>예약 내용</td>
-		<td colspan="3">
+		<td colspan="4">
 			<textarea name="desc_detail" id="desc_detail" rows="4" cols="90" style="resize: none; width : 85%;"></textarea>
 		</td>
 	</tr>

@@ -146,10 +146,10 @@ $j(document).ready(function() {
 <link rel="stylesheet" type="text/css" href="/resources/js/mooncar.css">
 <title>Insert title here</title>
 </head>
-<body onresize="parent.resizeTo(700,650)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(800,600)" onload="parent.resizeTo(800,600)">
 <table style="width : 100%;">
 	<tr>
-		<th colspan="5">예약등록</th>
+		<th colspan="5">예약수정</th>
 	</tr>
 	<tr>
 		<td>연락처 </td>
@@ -169,14 +169,14 @@ $j(document).ready(function() {
 	
 	 <tr>
 		<td>차형          </td>
+		<td></td>  
 		<td class="car_size">크기 : ${Select_scheduleUpdate[0].carDTO.car_size}</td>
 		<td class="car_type">종류 : ${Select_scheduleUpdate[0].carDTO.car_category}</td>
 		<td class="car_fuel">연료 : ${Select_scheduleUpdate[0].carDTO.car_fuel_type}</td>
-		<td></td>  
 	<tr>
 		<td>방문일자</td>
 		<td colspan="2">
-			<input type="date" id="userdate" value="${Select_scheduleUpdate[0].date}" style="width : 75%; float : center; name="userdate">
+			<input type="date" id="userdate" value="${Select_scheduleUpdate[0].date}" style="width : 70%; float : right; name="userdate">
 		</td>
 		
 		<td>  
@@ -187,7 +187,7 @@ $j(document).ready(function() {
       	   </select>
 		</td>
 		<td>
-			<select id ="schedule" class="browser1" name="schedule" style=" float : right;">
+			<select id ="schedule" class="browser1" name="schedule" style=" float : center;">
 				<option value="0">예약</option> 
      			<option value="1">재연락</option> 
      			<option value="2">예약 처리완료</option> 
@@ -196,12 +196,12 @@ $j(document).ready(function() {
 	</tr>
 	<tr>
 		<td>예약 제목</td>
-		<td colspan="3"><textarea name="desc" id="desc" rows="2" cols="90" style="width : 85%;">${Select_scheduleUpdate[0].s_contents}</textarea></td>
+		<td colspan="4"><textarea name="desc" id="desc" rows="2" cols="90" style="resize: none; width : 85%;">${Select_scheduleUpdate[0].s_contents}</textarea></td>
 	</tr>
 	<tr>
 		<td>예약 내용</td>
 		<td colspan="4">
-			<textarea name="desc_detail" id="desc_detail" rows="4" cols="90" style="width : 85%;">${Select_scheduleUpdate[0].s_comment}</textarea>
+			<textarea name="desc_detail" id="desc_detail" rows="4" cols="90" style="resize: none; width : 85%;">${Select_scheduleUpdate[0].s_comment}</textarea>
 		</td>
 	</tr>
 	<tr>

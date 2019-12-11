@@ -24,4 +24,6 @@ public interface CarDAO {
 	public int carUpdate(CarDTO carDTO);
 
 	public List<CarDetailDTO> btnsearchFix(CarDetailDTO carDetailDTO);
+
+	public int carDelete(CarDTO carDTO);
 }

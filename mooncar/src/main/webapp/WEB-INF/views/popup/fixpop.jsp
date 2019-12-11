@@ -236,7 +236,7 @@ $j(document).ready(function(){
 		});
 </script>
 </head>
-<body onresize="parent.resizeTo(600,795)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(760,650)" onload="parent.resizeTo(760,650)">
 <table style="width : 100%;">
 	<tr>
 		<th colspan="4">정비등록</th>
@@ -269,7 +269,7 @@ $j(document).ready(function(){
 	<tr>
 		<td>방문일자</td>
 		<td colspan="2">
-			<input type="date" id="userdate" style="width : 75%; float : center; name="userdate" value="2019-11-14">
+			<input type="date" id="userdate" style="width : 70%; float : right; name="userdate" value="2019-11-14">
 		</td>
 		<td>  
             <input type="radio" value="오전" name="timeTF">오전

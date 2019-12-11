@@ -59,7 +59,7 @@ $j(document).ready(function() {
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
-      <<form id='main_search' target='_self' action='/main_search' method='post'>
+      <form id='main_search' target='_self' action='/main_search' method='post'>
       <select id="browsers2" name="search_option" >
           <option value="이름">이름</option>
           <option value="핸드폰">핸드폰</option>

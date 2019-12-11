@@ -66,12 +66,7 @@ public class CustomerController {
         return mav; // custview.jsp로 custview가 전달된다.
 	}
 	
-	@RequestMapping(value = "customer/ajax", method = RequestMethod.GET)
-	public String main(Model model) {
-		logger.info("main");
-		
-		return "customer/ajax";
-	}
+	
 
     @RequestMapping(value="customer/delete.do", method=RequestMethod.GET)
     public ModelAndView detail(CustomerDTO customerDTO) throws Exception{

@@ -478,7 +478,7 @@
     	});
 </script>
 </head>
-<body onresize="parent.resizeTo(750,910)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(680,700)" onload="parent.resizeTo(680,700)">
 <table style="width : 100%;">
 	<tr>
 		<th colspan="4">회원등록</th>

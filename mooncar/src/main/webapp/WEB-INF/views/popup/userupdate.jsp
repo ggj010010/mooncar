@@ -160,7 +160,7 @@
     	});
 </script>
 </head>
-<body onresize="parent.resizeTo(750,910)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(680,450)" onload="parent.resizeTo(680,450)">
 <table style="width : 100%;">
 	<tr>
 		<th colspan="4">회원수정</th>
@@ -214,7 +214,7 @@
 		<td colspan="3"><textarea class="input2" name="c_comment" id="c_comment" rows="2" cols="90" style="resize: none; width : 75%;">${selectCustomerOne.c_comment}</textarea></td>
 	</tr>
 	<tr>
-		<td colspan="4"><button id = "btnInsert" class ="button" type="button" style = "width : 40%;"> 등록하기 </button></td>
+		<td colspan="4"><button id = "btnInsert" class ="button" type="button" style = "width : 40%;"> 수정하기 </button></td>
 	</tr>
 </table>
 </body>

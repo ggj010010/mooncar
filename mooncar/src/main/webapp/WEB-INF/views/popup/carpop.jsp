@@ -299,7 +299,7 @@
 </script>
 
 </head>
-<body onresize="parent.resizeTo(750,810)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(680,550)" onload="parent.resizeTo(680,550)">
 <table style="width : 100%;">
 	<tr>
 		<th colspan="4">차량등록</th>

@@ -91,7 +91,6 @@
 		where
             car_number = #{car_number}
         
-        order by S_DATE desc
             
 	</select>
 	<insert id="insertSchedule" parameterType="com.spring.mooncar.dto.ScheduleDTO">

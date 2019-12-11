@@ -148,7 +148,7 @@
 </script>
 
 </head>
-<body onresize="parent.resizeTo(750,810)" onload="parent.resizeTo(500,400)">
+<body onresize="parent.resizeTo(680,600)" onload="parent.resizeTo(680,600)">
 <table style="width : 100%;">
 	<tr><th></th>
 		<th colspan="3">차 량 정 보 갱 신</th>

@@ -20,4 +20,5 @@ public interface CarService {
 	void car_kmUpdate(CarDTO carDTO);
 	int carUpdate(CarDTO carDTO);
 	public List<CarDetailDTO> btnsearchFix(CarDetailDTO cardetailDTO);
+	int carDelete(CarDTO carDTO);
 }

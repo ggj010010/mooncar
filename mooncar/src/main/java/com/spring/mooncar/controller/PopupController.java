@@ -233,6 +233,22 @@ public class PopupController {
    	    int carUpdate= carService.carUpdate(carDTO);
    	    return(carUpdate);
    	}
+    
+    @RequestMapping(value = "popup/cardelete", method = RequestMethod.GET)
+	public String cardelete(Model model,CustomerDTO customerDTO,CarDTO carDTO, HttpServletRequest hrq)throws Exception {
+		CustomerDTO selectCustomerOne = customerService.selectCustomerOne(customerDTO);
+		List<CarDTO> selectCarOne = customerService.selectCarOne(carDTO);
+		model.addAttribute("selectCustomerOne",selectCustomerOne);
+		model.addAttribute("selectCarOne",selectCarOne);
+		return "popup/cardelete";
+	}
+    
+    @ResponseBody
+   	@RequestMapping(value = "/carDelete", produces ="application/json; charset=utf8", method = RequestMethod.GET)
+   	public int carDelete(Model model, CarDTO carDTO) throws IOException {
+   	    int delete= carService.carDelete(carDTO);
+   	    return(delete);
+   	}
    
 }
 	
