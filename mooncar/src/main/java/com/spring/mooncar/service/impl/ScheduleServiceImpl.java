@@ -105,4 +105,10 @@ public class ScheduleServiceImpl implements ScheduleService{
 		return scheduleDAO.todaySchedule();
 	}
 
+	@Override
+	public void checkUpdate(ScheduleDTO scheduleDTO) {
+		scheduleDAO.checkUpdate(scheduleDTO);
+		
+	}
+
 }

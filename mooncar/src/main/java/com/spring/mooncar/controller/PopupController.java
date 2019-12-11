@@ -29,6 +29,7 @@ import com.spring.mooncar.dto.ScheduleDTO;
 import com.spring.mooncar.service.CarService;
 import com.spring.mooncar.service.CodeService;
 import com.spring.mooncar.service.CustomerService;
+import com.spring.mooncar.service.ScheduleService;
 
 @Controller
 public class PopupController {
@@ -39,6 +40,8 @@ public class PopupController {
 	CarService carService;
 	@Autowired
 	CodeService codeService;
+	@Autowired
+	ScheduleService scheduleService;
 	
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
@@ -124,12 +127,15 @@ public class PopupController {
 	
 	 @ResponseBody
 	 @RequestMapping(value = "/carDetailInsert", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-	 public int carDetailInsert(Model model, CarDetailDTO carDetailDTO,CarDTO carDTO) throws IOException {
+	 public int carDetailInsert(Model model, CarDetailDTO carDetailDTO,CarDTO carDTO,ScheduleDTO scheduleDTO) throws IOException {
 		 System.out.println("car : "+carDTO.getCar_km());
 		 System.out.println("car D : "+carDetailDTO.getCar_d_km());
+		 scheduleDTO.setS_date(carDetailDTO.getCar_date());
+		 System.out.println("sdate : "+scheduleDTO.getS_date());
 		 int check = carService.Detail_check(carDetailDTO);
 			if(check == 0) {
 				carService.car_kmUpdate(carDTO);
+				scheduleService.checkUpdate(scheduleDTO);
 				int insert = carService.carDetailInsert(carDetailDTO);
 			}
 		    

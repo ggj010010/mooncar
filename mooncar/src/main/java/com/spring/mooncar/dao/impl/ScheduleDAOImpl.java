@@ -88,5 +88,11 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("schedule.todaySchedule");
 	}
+
+	@Override
+	public void checkUpdate(ScheduleDTO scheduleDTO) {
+		// TODO Auto-generated method stub
+		sqlSession.update("schedule.checkUpdate",scheduleDTO);
+	}
 	
 }
