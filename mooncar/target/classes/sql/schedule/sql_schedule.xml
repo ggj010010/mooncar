@@ -72,7 +72,8 @@
 				car_name,
 				car_size,
 				car_category,
-				car_fuel_type
+				car_fuel_type,
+				customer.c_email as c_email
 		FROM 
 			customer , car
 		where
@@ -181,6 +182,7 @@
     	,(select car_category from car where CAR_NUMBER = #{car_number}) as car_category
     	,(select car_fuel_type from car where CAR_NUMBER = #{car_number}) as car_fuel_type
     	,(select car_name from car where CAR_NUMBER = #{car_number}) as car_name
+    	,(select c_email from customer where c_tel = #{c_tel}) as c_email
     	
 	from  schedule 
 	where c_tel = #{c_tel} and CAR_NUMBER = #{car_number} and s_check in (0,1)
