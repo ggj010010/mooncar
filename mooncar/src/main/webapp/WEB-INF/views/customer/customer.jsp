@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 
                 if($j(this).val().length > 10) {
                     $j(this).val($j(this).val().substring(0, 10));
-                    alert("ÄÚ¸àÆ®°¡ ³Ê¹« ±é´Ï´Ù.");
+                    alert("ì½”ë©˜íŠ¸ê°€ ë„ˆë¬´ ê¹ë‹ˆë‹¤.");
                 }
         	});
 
@@ -55,14 +55,14 @@
         								$j(".car_size").text(val.car_size);
         								$j(".car_category").text(val.car_category);
         								$j(".car_fuel_type").text(val.car_fuel_type); 
-        								$j(".car_oil_date").text(val.car_oil_date + " °³¿ù");
+        								$j(".car_oil_date").text(val.car_oil_date + " ê°œì›”");
         								$j(".car_comment").text(val.car_comment); 
-        								//Á¤ºñÁ¤º¸ Âï¾îÁÖ´Â °Å
+        								//ì •ë¹„ì •ë³´ ì°ì–´ì£¼ëŠ” ê±°
         								{
         									var html = "";
         									$j("#car_detail").empty();
         									html += "<table id='response_date_table'; style='width : 100%';>";
-        									html += "<tr><th>Á¤ºñ³»¿ª</th><th>´ÙÀ½Á¤ºñ</th><th>Å°·Î¼ö</th><th>³¯Â¥</th></tr>";
+        									html += "<tr><th>ì •ë¹„ë‚´ì—­</th><th>ë‹¤ìŒì •ë¹„</th><th>í‚¤ë¡œìˆ˜</th><th>ë‚ ì§œ</th></tr>";
         									
         									var car_detail = returndata.car_detail;
         									$j.each(car_detail , function(idx, val) {
@@ -80,12 +80,12 @@
         									html += "</table>";
         									$j("#car_detail").append(html);
         								}
-        								//¿¹¾àÁ¤º¸ Âï¾îÁÖ´Â °Å
+        								//ì˜ˆì•½ì •ë³´ ì°ì–´ì£¼ëŠ” ê±°
         								{
         									var html = "";
         									$j("#selectCarSchedule").empty();
         									html += "<table id='response_date_table'; style='width : 100%';>";
-        									html += "<tr><th>¿¹¾à¸í</th><th>¿¹¾à»ó¼¼</th><th>Á¾·ù</th><th>³¯Â¥</th></tr>";
+        									html += "<tr><th>ì˜ˆì•½ëª…</th><th>ì˜ˆì•½ìƒì„¸</th><th>ì¢…ë¥˜</th><th>ë‚ ì§œ</th></tr>";
         									
         									var selectCarSchedule = returndata.selectCarSchedule;
         									$j.each(selectCarSchedule , function(idx, val) {
@@ -94,13 +94,13 @@
         										html += "<td>"+val.s_contents+"</td>"
         										html += "<td>"+val.s_comment+"</td>"
         										if(val.s_check==0){
-        											html += "<td>Ã¹¿¬¶ô</td>"
+        											html += "<td>ì²«ì—°ë½</td>"
         										}
         										else if(val.s_check==1){
-        											html += "<td>Àç¿¬¶ô</td>"
+        											html += "<td>ì¬ì—°ë½</td>"
         										}
         										else if(val.s_check==2){
-        											html += "<td>Á¤ºñ¿Ï·á</td>"
+        											html += "<td>ì •ë¹„ì™„ë£Œ</td>"
         										}
         										html += "<td>"+val.s_date+"</td></tr>"
         										
@@ -118,12 +118,12 @@
         					error : function(jqXHR, textStatus, errorThrown) {
         					 	if(textStatus=="timeout") {
 
-        				        	alert("½Ã°£ÀÌ ÃÊ°úµÇ¾î µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.");
+        				        	alert("ì‹œê°„ì´ ì´ˆê³¼ë˜ì–´ ë°ì´í„°ë¥¼ ìˆ˜ì‹ í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.");
 
         				        } 
         					 	else {
 
-        				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"µ¥ÀÌÅÍ Àü¼Û¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØ ÁÖ¼¼¿ä");
+        				        	alert(jqXHR.status+jqXHR.responseText+textStatus+errorThrown+"ë°ì´í„° ì „ì†¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ ì£¼ì„¸ìš”");
 
         				        } 
         					
@@ -132,7 +132,7 @@
         		}).on("click", "#insertCd", function() {
         			var cus_d_contents = $j(CusDetail).val();
         			if(cus_d_contents==""){
-        				alert("³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä");
+        				alert("ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”");
         			}else{        				
 	        			var c_tel=$j("#c_tel").text();
         			}
@@ -150,14 +150,14 @@
        					contentType:"application/json;charset=UTF-8",
        					timeout : 3000,
        					success : function(insert) {
-       						alert("Ãß°¡¿Ï·áµÇ¾ú½À´Ï´Ù.");
+       						alert("ì¶”ê°€ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
        						location.reload();
        				            
        					},//end success
        					error : function(jqXHR, textStatus, errorThrown) {
        					 	if(textStatus=="timeout") {
 
-       				        	alert("½Ã°£ÀÌ ÃÊ°úµÇ¾î µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.");
+       				        	alert("ì‹œê°„ì´ ì´ˆê³¼ë˜ì–´ ë°ì´í„°ë¥¼ ìˆ˜ì‹ í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.");
 
        				        } 
        					 	else {
@@ -171,7 +171,7 @@
        		}).on("click", "#btnsearchFix", function() {
         		var car_number=$j(".car_number").text();
     			if(car_number=="-"){
-    				alert("Â÷·®À» ¼±ÅÃÇÑ ÈÄ °Ë»öÇØÁÖ¼¼¿ä.");
+    				alert("ì°¨ëŸ‰ì„ ì„ íƒí•œ í›„ ê²€ìƒ‰í•´ì£¼ì„¸ìš”.");
     			}
     			else{
 	    			var startDate = $j("#startDate").val();
@@ -204,7 +204,7 @@
    						var html = "";
 						$j("#car_detail").empty();
 						html += "<table id='response_date_table'; style='width : 100%';>";
-						html += "<tr><th>Á¤ºñ³»¿ª</th><th>´ÙÀ½Á¤ºñ</th><th>Å°·Î¼ö</th><th>³¯Â¥</th></tr>";
+						html += "<tr><th>ì •ë¹„ë‚´ì—­</th><th>ë‹¤ìŒì •ë¹„</th><th>í‚¤ë¡œìˆ˜</th><th>ë‚ ì§œ</th></tr>";
 						
 						var car_detail = returnFix.btnsearchFix;
 						$j.each(car_detail , function(idx, val) {
@@ -226,7 +226,7 @@
    					error : function(jqXHR, textStatus, errorThrown) {
    					 	if(textStatus=="timeout") {
 
-   				        	alert("½Ã°£ÀÌ ÃÊ°úµÇ¾î µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.");
+   				        	alert("ì‹œê°„ì´ ì´ˆê³¼ë˜ì–´ ë°ì´í„°ë¥¼ ìˆ˜ì‹ í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.");
 
    				        } 
    					 	else {
@@ -273,7 +273,7 @@
 					error : function(jqXHR, textStatus, errorThrown) {
 					 	if(textStatus=="timeout") {
 
-				        	alert("½Ã°£ÀÌ ÃÊ°úµÇ¾î µ¥ÀÌÅÍ¸¦ ¼ö½ÅÇÏÁö ¸øÇÏ¿´½À´Ï´Ù.");
+				        	alert("ì‹œê°„ì´ ì´ˆê³¼ë˜ì–´ ë°ì´í„°ë¥¼ ìˆ˜ì‹ í•˜ì§€ ëª»í•˜ì˜€ìŠµë‹ˆë‹¤.");
 
 				        } 
 					 	else {
@@ -288,9 +288,46 @@
         </script>
         
 <title>Insert title here</title>
+<script type="text/javascript">
+$j(document).on("keyup", "#search_customer", function() {
+	if($j("#browsers2").val() == "ì´ë¦„"){
+		$j(this).val($j(this).val().replace(/[^(ã„±-í£)]/gi, ''));
 
+	}
+	else if($j("#browsers2").val() == "í•¸ë“œí°"){
+		$j(this).val( $j(this).val().replace(/[^0-9]/gi,"") );
+		if($j(this).val().length > 11) {
+            $j(this).val($j(this).val().substring(0, 11));
+            alert("11ìë¥¼ ë„˜ì„ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        }
+		  
+	}
+	else if($j("#browsers2").val() == "ì„±ë³„"){
+		$j(this).val($j(this).val().replace(/[^(ã„±-í£)]/gi, ''));
+	}
+});
 
-<!--»ó´Ü (°øÅë) -->
+$j(document).ready(function() {
+	}).on("click", ".button1", function(){
+		if($j("#browsers2").val() == "ì´ë¦„"){
+			$j("#main_search").submit();
+		}
+		else if($j("#browsers2").val() == "í•¸ë“œí°"){
+			$j("#main_search").submit();
+		}
+		else if($j("#browsers2").val() == "ì„±ë³„"){
+			if($j("#search_customer").val() != "ë‚¨ì" ||$j("#search_customer").val() != "ë‚¨" ||$j("#search_customer").val() != "ì—¬ì" ||$j("#search_customer").val() != "ì—¬" ){
+				  
+				alert("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
+			}else{
+				$j("#main_search").submit();
+			}
+		}
+		
+	});
+</script>
+
+<!--ìƒë‹¨ (ê³µí†µ) -->
    <h1 align = "center">MoonCar</h1>
             <button class="btn" id="btn" type="button" onclick="window.open('/popup/userpop', '_blank', 'toolbars=no,scrollbars=no'); return false;" 
             style="float : right; border : 0; background-color : white";>
@@ -299,13 +336,15 @@
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
-      <select id="browsers2" name="startdate" >
-            <option value="ÀÌ¸§">ÀÌ¸§</option>
-          <option value="ÇÚµåÆù">ÇÚµåÆù</option>
-          <option value="¼ºº°">¼ºº°</option>
+      <form id='main_search' target='_self' action='/main_search' method='post'>
+      <select id="browsers2" name="search_option" >
+          <option value="ì´ë¦„">ì´ë¦„</option>
+          <option value="í•¸ë“œí°">í•¸ë“œí°</option>
+          <option value="ì„±ë³„">ì„±ë³„</option>
       </select>
-	  		 <input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
-             <button class ="button1" type="button"> °Ë»ö </button>
+	  		 <input type="text" id = "search_customer" name="search_customer" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
+             <button class ="button1" type="button"> ê²€ìƒ‰ </button>
+   	</form>
    </div></div>
 </div>
    <br><br>
@@ -319,46 +358,46 @@
 </head>
 <body>
 <br>
-   <h2 align = "center">È¸¿øÁ¤º¸</h2>
+   <h2 align = "center">íšŒì›ì •ë³´</h2>
 <div class="board-container" >
   <div id="left" >
     <div id="left">
         <table style = "float : center; width : 100%;">
            <tr>
-              <th colspan="2">È¸¿øÁ¤º¸</th>
+              <th colspan="2">íšŒì›ì •ë³´</th>
            </tr>
            <tr>
-              <td>ÀÌ¸§</td>
+              <td>ì´ë¦„</td>
               <td>${selectCustomerOne.c_name}</td>
            </tr>
            <tr>
-              <td>¿¬¶ôÃ³</td>
+              <td>ì—°ë½ì²˜</td>
               <td id="c_tel">${selectCustomerOne.c_tel}</td>
            </tr>
              <tr>
-              <td>¼ºº°</td>
+              <td>ì„±ë³„</td>
              <c:choose>
               		<c:when test="${selectCustomerOne.c_gender == '1'}">
-              			<td>³²ÀÚ</td>
+              			<td>ë‚¨ì</td>
               		</c:when>
         			<c:otherwise> 
-              			<td>¿©ÀÚ</td>
+              			<td>ì—¬ì</td>
               		</c:otherwise>
                </c:choose>
            </tr>
            
            <tr>
-              <td>ÀÌ¸ŞÀÏ</td>
+              <td>ì´ë©”ì¼</td>
               <td>${selectCustomerOne.c_email}</td>
            </tr>
            <tr>
-              <td>Æ¯ÀÌ»çÇ×</td>
+              <td>íŠ¹ì´ì‚¬í•­</td>
               	<td>${selectCustomerOne.c_comment}</td>
            </tr>
        	 <tr>
        		<td colspan="2">
        		    <button class="button" type="button" style="width : 30%;float : right; height : 100%"
-       		    onclick="window.open('/popup/userupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ¼öÁ¤ </button>
+       		    onclick="window.open('/popup/userupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ìˆ˜ì • </button>
        		</td>
       	 </tr>
        </table>
@@ -384,7 +423,7 @@
 	       	  <tr>
 	       	  	<td>
 	       			<input id="CusDetail" type="text" name="CusDetail" size="50" style="color : black; border-radius: 8px; background-color: white; width:60%; height:100%; letter-spacing: 2px; text-align:center; font-size : 15px">
-	        		<button id="insertCd" class="button" type="button" style="width : 30%;float : right; height : 100%"> Ãß°¡ </button>
+	        		<button id="insertCd" class="button" type="button" style="width : 30%;float : right; height : 100%"> ì¶”ê°€ </button>
 	        	</td>
 	          </tr>
 	       </table>
@@ -400,7 +439,7 @@
         
  	<table style = "width : 100%;">
         <tr>
-           <th>Â÷·®</th>
+           <th>ì°¨ëŸ‰</th>
            <c:forEach var="selectCarOne" items="${selectCarOne}" varStatus ="sta">
 				<c:choose>
 				<c:when test="${sta.index eq 0}">
@@ -418,68 +457,68 @@
     <br><br><br>
          <table style = "float : center; width : 100%;">
            <tr>
-              <th colspan="2">Â÷·®Á¤º¸</th>
+              <th colspan="2">ì°¨ëŸ‰ì •ë³´</th>
            </tr>
            <tr>
-              <td>Â÷·®¹øÈ£</td>
+              <td>ì°¨ëŸ‰ë²ˆí˜¸</td>
               <td class=car_number>-</td>
            </tr>
            <tr>
-              <td>Â÷Á¾</td>
+              <td>ì°¨ì¢…</td>
               <td class=car_name> &nbsp&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp&nbsp&nbsp</td>
            </tr>
            <tr>
-              <td>Å°·Î¼ö</td>
+              <td>í‚¤ë¡œìˆ˜</td>
               <td class=car_km> - </td>
            </tr>
            <tr>
-              <td>Â÷·®Å©±â</td>
+              <td>ì°¨ëŸ‰í¬ê¸°</td>
               <td class=car_size> - </td>
            </tr>
            <tr>
-              <td>Á¾·ù</td>
+              <td>ì¢…ë¥˜</td>
               <td class=car_category> - </td>
            </tr>
            <tr>
-              <td>¿¬·á</td>
+              <td>ì—°ë£Œ</td>
               <td class=car_fuel_type> - </td>
            </tr>
           
            <tr>
-           	  <td>¿£Áø¿ÀÀÏ±³Ã¼</td>
+           	  <td>ì—”ì§„ì˜¤ì¼êµì²´</td>
               <td class=car_oil_date> - </td>
            </tr>
            <tr>
-              <td>Â÷·®»ó¼¼</td>
+              <td>ì°¨ëŸ‰ìƒì„¸</td>
               <td class=car_comment> - </td>
            </tr>
      </table>
      <br>
         <div class="wrap" style="float: right; width : 30%;">
-          <button class ="button" type="button" onclick="window.open('/popup/carpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> Ãß°¡ </button>
-          <button class="button" type="button" onclick="window.open('/popup/carupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ¼öÁ¤ </button>
-          <button class="button" type="button"> »èÁ¦ </button>
+          <button class ="button" type="button" onclick="window.open('/popup/carpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ì¶”ê°€ </button>
+          <button class="button" type="button" onclick="window.open('/popup/carupdate?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ìˆ˜ì • </button>
+          <button class="button" type="button"> ì‚­ì œ </button>
        </div>
   </div>
     <div id="right" >
     	<div id="selectCarSchedule">
            <table style = "width : 100%";>
            <tr>
-              <th>¿¹¾à¸í</th>
-              <th>¿¹¾à»ó¼¼</th>
-              <th>Á¾·ù</th>
-              <th>³¯Â¥</th>              
+              <th>ì˜ˆì•½ëª…</th>
+              <th>ì˜ˆì•½ìƒì„¸</th>
+              <th>ì¢…ë¥˜</th>
+              <th>ë‚ ì§œ</th>              
            </tr>
            <tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
           
         </table>
         </div>
         <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" onclick="window.open('/popup/schedulepop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> Ãß°¡ </button>
+          <button class ="button" type="button" onclick="window.open('/popup/schedulepop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ì¶”ê°€ </button>
        </div>
         <table style = "width : 100%";>
            <tr>
-              <th colspan="4">Á¤ºñ³»¿ª</th>
+              <th colspan="4">ì •ë¹„ë‚´ì—­</th>
            </tr>
            <tr>
               <td colspan="2">
@@ -495,17 +534,17 @@
            </tr>
            <tr>
               <td colspan="3">KeyWord &nbsp : &nbsp <input type="text" id="keyword" name="keyword" size="40"></td>
-              <td><button class="button" id="btnsearchFix" type="button" style = "width : 60%; height : 60%;"> °Ë»ö </button></td>
+              <td><button class="button" id="btnsearchFix" type="button" style = "width : 60%; height : 60%;"> ê²€ìƒ‰ </button></td>
            </tr>
         </table>
         <br>
         <div id="car_detail">
         <table style = "width : 100%";>
            <tr>
-              <th>Á¤ºñ³»¿ª</th>
-              <th>´ÙÀ½Á¤ºñ</th>
-              <th>Å°·Î¼ö</th>     
-              <th>¹æ¹®³¯Â¥</th>              
+              <th>ì •ë¹„ë‚´ì—­</th>
+              <th>ë‹¤ìŒì •ë¹„</th>
+              <th>í‚¤ë¡œìˆ˜</th>     
+              <th>ë°©ë¬¸ë‚ ì§œ</th>              
            </tr>
            <tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
         </table>
@@ -513,7 +552,7 @@
         
 
         <div class="wrap" style="float: right; width : 10%;">
-          <button class ="button" type="button" onclick="window.open('/popup/fixpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> Ãß°¡ </button>
+          <button class ="button" type="button" onclick="window.open('/popup/fixpop?c_tel=${selectCustomerOne.c_tel}', '_blank', 'toolbars=no,scrollbars=no'); return false;"> ì¶”ê°€ </button>
        </div>
     </div>
 </div>
