@@ -11,6 +11,7 @@ import com.spring.mooncar.dto.CalendarDTO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
+import com.spring.mooncar.dto.Schedule_EmailDTO;
 
 @Repository
 public class ScheduleDAOImpl implements ScheduleDAO{
@@ -93,6 +94,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 	public void checkUpdate(ScheduleDTO scheduleDTO) {
 		// TODO Auto-generated method stub
 		sqlSession.update("schedule.checkUpdate",scheduleDTO);
+	}
+
+	@Override
+	public List<Schedule_EmailDTO> schedule_email() {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectList("schedule.schedule_email");
 	}
 	
 }

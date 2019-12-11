@@ -1,7 +1,7 @@
 package com.spring.mooncar.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.common.CommonUtil;
-import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.EmailDTO;
 import com.spring.mooncar.dto.MainSearchDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
-import com.spring.mooncar.dto.SearchDTO;
 import com.spring.mooncar.service.ScheduleService;
 import com.spring.mooncar.service.SearchService;
 
@@ -35,7 +32,6 @@ public class MainController {
 	ScheduleService scheduleService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Model model, ScheduleDTO scheduleDTO) {
 		List<ScheduleDTO> todaySchedule = scheduleService.todaySchedule();
@@ -59,4 +55,6 @@ public class MainController {
 			model.addAttribute("Search_Customer",Search_Customer);
 			return "customer/custview";
 	    }
+	    
+	  
 }

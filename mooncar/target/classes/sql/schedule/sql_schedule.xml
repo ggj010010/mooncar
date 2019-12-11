@@ -10,7 +10,15 @@
 		<result property="c_email" column="c_email" />
 		<result property="c_comment" column="c_comment" />
 	</resultMap>
-	
+	<resultMap type="com.spring.mooncar.dto.Schedule_EmailDTO" id="Schedule_EmailDTO">
+		<result property="car_name" column="car_name" />
+		<result property="c_name" column="c_name" />
+		<result property="s_date" column="s_date" />
+		<result property="c_email" column="c_email" />
+		<result property="s_contents" column="s_contents" />
+		<result property="car_number" column="car_number" />
+
+	</resultMap>
 	<resultMap type="com.spring.mooncar.dto.CarDTO" id="CarDTO">
 		<result property="car_number" column="car_number" />
 		<result property="car_km" column="car_km" />
@@ -53,6 +61,25 @@
 		<result property="title" column="title" />
 		<result property="start" column="start" />
 	</resultMap>
+	
+	<select id="schedule_email" resultMap="Schedule_EmailDTO">
+	/*schedule.schedule_email*/
+	select customer.c_name as c_name, 
+       schedule.car_number as car_number,
+       schedule.s_contents as s_contents,
+       to_char(schedule.s_date, 'YYYY/MM/DD HH24') as s_date,
+       car.car_name as car_name,
+       customer.c_email as c_email
+	from schedule, customer, car
+	where 
+		schedule.c_tel = customer.c_tel 
+		and
+   			car.car_number = schedule.car_number
+		and
+    		to_date(s_date,'YY-MM-DD') in (select to_date(sysdate,'YY-MM-DD')+1 from dual)
+        
+            
+	</select>
 	<select id="auto_customer" parameterType="com.spring.mooncar.dto.CustomerDTO" resultMap="CustomerDTO">
 
 	/*schedule.auto_customer*/

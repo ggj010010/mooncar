@@ -6,6 +6,7 @@ import com.spring.mooncar.dto.CalendarDTO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
+import com.spring.mooncar.dto.Schedule_EmailDTO;
 
 public interface ScheduleDAO {
 	public List<CustomerDTO> Auto_Customer(CustomerDTO customerDTO);
@@ -22,4 +23,5 @@ public interface ScheduleDAO {
 	int scheduleUpdate(ScheduleDTO scheduleDTO);
 	public List<ScheduleDTO> todaySchedule();
 	public void checkUpdate(ScheduleDTO scheduleDTO);
+	List<Schedule_EmailDTO> schedule_email();
 }

@@ -3,6 +3,7 @@ package com.spring.mooncar.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.spring.mooncar.dao.ScheduleDAO;
@@ -10,6 +11,7 @@ import com.spring.mooncar.dto.CalendarDTO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
+import com.spring.mooncar.dto.Schedule_EmailDTO;
 import com.spring.mooncar.service.ScheduleService;
 @Service
 public class ScheduleServiceImpl implements ScheduleService{
@@ -109,6 +111,13 @@ public class ScheduleServiceImpl implements ScheduleService{
 	public void checkUpdate(ScheduleDTO scheduleDTO) {
 		scheduleDAO.checkUpdate(scheduleDTO);
 		
+	}
+
+	@Override
+	public List<Schedule_EmailDTO> schedule_email() {
+		// TODO Auto-generated method stub
+		System.out.println("a");
+		return scheduleDAO.schedule_email();
 	}
 
 }

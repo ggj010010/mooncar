@@ -6,6 +6,7 @@ import com.spring.mooncar.dto.CalendarDTO;
 import com.spring.mooncar.dto.CarDTO;
 import com.spring.mooncar.dto.CustomerDTO;
 import com.spring.mooncar.dto.ScheduleDTO;
+import com.spring.mooncar.dto.Schedule_EmailDTO;
 
 public interface ScheduleService {
 	List<ScheduleDTO> selectScheduleToday(ScheduleDTO scheduleDTO);//메인에서 사용
@@ -24,4 +25,5 @@ public interface ScheduleService {
 	int scheduleUpdate(ScheduleDTO scheduleDTO);
 	List<ScheduleDTO> todaySchedule();
 	void checkUpdate(ScheduleDTO scheduleDTO);
+	List<Schedule_EmailDTO> schedule_email();
 }
