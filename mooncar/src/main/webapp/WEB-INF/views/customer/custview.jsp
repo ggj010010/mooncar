@@ -13,18 +13,18 @@
 
 <title>Insert title here</title>
 
-    <!--»ó´Ü (°øÅë) -->
+    <!--ìƒë‹¨ (ê³µí†µ) -->
 <h1 align = "center">MoonCar</h1>
 <div class="board-container" >
 <div id="right">
   <div class="wrap" style="float : right;">
       <select id="browsers2" name="startdate" >
-            <option value="ÀÌ¸§">ÀÌ¸§</option>
-          <option value="ÇÚµåÆù">ÇÚµåÆù</option>
-          <option value="¼ºº°">¼ºº°</option>
+            <option value="ì´ë¦„">ì´ë¦„</option>
+          <option value="í•¸ë“œí°">í•¸ë“œí°</option>
+          <option value="ì„±ë³„">ì„±ë³„</option>
       </select>
 	  		 <input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
-             <button class ="button1" type="button"> °Ë»ö </button>
+             <button class ="button1" type="button"> ê²€ìƒ‰ </button>
   </div></div>
 </div>
    <br><br>
@@ -39,23 +39,23 @@
 <body>
  <br>
 <div class="board-container" >
-    <h2 align = "center">È¸¿ø°Ë»ö</h2>
+    <h2 align = "center">íšŒì›ê²€ìƒ‰</h2>
         <table style = "margin: auto; width : 50%;">
            <tr>
-              <th>ÀÌ¸§</th>
-              <th>ÀüÈ­¹øÈ£</th>
-			  <th>¼ºº°</th>
+              <th>ì´ë¦„</th>
+              <th>ì „í™”ë²ˆí˜¸</th>
+			  <th>ì„±ë³„</th>
 			  <th>Del</th>
 			  
            </tr>
 
 <script>
-//»èÁ¦¹öÆ°
+//ì‚­ì œë²„íŠ¼
 	$(document).ready(function() {
 		$(".btnDelete").click(function() {
 			var val = $(this).val();
 			alert(val);
-			if (confirm("»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?")) {
+			if (confirm("ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
 				location.href="/customer/delete.do?c_tel="+$(this).val();
 			}
 		});
@@ -68,13 +68,28 @@
               <td><a href="/customer/customer?c_tel=${cv.c_tel}">${cv.c_tel}</a></td>
               <c:choose>
               		<c:when test="${cv.c_gender == '1'}">
-              			<td>³²ÀÚ</td>
+              			<td>ë‚¨ì</td>
               		</c:when>
         			<c:otherwise> 
-              			<td>¿©ÀÚ</td>
+              			<td>ì—¬ì</td>
               		</c:otherwise>
                </c:choose>
-              <td><button class="button btnDelete" type="button" style="width : 60%;float : center; height : 100%"  value="${cv.c_tel}"> »èÁ¦ </button></td>
+              <td><button class="button btnDelete" type="button" style="width : 60%;float : center; height : 100%"  value="${cv.c_tel}"> ì‚­ì œ </button></td>
+		  </c:forEach>
+		  
+		  <c:forEach var="sc" items="${Search_Customer}">
+           <tr>
+              <td><a href="/customer/customer?c_tel=${sc.c_tel}">${sc.c_name}</a></td>
+              <td><a href="/customer/customer?c_tel=${sc.c_tel}">${sc.c_tel}</a></td>
+              <c:choose>
+              		<c:when test="${sc.c_gender == '1'}">
+              			<td>ë‚¨ì</td>
+              		</c:when>
+        			<c:otherwise> 
+              			<td>ì—¬ì</td>
+              		</c:otherwise>
+               </c:choose>
+              <td><button class="button btnDelete" type="button" style="width : 60%;float : center; height : 100%"  value="${sc.c_tel}"> ì‚­ì œ </button></td>
 		  </c:forEach>
         </table>
    
