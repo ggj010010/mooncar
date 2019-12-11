@@ -14,7 +14,8 @@ public class ScheduleDTO {
 	String c_email;
 	String date;
 	String time;
-	
+	String car_name;
+	String c_name;
 	String name;
 	String start;
 	String title;
@@ -32,6 +33,18 @@ public class ScheduleDTO {
 
 
 
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
+	public String getC_name() {
+		return c_name;
+	}
+	public void setC_name(String c_name) {
+		this.c_name = c_name;
+	}
 	public String getC_email() {
 		return c_email;
 	}

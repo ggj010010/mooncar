@@ -76,7 +76,9 @@ $j(document).ready(function() {
 		var c_tel = $j("#tel").val();
 		var c_name = $j(".c_name").text();
 		var car_number = $j(".car").text().split("-")[1];
+		var car_name = $j(".car").text().split("-")[0];
 		var s_check =  $j('select[name="schedule"]').val();
+		var c_email = $j("#c_email").val();
 		if($j('input:radio[name=timeTF]').is(':checked') == true && $j('[name=time] > option:selected').val() != '시간선택'){
 			var timeTF = $j('input[name="timeTF"]:checked').val();
 			var time = $j('select[name="time"]').val();
@@ -106,13 +108,16 @@ $j(document).ready(function() {
 					"s_contents" : scheduleTitle,
 					"s_comment" : scheduleDedail,
 					"s_date" : date,
-					"s_check" : s_check
+					"s_check" : s_check,
+					"c_email" : c_email,
+					"c_name" : c_name,
+					"car_name" : car_name
 				}
 			,
 			//JSON.stringify()
 			dataType : "json",
 			//contentType:"application/json;charset=UTF-8",
-			timeout : 3000,
+			timeout : 100000,
 			success : function(returndata) {
 					//console.log(returndata.count)
 					if(returndata == 1){
@@ -158,12 +163,15 @@ $j(document).ready(function() {
 	</tr>
 	<tr>
 		<td>고객명</td>
-		<td colspan="4" class="c_name">${Select_scheduleUpdate[0].customerDTO.c_name}</td>
+		<td colspan="4" class="c_name">
+			<input type="hidden" id="c_email" value="${Select_scheduleUpdate[0].customerDTO.c_email}" />
+			${Select_scheduleUpdate[0].customerDTO.c_name}
+		</td>
 	</tr>
 	<tr>
 		<td>차량</td>
 		<td colspan="4" class="car">
-		${Select_scheduleUpdate[0].carDTO.car_name}-${Select_scheduleUpdate[0].car_number}
+			${Select_scheduleUpdate[0].carDTO.car_name}-${Select_scheduleUpdate[0].car_number}
 		</td>
 	</tr>
 	

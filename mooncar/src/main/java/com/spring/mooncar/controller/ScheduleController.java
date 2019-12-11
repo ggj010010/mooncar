@@ -59,7 +59,7 @@ public class ScheduleController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/scheduleUpdate", method = RequestMethod.GET, produces ="application/json; charset=utf8")
-	public int scheduleUpdate(Model model, ScheduleDTO scheduleDTO, final EmailDTO emailDTO) throws IOException {
+	public int scheduleUpdate(Model model, final ScheduleDTO scheduleDTO, final EmailDTO emailDTO) throws IOException {
 		int update = scheduleService.scheduleUpdate(scheduleDTO);
 	    if(update == 1) {
 	    	final MimeMessagePreparator preparator = new MimeMessagePreparator() {
@@ -67,18 +67,14 @@ public class ScheduleController {
 					final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 					
 					helper.setFrom("answhdgkr9494@gmail.com");
-					for(int i = 0; i< emailDTO.getC_email().length;i++) {
-						System.out.println(emailDTO.getC_email()[i]);
-					}
 					InternetAddress[] toAddr = new InternetAddress[emailDTO.getC_email().length];
-					for(int i = 0; i< emailDTO.getC_email().length;i++) {
+					for(int i = 0; i< 1;i++) {
 						toAddr[i] = new InternetAddress (emailDTO.getC_email()[i]);
 					}
 					helper.setTo(toAddr);
-					System.out.println(emailDTO.getTitle());
-					helper.setSubject(emailDTO.getTitle());
-					System.out.println(emailDTO.getDesc());
-					helper.setText(emailDTO.getDesc(), true);
+					helper.setSubject("<MoonCar>"+scheduleDTO.getS_date().split("-")[0]+"년"+scheduleDTO.getS_date().split("-")[1]+"월"+scheduleDTO.getS_date().split("-")[2]+"일"+scheduleDTO.getS_date().split("-")[3]+"시  "
+							+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량의 예약이 변경되었습니다.");
+							helper.setText(scheduleDTO.getC_name()+"고객님의"+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량의 예약이 변경되었습니다. 예약내용:"+scheduleDTO.getS_contents(), true);
 				} 
 			};
 			mailSender.send(preparator);
@@ -156,11 +152,29 @@ public class ScheduleController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/scheduleInsert", produces ="application/json; charset=utf8", method = RequestMethod.GET)
-	public int scheduleInsert(Model model, ScheduleDTO scheduleDTO) throws IOException {
+	public int scheduleInsert(Model model, final ScheduleDTO scheduleDTO, final EmailDTO emailDTO) throws IOException {
 		int check = scheduleService.Schedule_check(scheduleDTO);
 		System.out.println(check);
 		if(check == 0) {
 			int insert = scheduleService.insertSchedule(scheduleDTO);
+			if(insert == 1) {
+				final MimeMessagePreparator preparator = new MimeMessagePreparator() {
+					@Override public void prepare(MimeMessage mimeMessage) throws Exception {
+						final MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+						
+						helper.setFrom("answhdgkr9494@gmail.com");
+						InternetAddress[] toAddr = new InternetAddress[emailDTO.getC_email().length];
+						for(int i = 0; i< 1;i++) {
+							toAddr[i] = new InternetAddress (emailDTO.getC_email()[i]);
+						}
+						helper.setTo(toAddr);
+						helper.setSubject("<MoonCar>"+scheduleDTO.getS_date().split("-")[0]+"년"+scheduleDTO.getS_date().split("-")[1]+"월"+scheduleDTO.getS_date().split("-")[2]+"일"+scheduleDTO.getS_date().split("-")[3]+"시  "
+						+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량 정비가 예약되었습니다.");
+						helper.setText(scheduleDTO.getC_name()+"고객님의"+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량의 예약되었습니다. 예약내용:"+scheduleDTO.getS_contents(), true);
+					} 
+				};
+				mailSender.send(preparator);
+			}
 		}
 	    
 		return check;

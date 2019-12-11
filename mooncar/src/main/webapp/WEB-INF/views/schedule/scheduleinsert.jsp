@@ -230,13 +230,17 @@ $j(document).ready(function(){
 							if(returndata.search_customer.length == 0){
 								alert("예약을 등록할수 있는 차가 없습니다.");
 							}
+							var html1 = "";
+							var html2 = "";
+							html1 += '<input type="hidden" id="c_email" value="'+returndata.search_customer[0].c_email+'" />'
 								$j.each(returndata.search_customer , function(idx, val) {
-									html = "<input type='radio' value='"+val.car_number+"'"+" name='chk_car'>"+val.car_name
-									$j(".car").append(html);
+									html2 += "<input type='radio' value='"+val.car_number+"' name='chk_car' /><label for='"+val.car_number+"'>"+ val.car_name+"</label>"
+
+									$j(".car").append(html2);
 								
 								});
 							
-							
+							$j(".car").append(html1);
 							
 					},//end success
 					error : function(jqXHR, textStatus, errorThrown) {
@@ -264,8 +268,14 @@ $j(document).ready(function(){
 	}).on("click", "#btnInsert", function() {
 		var c_tel = $j("#tel").val();
 		var c_name = $j(".c_name").text();
+		var c_email = $j("#c_email").val();
+		var car_name = $j('input[name="chk_car"]:checked').text();
+		alert(c_email);
 		if($j('input:radio[name=chk_car]').is(':checked') == true){
 			var car_number = $j('input[name="chk_car"]:checked').val();
+			var car_name = $j("label[for='"+car_number+"']").text();
+			alert(car_name);
+
 			if($j('input:radio[name=timeTF]').is(':checked') == true && $j('[name=time] > option:selected').val() != '시간선택'){
 				var timeTF = $j('input[name="timeTF"]:checked').val();
 				var time = $j('select[name="time"]').val();
@@ -289,13 +299,16 @@ $j(document).ready(function(){
 								"s_contents" : scheduleTitle,
 								"s_comment" : scheduleDedail,
 								"s_date" : date,
-								"car_number" : car_number
+								"car_number" : car_number,
+								"c_email" : c_email,
+								"c_name" : c_name,
+								"car_name" : car_name
 							}
 						,
 						//JSON.stringify()
 						dataType : "json",
 						//contentType:"application/json;charset=UTF-8",
-						timeout : 3000,
+						timeout : 100000,
 						success : function(returndata) {
 								//console.log(returndata.count)
 								if(returndata == 0){
@@ -304,8 +317,6 @@ $j(document).ready(function(){
 									opener.parent.location.reload();
 									window.close();
 									
-								}else{
-									alert("예약이 존재합니다");
 								}
 								
 								

@@ -13,6 +13,7 @@ public class CarDTO {
 	int car_oil_date;
 	String car_comment;
 	String c_name;
+	String c_email;
 	public String getCar_number() {
 		return car_number;
 	}
@@ -84,6 +85,12 @@ public class CarDTO {
 	}
 	public void setC_name(String c_name) {
 		this.c_name = c_name;
+	}
+	public String getC_email() {
+		return c_email;
+	}
+	public void setC_email(String c_email) {
+		this.c_email = c_email;
 	}
 	
 }
