@@ -193,7 +193,7 @@ $j(document).ready(function() {
 </table>
 </form>
      <button id="email_ready" class ="button" type="button" style="width : 6%; float : right;"> E-Mail </button>
-     
 </div>
 </body>
+
 </html>
