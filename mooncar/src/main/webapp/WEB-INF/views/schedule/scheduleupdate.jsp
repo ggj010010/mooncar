@@ -171,7 +171,7 @@ $j(document).ready(function() {
 	<tr>
 		<td>Â÷·®</td>
 		<td colspan="4" class="car">
-			${Select_scheduleUpdate[0].carDTO.car_name}(${Select_scheduleUpdate[0].car_number})
+			${Select_scheduleUpdate[0].carDTO.car_name}-${Select_scheduleUpdate[0].car_number}
 		</td>
 	</tr>
 	

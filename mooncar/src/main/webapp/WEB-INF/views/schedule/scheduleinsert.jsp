@@ -234,7 +234,7 @@ $j(document).ready(function(){
 							var html2 = "";
 							html1 += '<input type="hidden" id="c_email" value="'+returndata.search_customer[0].c_email+'" />'
 								$j.each(returndata.search_customer , function(idx, val) {
-									html2 += "<input type='radio' value='"+val.car_number+"' name='chk_car' /><label for='"+val.car_number+"'>"+val.car_name+"("+val.car_number+")"+"</label>"
+									html2 += "<input type='radio' value='"+val.car_number+"' name='chk_car' /><label for='"+val.car_number+"'>"+val.car_name+"-"+val.car_number+"</label>"
 
 									$j(".car").append(html2);
 								
@@ -269,10 +269,10 @@ $j(document).ready(function(){
 		var c_tel = $j("#tel").val();
 		var c_name = $j(".c_name").text();
 		var c_email = $j("#c_email").val();
-		var car_name = $j('input[name="chk_car"]:checked').text();
+		var car_name = $j('input[name="chk_car"]:checked').text().split("-")[0];
 		if($j('input:radio[name=chk_car]').is(':checked') == true){
 			var car_number = $j('input[name="chk_car"]:checked').val();
-			var car_name = $j("label[for='"+car_number+"']").text();
+			var car_name = $j("label[for='"+car_number+"']").text().split("-")[0];
 
 			if($j('input:radio[name=timeTF]').is(':checked') == true && $j('[name=time] > option:selected').val() != '시간선택'){
 				var timeTF = $j('input[name="timeTF"]:checked').val();
