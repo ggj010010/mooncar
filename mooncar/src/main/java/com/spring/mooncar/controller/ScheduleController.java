@@ -72,7 +72,7 @@ public class ScheduleController {
 						toAddr[i] = new InternetAddress (emailDTO.getC_email()[i]);
 					}
 					helper.setTo(toAddr);
-					helper.setSubject("<MoonCar>"+scheduleDTO.getS_date().split("-")[0]+"년"+scheduleDTO.getS_date().split("-")[1]+"월"+scheduleDTO.getS_date().split("-")[2]+"일"+scheduleDTO.getS_date().split("-")[3]+"시  "
+					helper.setSubject("<MoonCar> "+scheduleDTO.getS_date().split("-")[0]+"년"+scheduleDTO.getS_date().split("-")[1]+"월"+scheduleDTO.getS_date().split("-")[2]+"일"+scheduleDTO.getS_date().split("-")[3]+"시  "
 							+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량의 예약이 변경되었습니다.");
 							helper.setText(scheduleDTO.getC_name()+"고객님의"+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량의 예약이 변경되었습니다. 예약내용:"+scheduleDTO.getS_contents(), true);
 				} 
@@ -168,7 +168,7 @@ public class ScheduleController {
 							toAddr[i] = new InternetAddress (emailDTO.getC_email()[i]);
 						}
 						helper.setTo(toAddr);
-						helper.setSubject("<MoonCar>"+scheduleDTO.getS_date().split("-")[0]+"년"+scheduleDTO.getS_date().split("-")[1]+"월"+scheduleDTO.getS_date().split("-")[2]+"일"+scheduleDTO.getS_date().split("-")[3]+"시  "
+						helper.setSubject("<MoonCar> "+scheduleDTO.getS_date().split("-")[0]+"년"+scheduleDTO.getS_date().split("-")[1]+"월"+scheduleDTO.getS_date().split("-")[2]+"일"+scheduleDTO.getS_date().split("-")[3]+"시  "
 						+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량 정비가 예약되었습니다.");
 						helper.setText(scheduleDTO.getC_name()+"고객님의"+scheduleDTO.getCar_name()+"("+scheduleDTO.getCar_number()+")차량의 예약되었습니다. 예약내용:"+scheduleDTO.getS_contents(), true);
 					} 
