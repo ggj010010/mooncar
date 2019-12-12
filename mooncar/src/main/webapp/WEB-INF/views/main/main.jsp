@@ -46,11 +46,11 @@ $j(document).ready(function() {
 			$j("#main_search").submit();
 		}
 		else if($j("#browsers2").val() == "성별"){
-			if($j("#search_customer").val() != "남자" ||$j("#search_customer").val() != "남" ||$j("#search_customer").val() != "여자" ||$j("#search_customer").val() != "여" ){
-				  
-				alert("다시 입력해주세요");
-			}else{
+			if($j("#search_customer").val() == "남자" || $j("#search_customer").val() == "남" ||$j("#search_customer").val() == "여자" || $j("#search_customer").val() == "여"){
 				$j("#main_search").submit();
+				  
+			}else{
+				alert("다시 입력해주세요");
 			}
 		}
 		

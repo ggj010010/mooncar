@@ -28,7 +28,7 @@ $j(document).on("keyup", "#search_customer", function() {
 });
 
 $j(document).ready(function() {
-	}).on("click", ".button1", function(){
+	}).on("click", "#btn_search1", function(){
 		if($j("#browsers2").val() == "이름"){
 			$j("#main_search").submit();
 		}
@@ -36,11 +36,11 @@ $j(document).ready(function() {
 			$j("#main_search").submit();
 		}
 		else if($j("#browsers2").val() == "성별"){
-			if($j("#search_customer").val() != "남자" ||$j("#search_customer").val() != "남" ||$j("#search_customer").val() != "여자" ||$j("#search_customer").val() != "여" ){
-				  
-				alert("다시 입력해주세요");
-			}else{
+			if($j("#search_customer").val() == "남자" || $j("#search_customer").val() == "남" ||$j("#search_customer").val() == "여자" || $j("#search_customer").val() == "여"){
 				$j("#main_search").submit();
+				  
+			}else{
+				alert("다시 입력해주세요");
 			}
 		}
 		
@@ -62,7 +62,7 @@ $j(document).ready(function() {
           <option value="성별">성별</option>
       </select>
 	  		 <input type="text" id = "search_customer" name="search_customer" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
-             <button class ="button1" type="button"> 검색 </button>
+             <button id = "btn_search1" class ="button1" type="button"> 검색 </button>
    	</form>
    </div></div>
 </div>
@@ -167,11 +167,6 @@ $j(document).ready(function() {
 		검색
 		</th>
 		<td colspan="5">
-			<select id="browsers2" name="startdate" >
-				<option value="이름">이름</option>
-				<option value="차량번호">차량번호</option>
-			</select>
-			<input type="text" name="my_name" size="50" style="color : white; border-radius: 8px; background-color: gray; width:50%; height:35px; letter-spacing: 2px; text-align:center; font-size : 20px">
 			<button id=check_search class ="button1" type="button"> 검색 </button>
 		</td>
 	</tr>
